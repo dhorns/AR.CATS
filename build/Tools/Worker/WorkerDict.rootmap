@@ -1,0 +1,4 @@
+[  ]
+# List of selected classes
+class TProcessor
+header TProcessor.h

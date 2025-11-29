@@ -1,0 +1,23 @@
+
+##         HexBase #Registers ModuleType MapSize
+BaseSetup: 0       0          NULL       4000
+# firmware id of the VUPROM
+Hardware-ID: 02000025
+
+# what offsets for the "left" channel
+# and the pairs of the "right" channel?
+#          left    right
+#          GH      QR
+
+# 1604 MeV
+#CfgMode:   1       8
+
+# 1557 MeV
+CfgMode:   1       11
+
+# 887 MeV
+#CfgMode:   1       12
+
+# 450 MeV
+#CfgMode:   0       13
+

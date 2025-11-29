@@ -1,0 +1,486 @@
+//--Author	David Hornidge   October 2025   CATS Analysis
+
+#include "TA2CATSPhysics.h"
+
+enum {
+	EComptonPromptWindows = 1000,
+	EComptonRandomWindows,
+	EPi0PromptWindows,
+	EPi0RandomWindows,
+	EPi0InvariantMassCuts,
+	EProduceTreeFile,
+	ETreeFileName
+};
+
+static const Map_t kInputs[] = {
+	{"Compton-Prompt-Windows:",	EComptonPromptWindows},
+	{"Compton-Random-Windows:",	EComptonRandomWindows},
+	{"Pi0-Prompt-Windows:",			EPi0PromptWindows},
+	{"Pi0-Random-Windows:",			EPi0RandomWindows},
+	{"Pi0-Invariant-Mass-Cuts:",	EPi0InvariantMassCuts},
+	{"Produce-Tree-File:",			EProduceTreeFile},
+	{"Tree-File-Name:",				ETreeFileName},
+	{NULL,          -1}
+};
+
+
+//-----------------------------------------------------------------------------
+TA2CATSPhysics::TA2CATSPhysics( const char* name, TA2Analysis* analysis )
+	:TA2Physics( name, analysis ) 
+{
+
+// Initialise Detectors
+
+// Tagger
+	fTAGG			= NULL;
+
+	fNTagg			= 0;
+
+// Particle Counters
+
+// CATS
+	fCATS				= NULL;	// CATS
+	fCATSCore		= NULL;	// CATS Core
+	fCATSAnnulus	= NULL;	// CATS Annulus
+	fCATSShield		= NULL;	// CATS Shield
+
+// CATS Core
+	// ADCs
+	nCATSCoreADCs	= 0;
+//	CATSCoreADCs     = NULL;
+//	CATSCoreADCsRaw  = NULL;
+//	CATSCoreADCsHit  = NULL;
+
+	// TDCs
+	nCATSCoreTDCs	= 0;
+//	CATSCoreTDCs     = NULL;
+//	CATSCoreTDCsRaw  = NULL;
+//	CATSCoreTDCsHit  = NULL;
+
+	// Hits and Cluster
+	nCATSCoreHits	= 0;
+//	CATSCoreHits     = NULL;
+//	CATSCoreCluster  = NULL;
+//	CATSCoreEnergy   = NULL;
+//	CATSCoreTime     = NULL;
+
+// CATS Annulus
+	// ADCs
+	nCATSAnnulusADCs	= 0;
+
+	// TDCs
+	nCATSAnnulusTDCs	= 0;
+
+	// Hits
+	nCATSAnnulusHits	= 0;
+
+// CATS Shield
+	// ADCs
+	nCATSShieldADCs	= 0;
+
+	// TDCs
+	nCATSShieldTDCs	= 0;
+
+	// Hits
+	nCATSShieldHits	= 0;
+
+	AddCmdList(kInputs);
+}
+
+
+//-----------------------------------------------------------------------------
+TA2CATSPhysics::~TA2CATSPhysics()
+{
+
+// Delete Tree Files
+//
+//	delete fTree;
+//	delete fFile;
+
+}
+	
+//-----------------------------------------------------------------------------
+void TA2CATSPhysics::SetConfig(Char_t* line, Int_t key)
+{
+
+	// Any special command-line input for analysis
+
+	switch (key){
+		case EComptonPromptWindows:
+			//  Compton Prompt Windows
+			if( sscanf( line, "%d %d\n", &fPhotTimePL, &fPhotTimePR ) != 2 )
+			{
+				PrintError( line, "<Error: Compton Prompt Windows not set correctly>");
+				return;
+			}
+		break;
+		case EComptonRandomWindows:
+			//  Compton Random Windows
+			if( sscanf( line, "%d %d %d %d\n", &fPhotTimeRL1, &fPhotTimeRR1, &fPhotTimeRL2, &fPhotTimeRR2 ) != 4 )
+			{
+				PrintError( line, "<Error: Compton Random Windows not set correctly>");
+				return;
+			}
+		break;
+		case EPi0PromptWindows:
+			//  Pi0 Prompt Windows
+			if( sscanf( line, "%d %d\n", &fPi0TimePL, &fPi0TimePR ) != 2 )
+			{
+				PrintError( line, "<Error: Pi0 Prompt Windows not set correctly>");
+				return;
+			}
+		break;
+		case EPi0RandomWindows:
+			//  Pi0 Random Windows
+			if( sscanf( line, "%d %d %d %d\n", &fPi0TimeRL1, &fPi0TimeRR1, &fPi0TimeRL2, &fPi0TimeRR2 ) != 4 )
+			{
+				PrintError( line, "<Error: Pi0 Random Windows not set correctly>");
+				return;
+			}
+		break;
+		case EPi0InvariantMassCuts:
+			//  Pi0 Invariant Mass Cuts
+			if( sscanf( line, "%d %d\n", &fPi0InvMassCut1, &fPi0InvMassCut2 ) != 2 )
+			{
+				PrintError( line, "<Error: Pi0 Invariant Mass Cuts not set correctly>");
+				return;
+			}
+		break;
+		case EProduceTreeFile:
+			//  Pi0 Random Windows
+			if( sscanf( line, "%d\n", &fProduceTreeFile) != 1 )
+			{
+				PrintError( line, "<Error: Tree files not turned on/off correctly>");
+				return;
+			}
+			if(fProduceTreeFile == 1) printf("\n\nPhysics tree file enabled\n");
+                        else printf("\n\nPhysics tree file disabled\n");
+		break;
+		case ETreeFileName:
+			//  Tree File Name
+			if( sscanf( line, "%s\n", fTreeFileName) != 1)
+			{
+				PrintError( line, "<Error: Tree file name not set correctly>");
+				return;
+			}
+			else printf("Physics class tree file will be saved to: %s\n\n", fTreeFileName);
+		break;
+		default:
+			// default main apparatus SetConfig()
+			TA2Physics::SetConfig( line, key );
+		break;
+	}
+}
+
+//---------------------------------------------------------------------------
+void TA2CATSPhysics::PostInit()
+{
+
+// Introduce Detectors
+
+	// Tagger
+	fTAGG = (TA2Tagger*)((TA2Analysis*)fParent)->GetChild("TAGG");
+	if ( !fTAGG) PrintError("","<No Tagger class found>",EErrFatal);
+	else {  printf("Tagger included in analysis\n");
+		fTAGGParticles = fTAGG->GetParticles(); }
+
+	// Ladder
+	fLADD = (TA2Ladder*)((TA2Analysis*)fParent)->GetGrandChild( "FPD");
+	if ( !fLADD) PrintError( "", "<No Ladder class found>", EErrFatal);
+
+	// CATS
+	fCATS = (TA2GenericApp*)((TA2Analysis*)fParent)->GetChild( "CATSApp");
+	if ( !fCATS) printf( "CATS *NOT* included in analysis\n");
+	else
+	{
+		printf( "CATS Core included in analysis\n");
+//		fCATSParticles = fCATS->GetParticles();
+
+		// CATS Core
+		fCATSCore = (TA2GenericApp_CATSCore*)((TA2Analysis*)fParent)->GetGrandChild( "CATSCore");
+		if ( !fCATSCore) PrintError( "", "<No CATS Core class found>", EErrFatal);
+
+		// CATS Annulus
+		fCATSAnnulus = (TA2GenericApp_CATSAnnulus*)((TA2Analysis*)fParent)->GetGrandChild( "CATSAnnulus");
+		if ( !fCATSAnnulus) printf( "CATS Annulus not included in analysis\n");
+		else printf( "CATS Annulus included in analysis\n");
+
+		// CATS Shield
+		fCATSShield = (TA2GenericApp_CATSShield*)((TA2Analysis*)fParent)->GetGrandChild( "CATSShield");
+		if ( !fCATSShield) printf( "CATS Shield not included in analysis\n");
+		else printf( "CATS Shield included in analysis\n");
+
+	}
+
+	printf("\n");
+
+// CATS Core
+	// ADCs
+//	CATSCoreADCs     = new Int_t[CATS_MAX_HITS];
+//	CATSCoreADCsRaw  = new Int_t[7];
+//	CATSCoreADCsHit  = new Bool_t[CATS_MAX_HITS];
+
+	// TDCs
+//	CATSCoreTDCs     = new Int_t[CATS_MAX_HITS];
+//	CATSCoreTDCsRaw  = new Int_t[7];
+//	CATSCoreTDCsHit  = new Bool_t[CATS_MAX_HITS];
+
+	// Hits and Cluster
+//	CATSCoreHits     = new Int_t[CATS_MAX_HITS];
+//	CATSCoreCluster  = new Int_t[CATS_MAX_HITS];
+//	CATSCoreEnergy   = new Double_t[CATS_MAX_HITS];
+//	CATSCoreTime     = new Double_t[CATS_MAX_HITS];
+
+// Calculate ratio of prompt to random windows
+
+	if (gAR->GetProcessType() == EMCProcess) {
+		fPromptRandomRatio	= 0.0;
+		fPromptRandomRatioPi0	= 0.0;		
+	}
+	else {
+		fPromptRandomRatio	= double(fPi0TimePR - fPi0TimePL)/double(fPi0TimeRR1 - fPi0TimeRL1 + fPi0TimeRR2 - fPi0TimeRL2);
+		fPromptRandomRatioPi0	= double(fPi0TimePR - fPi0TimePL)/double(fPi0TimeRR1 - fPi0TimeRL1 + fPi0TimeRR2 - fPi0TimeRL2);
+ 	}
+
+// Get max # of Particles from detectors, used for defining array sizes
+
+// Create arrays to hold Particles
+
+// Create Tree Files, Define Branches (if option is turned on "fProduceTreeFile ==1")
+
+	if ( fProduceTreeFile == 1)
+	{
+
+		fFile = new TFile( fTreeFileName, "RECREATE", "Physics", 3);
+		fTree = new TTree( "CATSPhysicsTree", "CATS Physics Analysis");
+
+		fTree->Branch( "NTagg",	&fNTagg,	"NTagg/I");
+
+// CATS Core
+		// ADCs
+		fTree->Branch( "nCATSCoreADCs", &nCATSCoreADCs, "nCATSCoreADCs/I");
+//		fTree->Branch( "CATSCoreADCs", 		CATSCoreADCs,		"CATSCoreADCs[nCATSCoreADCs]/I");
+//		fTree->Branch( "CATSCoreADCsRaw",	CATSCoreADCsRaw,	"CATSCoreADCsRaw[7]/I");
+//		fTree->Branch( "CATSCoreADCsHit",	CATSCoreADCsHit,	"CATSCoreADCsHit[nCATSCoreADCs]/O");
+
+		// TDCs
+		fTree->Branch( "nCATSCoreTDCs", &nCATSCoreTDCs, "nCATSCoreTDCs/I");
+//		fTree->Branch("CATSCoreTDCs", CATSCoreTDCs, "CATSCoreTDCs[nCATSCoreTDCs]/I");
+//		fTree->Branch("CATSCoreTDCsRaw", CATSCoreTDCsRaw, "CATSCoreTDCsRaw[7]/I");
+//		fTree->Branch("CATSCoreTDCsHit", CATSCoreTDCsHit, "CATSCoreTDCsHit[nCATSCoreTDCs]/O");
+
+		// Hits and Cluster
+		fTree->Branch( "nCATSCoreHits", &nCATSCoreHits, "nCATSCoreHits/I");
+
+// CATS Annulus
+		// ADCs
+		fTree->Branch( "nCATSAnnulusADCs", &nCATSAnnulusADCs, "nCATSAnnulusADCs/I");
+
+		// TDCs
+		fTree->Branch( "nCATSAnnulusTDCs", &nCATSAnnulusTDCs, "nCATSAnnulusTDCs/I");
+
+		// Hits
+		fTree->Branch( "nCATSAnnulusHits", &nCATSAnnulusHits, "nCATSAnnulusHits/I");
+
+// CATS Shield
+		// ADCs
+		fTree->Branch( "nCATSShieldADCs", &nCATSShieldADCs, "nCATSShieldADCs/I");
+
+		// TDCs
+		fTree->Branch( "nCATSShieldTDCs", &nCATSShieldTDCs, "nCATSShieldTDCs/I");
+
+		// Hits
+		fTree->Branch( "nCATSShieldHits", &nCATSShieldHits, "nCATSShieldHits/I");
+
+		gROOT->cd();
+	}
+
+	// Default physics initialisation
+	TA2Physics::PostInit();
+
+}
+
+//-----------------------------------------------------------------------------
+void TA2CATSPhysics::LoadVariable( )
+{
+
+// Input name - variable pointer associations for any subsequent cut/histogram setup
+
+	// Tagger
+	TA2DataManager::LoadVariable( "NTagg", 			&fNTagg,				EISingleX);
+
+// CATS Core
+	// ADCs
+	TA2DataManager::LoadVariable( "nCATSCoreADCs", 	&nCATSCoreADCs,	EISingleX);
+//	TA2DataManager::LoadVariable( "CATSCoreADCs",		CATSCoreADCs,		EIMultiX);
+//	TA2DataManager::LoadVariable( "CATSCoreADCsRaw",	CATSCoreADCsRaw,	EIMultiX);
+//	TA2DataManager::LoadVariable( "CATSCoreADCsHit",	CATSCoreADCsHit,	EIMultiX);
+
+	// TDCs
+	TA2DataManager::LoadVariable( "nCATSCoreTDCs", 	&nCATSCoreTDCs,	EISingleX);
+//	TA2DataManager::LoadVariable( "CATSCoreTDCs",		CATSCoreTDCs,		EIMultiX);
+//	TA2DataManager::LoadVariable( "CATSCoreTDCsRaw",	CATSCoreTDCsRaw,	EIMultiX);
+//	TA2DataManager::LoadVariable( "CATSCoreTDCsHit",	CATSCoreTDCsHit,	EIMultiX);
+
+	// Hits
+	TA2DataManager::LoadVariable( "nCATSCoreHits", 	&nCATSCoreHits,	EISingleX);
+
+// CATS Annulus
+	TA2DataManager::LoadVariable( "nCATSAnnulusADCs", 	&nCATSAnnulusADCs,	EISingleX);
+	TA2DataManager::LoadVariable( "nCATSAnnulusTDCs", 	&nCATSAnnulusTDCs,	EISingleX);
+	TA2DataManager::LoadVariable( "nCATSAnnulusHits", 	&nCATSAnnulusHits,	EISingleX);
+
+// CATS Shield
+	TA2DataManager::LoadVariable( "nCATSShieldADCs", 	&nCATSShieldADCs,	EISingleX);
+	TA2DataManager::LoadVariable( "nCATSShieldTDCs", 	&nCATSShieldTDCs,	EISingleX);
+	TA2DataManager::LoadVariable( "nCATSShieldHits", 	&nCATSShieldHits,	EISingleX);
+
+	TA2Physics::LoadVariable();
+
+	return;
+}
+
+//-----------------------------------------------------------------------------
+void TA2CATSPhysics::Reconstruct() 
+{
+
+// Get # of Particles from detectors
+
+	fTAGGNParticle	= fTAGG->GetNparticle();
+
+	fNTagg = fTAGGNParticle;
+
+// Sort according to Particle type
+
+	if ( fCATSCore)
+	{
+		if ( fCATSCore->IsRawHits())
+		{
+			nCATSCoreADCs = fCATSCore->GetNADChits();
+//			rhits = fCATSCore->GetRawEnergyHits();
+
+//			for ( i = 0; i < 7; i++) CATSCoreADCsRaw[i] = 0;
+
+//			for ( i = 0; i < nCATSCoreADCs; i++)
+//			{
+//				CATSCoreADCs[i] = rhits[i];
+//				CATSCoreADCsRaw[CATSCoreADCs[i]] = (Int_t)fCATSCore->GetElement(CATSCoreADCs[i])->GetRawADCValue();
+//				CATSCoreADCsHit[i] = fCATSCore->GetElement(CATSCoreADCs[i])->CheckEnergy();
+//			}
+
+			nCATSCoreTDCs = fCATSCore->GetNTDChits();
+//			rhits = fCATSCore->GetRawTimeHits();
+
+//			for ( i = 0; i < 7; i++) CATSCoreTDCsRaw[i] = 0;
+
+//			for ( i = 0; i < nCATSCoreTDCs; i++)
+//			{
+//				CATSCoreTDCs[i] = rhits[i];
+//				CATSCoreTDCsRaw[CATSCoreTDCs[i]] = (Int_t)fCATSCore->GetElement(CATSCoreTDCs[i])->GetRawTDCValue();
+//				CATSCoreTDCsHit[i] = fCATSCore->GetElement(CATSCoreTDCs[i])->CheckTime();
+//			}
+		}
+
+		nCATSCoreHits = fCATSCore->GetNhits();
+
+//		for ( i = 0; i < nCATSCoreHits; i++)
+//		{
+//			CATSCoreHits[i] = fCATSCore->GetHits(i);
+//			if ( fCATSCore->IsEnergy()) CATSCoreEnergy[i] = fCATSCore->GetEnergy(CATSCoreHits[i]);
+//			if ( fCATSCore->IsTime()) CATSCoreTime[i] = fCATSCore->GetTime(CATSCoreHits[i]);
+//		}   
+	}
+
+	if ( fCATSAnnulus)
+	{
+		if ( fCATSAnnulus->IsRawHits())
+		{
+			nCATSAnnulusADCs = fCATSAnnulus->GetNADChits();
+//			rhits = fCATSAnnulus->GetRawEnergyHits();
+
+//			for ( i = 0; i < 6; i++) CATSAnnulusADCsRaw[i] = 0;
+//			for ( i = 0; i < nCATSAnnulusADCs; i++)
+//			{
+//				CATSAnnulusADCs[i] = rhits[i];
+//				CATSAnnulusADCsRaw[CATSAnnulusADCs[i]] = (Int_t)fCATSAnnulus->GetElement(CATSAnnulusADCs[i])->GetRawADCValue();
+//				CATSAnnulusADCsHit[i] = fCATSAnnulus->GetElement(CATSAnnulusADCs[i])->CheckEnergy();
+//			}
+
+			nCATSAnnulusTDCs = fCATSAnnulus->GetNTDChits();
+//			rhits = fCATSAnnulus->GetRawTimeHits();
+
+//			for ( i = 0; i < 6; i++) CATSAnnulusTDCsRaw[i] = 0;
+//			for ( i = 0; i < nCATSAnnulusTDCs; i++)
+//			{
+//				CATSAnnulusTDCs[i] = rhits[i];
+//				CATSAnnulusTDCsRaw[CATSAnnulusTDCs[i]] = (Int_t)fCATSAnnulus->GetElement(CATSAnnulusTDCs[i])->GetRawTDCValue();
+//				CATSAnnulusTDCsHit[i] = fCATSAnnulus->GetElement(CATSAnnulusTDCs[i])->CheckTime();
+//			}
+		}
+
+		nCATSAnnulusHits = fCATSAnnulus->GetNhits();
+//		for ( i = 0; i < nCATSAnnulusHits; i++)
+//		{
+//			CATSAnnulusHits[i] = fCATSAnnulus->GetHits(i);
+//			//CATSCoreCluster[i] = clindex[CATSCoreHits[i]];
+//			if(fCATSAnnulus->IsEnergy()) CATSAnnulusEnergy[i] = fCATSAnnulus->GetEnergy(CATSAnnulusHits[i]);
+//			if(fCATSAnnulus->IsTime()) CATSAnnulusTime[i] = fCATSAnnulus->GetTime(CATSAnnulusHits[i]);
+//		}   
+	}
+  
+   if ( fCATSShield)
+	{
+		if ( fCATSShield->IsRawHits())
+		{
+
+			nCATSShieldADCs = fCATSShield->GetNADChits();
+//			rhits = fCATSShield->GetRawEnergyHits();
+
+//			for ( i = 0; i < 7; i++) CATSShieldADCsRaw[i] = 0;
+//			for ( i = 0; i < nCATSShieldADCs; i++)
+//			{
+//				CATSShieldADCs[i] = rhits[i];
+//				CATSShieldADCsRaw[CATSShieldADCs[i]] = (Int_t)fCATSShield->GetElement(CATSShieldADCs[i])->GetRawADCValue();
+//				CATSShieldADCsHit[i] = fCATSShield->GetElement(CATSShieldADCs[i])->CheckEnergy();
+//			}
+
+			nCATSShieldTDCs = fCATSShield->GetNTDChits();
+//			rhits = fCATSShield->GetRawTimeHits();
+
+//			for ( i = 0; i < 7; i++) CATSShieldTDCsRaw[i] = 0;
+//			for ( i = 0; i < nCATSShieldTDCs; i++)
+//			{
+//				CATSShieldTDCs[i] = rhits[i];
+//				CATSShieldTDCsRaw[CATSShieldTDCs[i]] = (Int_t)fCATSShield->GetElement(CATSShieldTDCs[i])->GetRawTDCValue();
+//				CATSShieldTDCsHit[i] = fCATSShield->GetElement(CATSShieldTDCs[i])->CheckTime();
+//			}
+		}
+
+		nCATSShieldHits = fCATSShield->GetNhits();
+//		for ( i = 0; i < nCATSShieldHits; i++)
+//		{
+//			CATSShieldHits[i] = fCATSShield->GetHits(i);
+//			//CATSCoreCluster[i] = clindex[CATSCoreHits[i]];
+//			if(fCATSShield->IsEnergy()) CATSShieldEnergy[i] = fCATSShield->GetEnergy(CATSShieldHits[i]);
+//			if(fCATSShield->IsTime()) CATSShieldTime[i] = fCATSShield->GetTime(CATSShieldHits[i]);
+//		}   
+	}
+	
+// Apply BufferEnd to the end of all arrays
+
+//	CATSCoreADCs[nCATSCoreADCs]     = NULL;
+//	CATSCoreADCsRaw[nCATSCoreADCs]  = NULL;
+//	CATSCoreADCsHit[nCATSCoreADCs]  = NULL;
+
+//	CATSCoreTDCs[nCATSCoreTDCs]     = NULL;
+//	CATSCoreTDCsRaw[nCATSCoreTDCs]  = NULL;
+//	CATSCoreTDCsHit[nCATSCoreTDCs]  = NULL;
+
+// Fill Tree File
+
+	if(fProduceTreeFile == 1) {
+		fTree->Fill();
+	}
+}
+
+ClassImp(TA2CATSPhysics)

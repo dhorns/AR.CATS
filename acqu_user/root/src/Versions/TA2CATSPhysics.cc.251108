@@ -1,0 +1,671 @@
+//--Author	David Hornidge   October 2025   CATS Analysis
+
+#include "TA2CATSPhysics.h"
+
+enum {
+	EComptonPromptWindows = 1000,
+	EComptonRandomWindows,
+	ECATSCorePedestals,
+	ECATSCoreGainDrift,
+	ECATSCoreECal,
+	EMissingEnergyCut,
+	EProduceTreeFile,
+	ETreeFileName
+};
+
+static const Map_t kInputs[] = {
+	{"Compton-Prompt-Windows:",		EComptonPromptWindows},
+	{"Compton-Random-Windows:",		EComptonRandomWindows},
+	{"CATS-Core-Pedestals:",			ECATSCorePedestals},
+	{"CATS-Core-GainDrift:",			ECATSCoreGainDrift},
+	{"CATS-Core-Energy-Calibration:",ECATSCoreECal},
+	{"Missing-Energy-Cut:",				EMissingEnergyCut},
+	{"Produce-Tree-File:",				EProduceTreeFile},
+	{"Tree-File-Name:",					ETreeFileName},
+	{NULL,          -1}
+};
+
+
+//-----------------------------------------------------------------------------
+TA2CATSPhysics::TA2CATSPhysics( const char* name, TA2Analysis* analysis )
+	:TA2Physics( name, analysis ) 
+{
+
+// Initialise Detectors
+
+// Tagger
+	fTAGG			= NULL;
+
+	fNTagg			= 0;
+	fNPrompt			= 0;
+	fNRandom			= 0;
+
+// Particle Counters
+
+// CATS
+	fCATS				= NULL;	// CATS
+	fCATSCore		= NULL;	// CATS Core
+	fCATSAnnulus	= NULL;	// CATS Annulus
+	fCATSShield		= NULL;	// CATS Shield
+
+// CATS Core
+	nCATSCore		= 0;
+	nCATSAnnulus	= 0;
+	nCATSShield		= 0;
+
+// Particle Arrays
+
+	fTaggerTime = NULL;
+	fTaggerTimeCal = NULL;
+	fTaggerChannel = NULL;
+	fTaggedPhoton = NULL;
+
+	fCATSEnergyPrompt = NULL;
+	fCATSEnergyRandom = NULL;
+
+	fEmissP = NULL;
+	fEmissR = NULL;
+
+	AddCmdList(kInputs);
+}
+
+
+//-----------------------------------------------------------------------------
+TA2CATSPhysics::~TA2CATSPhysics()
+{
+
+// Delete Tree Files
+//
+//	delete fTree;
+    if ( fTree) delete fTree;
+//	delete fFile;
+    if ( fFile) delete fFile;
+
+}
+	
+//-----------------------------------------------------------------------------
+void TA2CATSPhysics::SetConfig(Char_t* line, Int_t key)
+{
+
+	// Any special command-line input for analysis
+
+	switch (key){
+		case EComptonPromptWindows:
+			//  Compton Prompt Windows
+			if( sscanf( line, "%d %d\n", &fPhotTimePL, &fPhotTimePR ) != 2 )
+			{
+				PrintError( line, "<Error: Compton Prompt Windows not set correctly>");
+				return;
+			}
+		break;
+		case EComptonRandomWindows:
+			//  Compton Random Windows
+			if( sscanf( line, "%d %d %d %d\n", &fPhotTimeRL1, &fPhotTimeRR1, &fPhotTimeRL2, &fPhotTimeRR2 ) != 4 )
+			{
+				PrintError( line, "<Error: Compton Random Windows not set correctly>");
+				return;
+			}
+		break;
+		case ECATSCorePedestals:
+			//  CATS Core Pedestals
+			if( sscanf( line, "%lf %lf %lf %lf %lf %lf %lf\n", &fCorePed[0], &fCorePed[1], &fCorePed[2], &fCorePed[3], &fCorePed[4], &fCorePed[5], &fCorePed[6] ) != 7 )
+			{
+				PrintError( line, "<Error: CATS Core Pedestals not set correctly>");
+				return;
+			}
+		break;
+		case ECATSCoreGainDrift:
+			//  CATS Core GainDrift
+			if( sscanf( line, "%lf %lf %lf %lf %lf %lf %lf\n", &fCoreGD[0], &fCoreGD[1], &fCoreGD[2], &fCoreGD[3], &fCoreGD[4], &fCoreGD[5], &fCoreGD[6] ) != 7 )
+			{
+				PrintError( line, "<Error: CATS Core GainDrift not set correctly>");
+				return;
+			}
+		break;
+		case ECATSCoreECal:
+			//  CATS Core Energy Calibration Parameters
+			if( sscanf( line, "%lf %lf %lf\n", &fECore[0], &fECore[1], &fECore[2]) != 3 )
+			{
+				PrintError( line, "<Error: CATS Core Energy Calibration Parameters not set correctly>");
+				return;
+			}
+		break;
+		case EMissingEnergyCut:
+			//  Missing Energy Cut
+			if( sscanf( line, "%d %d\n", &fMissingEnergyCut1, &fMissingEnergyCut2 ) != 2 )
+			{
+				PrintError( line, "<Error: Missing Energy Cut not set correctly>");
+				return;
+			}
+		break;
+		case EProduceTreeFile:
+			//  Pi0 Random Windows
+			if( sscanf( line, "%d\n", &fProduceTreeFile) != 1 )
+			{
+				PrintError( line, "<Error: Tree files not turned on/off correctly>");
+				return;
+			}
+			if(fProduceTreeFile == 1) printf("\n\nPhysics tree file enabled\n");
+                        else printf("\n\nPhysics tree file disabled\n");
+		break;
+		case ETreeFileName:
+			//  Tree File Name
+			if( sscanf( line, "%s\n", fTreeFileName) != 1)
+			{
+				PrintError( line, "<Error: Tree file name not set correctly>");
+				return;
+			}
+			else printf("Physics class tree file will be saved to: %s\n\n", fTreeFileName);
+		break;
+		default:
+			// default main apparatus SetConfig()
+			TA2Physics::SetConfig( line, key );
+		break;
+	}
+
+}
+
+
+//
+// Jakob's functions
+//
+
+//Define the GainMatch Function  
+Double_t TA2CATSPhysics::SubtractPedestal( Int_t channel, Int_t adc_raw)
+{
+	Double_t x = ((adc_raw - fCorePed[channel])*fCoreGD[channel]);
+	if (x < 0) {x = 0;} //ensure a non-negative output
+
+	return x;
+}
+
+Double_t TA2CATSPhysics::ApplyGainMatch( Int_t channel, Double_t adc_corr)
+{
+	Double_t x = (fCoreGM_A0[channel] + fCoreGM_A1[channel]*adc_corr + fCoreGM_A2[channel]*adc_corr*adc_corr);
+	if (x < 0) {x = 0;} //ensure a non-negative output
+	return x;
+}
+
+//Define the energy calibration function 
+
+Double_t TA2CATSPhysics::ApplyEnergyCalibration( Double_t adc_gain_avg)
+{
+	return (fECore[0] + fECore[1]*adc_gain_avg + fECore[2]*adc_gain_avg*adc_gain_avg);
+}
+
+//Define the Annulus Pedestal Function
+Double_t TA2CATSPhysics::AnnulusCalibration( Int_t channel, Int_t adc_raw)
+{
+	Double_t x = (adc_raw-fAnnPed[channel]);
+	if (x <= 0) return 0.0; //ensure a non negative input
+
+	Double_t y =  x*fAnnM[channel] + fAnnB[channel];
+	if (y < 0 ) {y = 0;} //ensure a non negative input
+
+	return y;
+}
+
+//Define the Tagger TDC Calibration function
+Double_t TA2CATSPhysics::TaggerTDCCalibration( Int_t channel, Int_t time_raw)
+{
+	Double_t x = (time_raw - fTaggTDCOffset[channel]);
+	std::cout << "time" << time_raw << "channel " << channel << "cal_time" << x << std::endl;
+	return x;
+}
+
+//Define the Compton Scattering Formula
+Double_t TA2CATSPhysics::ComptonScattering( Double_t photon_energy)
+{
+	const Double_t kD2R = TMath::DegToRad();
+	Double_t theta = 40.0*kD2R; // scattering angle
+	Double_t mass = fP4target[0].M(); // carbon mass in MeV/c^2
+	Double_t Eprime = photon_energy / (1 + (photon_energy / mass) * (1 - std::cos(theta)));
+	return Eprime;
+}
+
+void TA2CATSPhysics::LoadCalibration()
+{
+
+	UInt_t i;
+	Double_t x, y, z;
+	TString name;
+
+	name = "data/CATS-Core-Gain-Matching.dat";
+	std::ifstream inFile( name);
+	if ( !inFile.is_open())
+	{
+		std::cout << "Error opening file ";
+		std::cout << name;
+		std::cout << std::endl;
+		exit( -1);
+	}
+	while ( !inFile.eof())
+	{
+		name.ReadLine( inFile);
+		if ( name[0] != '#')
+		{
+			sscanf( name, "%d%lf%lf%lf", &i, &x, &y, &z);
+			fCoreGM_A0[i] = x;
+			fCoreGM_A1[i] = y;
+			fCoreGM_A2[i] = z;
+		}
+	}
+	std::cout << "CATS Core Gain Matching Parameters read in." << std::endl;
+	inFile.close();
+
+	name = "data/CATS-Annulus-calibration.dat";
+	inFile.open( name);
+	if ( !inFile.is_open())
+	{
+		std::cout << "Error opening file ";
+		std::cout << name;
+		std::cout << std::endl;
+		exit( -1);
+	}
+	while ( !inFile.eof())
+	{
+		name.ReadLine( inFile);
+		if ( name[0] != '#')
+		{
+			sscanf( name, "%d%lf%lf%lf", &i, &x, &y, &z);
+			fAnnPed[i] = x;
+			fAnnM[i] = y;
+			fAnnB[i] = z;
+		}
+	}
+	std::cout << "CATS Annulus Calibration Parameters read in." << std::endl;
+	inFile.close();
+
+	name = "data/Tagger-TDC-Offsets.dat";
+	inFile.open( name);
+	if ( !inFile.is_open())
+	{
+		std::cout << "Error opening file ";
+		std::cout << name;
+		std::cout << std::endl;
+		exit( -1);
+	}
+	while ( !inFile.eof())
+	{
+		name.ReadLine( inFile);
+		if ( name[0] != '#')
+		{
+			sscanf( name, "%d%lf", &i, &x);
+			fTaggTDCOffset[i] = x;
+		}
+	}
+	std::cout << "Tagger TDC Offsets read in.\n\n";
+	inFile.close();
+
+}
+
+//---------------------------------------------------------------------------
+void TA2CATSPhysics::PostInit()
+{
+
+	// Read in calibration parameters
+	LoadCalibration();
+
+// Introduce Detectors
+
+	// Tagger
+	fTAGG = (TA2Tagger*)((TA2Analysis*)fParent)->GetChild("TAGG");
+	if ( !fTAGG) PrintError("","<No Tagger class found>",EErrFatal);
+	else {  printf("Tagger included in analysis\n");
+		fTAGGParticles = fTAGG->GetParticles(); }
+
+	// Ladder
+	fLADD = (TA2Ladder*)((TA2Analysis*)fParent)->GetGrandChild( "FPD");
+	if ( !fLADD) PrintError( "", "<No Ladder class found>", EErrFatal);
+
+	// CATS
+	fCATS = (TA2GenericApp*)((TA2Analysis*)fParent)->GetChild( "CATSApp");
+	if ( !fCATS) printf( "CATS *NOT* included in analysis\n");
+	else
+	{
+		printf( "CATS Core included in analysis\n");
+//		fCATSParticles = fCATS->GetParticles();
+
+		// CATS Core
+		fCATSCore = (TA2GenericApp_CATSCore*)((TA2Analysis*)fParent)->GetGrandChild( "CATSCore");
+		if ( !fCATSCore) PrintError( "", "<No CATS Core class found>", EErrFatal);
+
+		// CATS Annulus
+		fCATSAnnulus = (TA2GenericApp_CATSAnnulus*)((TA2Analysis*)fParent)->GetGrandChild( "CATSAnnulus");
+		if ( !fCATSAnnulus) printf( "CATS Annulus not included in analysis\n");
+		else printf( "CATS Annulus included in analysis\n");
+
+		// CATS Shield
+		fCATSShield = (TA2GenericApp_CATSShield*)((TA2Analysis*)fParent)->GetGrandChild( "CATSShield");
+		if ( !fCATSShield) printf( "CATS Shield not included in analysis\n");
+		else printf( "CATS Shield included in analysis\n");
+
+	}
+
+	printf("\n");
+
+// Calculate ratio of prompt to random windows
+
+	if (gAR->GetProcessType() == EMCProcess) {
+		fPromptRandomRatio	= 0.0;
+	}
+	else {
+		fPromptRandomRatio = double(fPhotTimePR - fPhotTimePL)
+			/double(fPhotTimeRR1 - fPhotTimeRL1 + fPhotTimeRR2 - fPhotTimeRL2);
+ 	}
+
+// Get max # of Particles from detectors, used for defining array sizes
+
+// Create arrays to hold Particles
+
+	fTaggerTime = new Double_t[328];
+	fTaggerTimeCal = new Double_t[328];
+	fTaggerChannel = new Int_t[328];
+	fTaggedPhoton = new TA2Particle*[328];
+
+	fCATSEnergyPrompt = new Double_t[328];
+	fCATSEnergyRandom = new Double_t[328];
+
+	fEmissP = new Double_t[328];
+	fEmissR = new Double_t[328];
+
+// Create Tree Files, Define Branches (if option is turned on "fProduceTreeFile ==1")
+
+	if ( fProduceTreeFile == 1)
+	{
+
+		fFile = new TFile( fTreeFileName, "RECREATE", "Physics", 3);
+		fTree = new TTree( "CATSPhysicsTree", "CATS Physics Analysis");
+
+		fTree->Branch( "NTagg",	&fNTagg,	"NTagg/I");
+
+		gROOT->cd();
+	}
+
+	// Default physics initialisation
+	TA2Physics::PostInit();
+
+}
+
+//-----------------------------------------------------------------------------
+void TA2CATSPhysics::LoadVariable( )
+{
+
+// Input name - variable pointer associations for any subsequent cut/histogram setup
+
+	// Tagger
+	TA2DataManager::LoadVariable( "NTagg", 			&fNTagg,				EISingleX);
+	TA2DataManager::LoadVariable( "NPrompt", 			&fNPrompt,			EISingleX);
+	TA2DataManager::LoadVariable( "NRandom", 			&fNRandom,			EISingleX);
+	TA2DataManager::LoadVariable( "TaggerTime",		fTaggerTime,		EDMultiX);
+	TA2DataManager::LoadVariable( "TaggerTimeCal",	fTaggerTimeCal,	EDMultiX);
+	TA2DataManager::LoadVariable( "TaggerChannel",	fTaggerChannel,	EIMultiX);
+
+// CATS 
+
+	TA2DataManager::LoadVariable( "CATSEnergyPrompt",		fCATSEnergyPrompt,		EDMultiX);
+	TA2DataManager::LoadVariable( "CATSEnergyRandom",		fCATSEnergyRandom,		EDMultiX);
+
+	TA2DataManager::LoadVariable( "EmissP",		fEmissP,		EDMultiX);
+	TA2DataManager::LoadVariable( "EmissR",		fEmissR,		EDMultiX);
+
+	// Core
+	TA2DataManager::LoadVariable( "nCATSCore", 	&nCATSCore,	EISingleX);
+
+	TA2DataManager::LoadVariable( "CATSCoreEnergy1",	&fCATSCore_Energy1,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSCoreEnergy2",	&fCATSCore_Energy2,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSCoreEnergy3",	&fCATSCore_Energy3,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSCoreEnergy4",	&fCATSCore_Energy4,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSCoreEnergy5",	&fCATSCore_Energy5,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSCoreEnergy6",	&fCATSCore_Energy6,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSCoreEnergy7",	&fCATSCore_Energy7,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSCoreEnergy",		&fCATSCoreEnergy,		EDSingleX);
+
+	TA2DataManager::LoadVariable( "CATSCoreTime1",	&fCATSCore_Time1,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSCoreTime2",	&fCATSCore_Time2,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSCoreTime3",	&fCATSCore_Time3,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSCoreTime4",	&fCATSCore_Time4,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSCoreTime5",	&fCATSCore_Time5,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSCoreTime6",	&fCATSCore_Time6,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSCoreTime7",	&fCATSCore_Time7,	EDSingleX);
+
+	// Annulus
+	TA2DataManager::LoadVariable( "nCATSAnnulus", 	&nCATSAnnulus,	EISingleX);
+
+	TA2DataManager::LoadVariable( "CATSAnnulusEnergy1",	&fCATSAnnulus_Energy1,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSAnnulusEnergy2",	&fCATSAnnulus_Energy2,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSAnnulusEnergy3",	&fCATSAnnulus_Energy3,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSAnnulusEnergy4",	&fCATSAnnulus_Energy4,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSAnnulusEnergy5",	&fCATSAnnulus_Energy5,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSAnnulusEnergy6",	&fCATSAnnulus_Energy6,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSAnnulusEnergy",		&fCATSAnnulusEnergy,		EDSingleX);
+
+	TA2DataManager::LoadVariable( "CATSAnnulusTime1",	&fCATSAnnulus_Time1,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSAnnulusTime2",	&fCATSAnnulus_Time2,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSAnnulusTime3",	&fCATSAnnulus_Time3,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSAnnulusTime4",	&fCATSAnnulus_Time4,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSAnnulusTime5",	&fCATSAnnulus_Time5,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSAnnulusTime6",	&fCATSAnnulus_Time6,	EDSingleX);
+
+	// Shield
+	TA2DataManager::LoadVariable( "nCATSShield", 	&nCATSShield,	EISingleX);
+
+	TA2DataManager::LoadVariable( "CATSShieldEnergy1",	&fCATSShield_Energy1,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSShieldEnergy2",	&fCATSShield_Energy2,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSShieldEnergy3",	&fCATSShield_Energy3,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSShieldEnergy4",	&fCATSShield_Energy4,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSShieldEnergy5",	&fCATSShield_Energy5,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSShieldEnergy",	&fCATSShieldEnergy,		EDSingleX);
+
+	TA2DataManager::LoadVariable( "CATSShieldTime1",	&fCATSShield_Time1,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSShieldTime2",	&fCATSShield_Time2,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSShieldTime3",	&fCATSShield_Time3,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSShieldTime4",	&fCATSShield_Time4,	EDSingleX);
+	TA2DataManager::LoadVariable( "CATSShieldTime5",	&fCATSShield_Time5,	EDSingleX);
+
+	// Total CATS
+	TA2DataManager::LoadVariable( "CATSEnergy",				&fCATSEnergy,				EDSingleX);
+	TA2DataManager::LoadVariable( "CATSEnergyNoShield",	&fCATSEnergyNoShield,	EDSingleX);
+
+	TA2Physics::LoadVariable();
+
+	return;
+}
+
+//-----------------------------------------------------------------------------
+void TA2CATSPhysics::Reconstruct() 
+{
+
+	TA2Particle taggerphoton;
+
+// Get # of Particles from detectors
+
+	fTAGGNParticle	= fTAGG->GetNparticle();
+	fNTagg = fTAGGNParticle;
+
+	UInt_t nhits, elem;
+	Double_t value, sum_energy;
+	Bool_t shield;
+
+// CATS Core
+	if ( fCATSCore)
+	{
+		nhits = fCATSCore->GetNhits();
+		nCATSCore = nhits;
+		sum_energy = 0;
+		for ( i = 0; i < nhits; i++)
+		{
+			if ( fCATSCore->IsEnergy())
+			{
+				elem = fCATSCore->GetHits(i);
+				value = fCATSCore->GetElement(elem)->GetEnergy();
+				sum_energy += value;
+				if ( elem == 0) fCATSCore_Energy1 = value;
+				else if ( elem == 1) fCATSCore_Energy2 = value;
+				else if ( elem == 2) fCATSCore_Energy3 = value;
+				else if ( elem == 3) fCATSCore_Energy4 = value;
+				else if ( elem == 4) fCATSCore_Energy5 = value;
+				else if ( elem == 5) fCATSCore_Energy6 = value;
+				else if ( elem == 6) fCATSCore_Energy7 = value;
+			}
+			if ( fCATSCore->IsTime())
+			{
+				elem = fCATSCore->GetHits(i);
+				value = fCATSCore->GetElement(elem)->GetTime();
+				if ( elem == 0) fCATSCore_Time1 = value;
+				else if ( elem == 1) fCATSCore_Time2 = value;
+				else if ( elem == 2) fCATSCore_Time3 = value;
+				else if ( elem == 3) fCATSCore_Time4 = value;
+				else if ( elem == 4) fCATSCore_Time5 = value;
+				else if ( elem == 5) fCATSCore_Time6 = value;
+				else if ( elem == 6) fCATSCore_Time7 = value;
+			}
+		}
+		sum_energy /= 7;
+		fCATSCoreEnergy = sum_energy;
+	}
+
+// CATS Annulus
+	if ( fCATSAnnulus)
+	{
+		nhits = fCATSAnnulus->GetNhits();
+		nCATSAnnulus = nhits;
+		sum_energy = 0;
+		for ( i = 0; i < nhits; i++)
+		{
+			if ( fCATSAnnulus->IsEnergy())
+			{
+				elem = fCATSAnnulus->GetHits(i);
+				value = fCATSAnnulus->GetElement(elem)->GetEnergy();
+				sum_energy += value;
+				if ( elem == 0) fCATSAnnulus_Energy1 = value;
+				else if ( elem == 1) fCATSAnnulus_Energy2 = value;
+				else if ( elem == 2) fCATSAnnulus_Energy3 = value;
+				else if ( elem == 3) fCATSAnnulus_Energy4 = value;
+				else if ( elem == 4) fCATSAnnulus_Energy5 = value;
+				else if ( elem == 5) fCATSAnnulus_Energy6 = value;
+			}
+			if ( fCATSAnnulus->IsTime())
+			{
+				elem = fCATSAnnulus->GetHits(i);
+				value = fCATSAnnulus->GetElement(elem)->GetTime();
+				if ( elem == 0) fCATSAnnulus_Time1 = value;
+				else if ( elem == 1) fCATSAnnulus_Time2 = value;
+				else if ( elem == 2) fCATSAnnulus_Time3 = value;
+				else if ( elem == 3) fCATSAnnulus_Time4 = value;
+				else if ( elem == 4) fCATSAnnulus_Time5 = value;
+				else if ( elem == 5) fCATSAnnulus_Time6 = value;
+			}
+		}
+		fCATSAnnulusEnergy = sum_energy;
+	}
+
+	fCATSEnergy = fCATSCoreEnergy + fCATSAnnulusEnergy;
+
+	// Total CATS Energy with no shield hits
+	shield = kTRUE;
+	if ( fCATSShield->GetNhits() == 0) shield = kFALSE;
+	if ( shield == kFALSE)
+	{
+		fCATSEnergyNoShield = fCATSCoreEnergy + fCATSAnnulusEnergy;
+	}
+
+// CATS Shield
+	if ( fCATSShield)
+	{
+		nhits = fCATSShield->GetNhits();
+		nCATSShield = nhits;
+		sum_energy = 0;
+		for ( i = 0; i < nhits; i++)
+		{
+			if ( fCATSShield->IsEnergy())
+			{
+				elem = fCATSShield->GetHits(i);
+				value = fCATSShield->GetElement(elem)->GetEnergy();
+				sum_energy += value;
+				if ( elem == 0) fCATSShield_Energy1 = value;
+				else if ( elem == 1) fCATSShield_Energy2 = value;
+				else if ( elem == 2) fCATSShield_Energy3 = value;
+				else if ( elem == 3) fCATSShield_Energy4 = value;
+				else if ( elem == 4) fCATSShield_Energy5 = value;
+			}
+			fCATSShieldEnergy = sum_energy;
+			if ( fCATSShield->IsTime())
+			{
+				elem = fCATSShield->GetHits(i);
+				value = fCATSShield->GetElement(elem)->GetTime();
+				if ( elem == 0) fCATSShield_Time1 = value;
+				else if ( elem == 1) fCATSShield_Time2 = value;
+				else if ( elem == 2) fCATSShield_Time3 = value;
+				else if ( elem == 3) fCATSShield_Time4 = value;
+				else if ( elem == 4) fCATSShield_Time5 = value;
+			}
+		}
+	}
+
+	// 4-mom stuff
+	Double_t CATSth, CATSph;
+	Double_t CATSpx, CATSpy, CATSpz;
+	Double_t CATSmom, Emiss;
+	TLorentzVector p4CATS, p4incident, p4missing;
+	const Double_t kD2R = TMath::DegToRad();
+
+	CATSmom = fCATSEnergy;
+	CATSth = 40*kD2R;
+	CATSph = 0*kD2R;
+	CATSpx = CATSmom*sin( CATSth)*cos( CATSph);
+	CATSpy = CATSmom*sin( CATSth)*sin( CATSph);
+	CATSpz = CATSmom*cos( CATSth);
+	p4CATS.SetPxPyPzE( CATSpx, CATSpy, CATSpz, CATSmom);
+
+	fNPrompt = 0;
+	fNRandom = 0;
+
+	UInt_t chan;
+
+	for ( i = 0; i < fNTagg; i++)
+	{
+		chan = (fLADD->GetHits())[i];
+		fTaggerChannel[i] = chan;
+		fTaggedPhoton[i] = fTAGGParticles+i;
+		taggerphoton = *fTaggedPhoton[i];
+		fTaggerTime[i]	= taggerphoton.GetTime();
+		fTaggerTimeCal[i]	= taggerphoton.GetTime()-fTaggTDCOffset[chan];
+
+		p4incident = fP4target[0] + taggerphoton.GetP4();
+		p4missing = p4incident - p4CATS;
+		Emiss = p4missing.M() - fP4target[0].M();
+
+		if ( (fTaggerTimeCal[i] >= fPhotTimePL && fTaggerTimeCal[i] <= fPhotTimePR) ||
+		  	(gAR->GetProcessType() == EMCProcess) ) {
+
+			fCATSEnergyPrompt[fNPrompt]  = fCATSEnergy;
+			fEmissP[fNPrompt]  = Emiss;
+			fNPrompt++;
+		}
+
+		if (fTaggerTimeCal[i] >= fPhotTimeRL1 && fTaggerTimeCal[i] <= fPhotTimeRR1) {
+
+			fCATSEnergyRandom[fNRandom]  = fCATSEnergy;
+			fEmissR[fNRandom]  = Emiss;
+			fNRandom++;
+		}
+	}
+
+// Apply BufferEnd to the end of all arrays
+	fTaggerTime[fNTagg] = EBufferEnd;
+	fTaggerTimeCal[fNTagg] = EBufferEnd;
+	fTaggerChannel[fNTagg] = EBufferEnd;
+
+	fCATSEnergyPrompt[fNPrompt] = EBufferEnd;
+	fCATSEnergyRandom[fNRandom] = EBufferEnd;
+	fEmissP[fNPrompt] = EBufferEnd;
+	fEmissR[fNRandom] = EBufferEnd;
+
+// Fill Tree File
+	if(fProduceTreeFile == 1) {
+		fTree->Fill();
+	}
+}
+
+ClassImp(TA2CATSPhysics)

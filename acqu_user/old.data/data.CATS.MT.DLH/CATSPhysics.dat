@@ -1,0 +1,65 @@
+############################################################
+# Setup File for Physics class TA2CATSPhysics
+#
+# Author: David Hornidge
+############################################################
+#
+# Set Target parameters (used by TA2Physics.cc)
+Target:	0. 0. 0.	938.271  
+#
+############################################################
+# Set Physics class input parameters
+#
+# Set Compton (photon v. tagger) prompt and random windows
+Compton-Prompt-Windows: 0 0
+Compton-Random-Windows: 0 0 0 0
+#
+# Set Pi0 (pi0 v. tagger) prompt and random windows
+Pi0-Prompt-Windows: 0 0
+Pi0-Random-Windows: 0 0 0 0
+#
+# Set Pi0 Invariant Mass Cut
+Pi0-Invariant-Mass-Cuts: 125 145
+#
+# Produce Physics class tree file? 0/1 = off/on
+Produce-Tree-File: 1
+#
+# Tree file name if Produce-Tree-File is on
+Tree-File-Name: scratch/TA2CATSPhysics.root
+#
+############################################################
+Initialise:
+############################################################
+# Define histograms to display
+#
+## Tagger ##
+Display: 1D NTagg		10 	0 	10 
+#
+## CATS ##
+#     Core
+#         ADCs
+Display: 1D nCATSCoreADCs	10 	0 	10 
+#Display: 1D CATSCoreADCs	1000	0	1000
+#Display: 1D CATSCoreADCsRaw	1000	0	1000
+#         TDCs
+Display: 1D nCATSCoreTDCs	10 	0 	10 
+#Display: 1D CATSCoreTDCs	1000	0	1000
+#Display: 1D CATSCoreTDCsRaw	1000	0	1000
+#         Hits
+Display: 1D nCATSCoreHits	10 	0 	10 
+#
+#     Annulus
+#         ADCs
+Display: 1D nCATSAnnulusADCs	10 	0 	10 
+#         TDCs
+Display: 1D nCATSAnnulusTDCs	10 	0 	10 
+#         Hits
+Display: 1D nCATSAnnulusHits	10 	0 	10 
+#
+#     Shield
+#         ADCs
+Display: 1D nCATSShieldADCs	10 	0 	10 
+#         TDCs
+Display: 1D nCATSShieldTDCs	10 	0 	10 
+#         Hits
+Display: 1D nCATSShieldHits	10 	0 	10 
