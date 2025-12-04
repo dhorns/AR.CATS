@@ -1031,6 +1031,13 @@ namespace ROOT {
    }
 } // end of namespace ROOT for class ::TMCPhotoPSGenerator
 
+namespace ROOT {
+   // Registration Schema evolution read functions
+   int RecordReadRules_AcquMCDict() {
+      return 0;
+   }
+   static int _R__UNIQUE_DICT_(ReadRules_AcquMCDict) = RecordReadRules_AcquMCDict();R__UseDummy(_R__UNIQUE_DICT_(ReadRules_AcquMCDict));
+} // namespace ROOT
 namespace {
   void TriggerDictionaryInitialization_AcquMCDict_Impl() {
     static const char* headers[] = {
@@ -1048,7 +1055,7 @@ namespace {
 nullptr
     };
     static const char* includePaths[] = {
-"/opt/root_v6.28.06_cxx14/include",
+"/opt/root_v6.36.00/include",
 "/usr/include",
 "/home/dave/opt/AR.CATS/acqu_core/AcquDAQ/src",
 "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src",
@@ -1056,7 +1063,7 @@ nullptr
 "/home/dave/opt/AR.CATS/acqu_core/ezcaRoot/src",
 "/home/dave/opt/AR.CATS/build/acqu_core/AcquRoot/src",
 "/home/dave/opt/AR.CATS/Tools/a2display/inc",
-"/opt/root_v6.28.06_cxx14/include/",
+"/opt/root_v6.36.00/include/",
 "/home/dave/opt/AR.CATS/build/acqu_core/",
 nullptr
     };
@@ -1086,6 +1093,9 @@ class __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_core/A
 #endif
 #ifndef WITH_LIBLZMA
   #define WITH_LIBLZMA 1
+#endif
+#ifndef VME_HOST
+  #define VME_HOST 1
 #endif
 
 #define _BACKWARD_BACKWARD_WARNING_H

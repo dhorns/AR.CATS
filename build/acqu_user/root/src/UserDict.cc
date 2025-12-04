@@ -638,120 +638,6 @@ namespace ROOT {
 } // end of namespace ROOT
 
 namespace ROOT {
-   static void delete_TA2GenericApp_CATSCore(void *p);
-   static void deleteArray_TA2GenericApp_CATSCore(void *p);
-   static void destruct_TA2GenericApp_CATSCore(void *p);
-
-   // Function generating the singleton type initializer
-   static TGenericClassInfo *GenerateInitInstanceLocal(const ::TA2GenericApp_CATSCore*)
-   {
-      ::TA2GenericApp_CATSCore *ptr = nullptr;
-      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::TA2GenericApp_CATSCore >(nullptr);
-      static ::ROOT::TGenericClassInfo 
-         instance("TA2GenericApp_CATSCore", ::TA2GenericApp_CATSCore::Class_Version(), "TA2GenericApp_CATSCore.h", 8,
-                  typeid(::TA2GenericApp_CATSCore), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &::TA2GenericApp_CATSCore::Dictionary, isa_proxy, 4,
-                  sizeof(::TA2GenericApp_CATSCore) );
-      instance.SetDelete(&delete_TA2GenericApp_CATSCore);
-      instance.SetDeleteArray(&deleteArray_TA2GenericApp_CATSCore);
-      instance.SetDestructor(&destruct_TA2GenericApp_CATSCore);
-      return &instance;
-   }
-   TGenericClassInfo *GenerateInitInstance(const ::TA2GenericApp_CATSCore*)
-   {
-      return GenerateInitInstanceLocal(static_cast<::TA2GenericApp_CATSCore*>(nullptr));
-   }
-   // Static variable to force the class initialization
-   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const ::TA2GenericApp_CATSCore*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
-} // end of namespace ROOT
-
-namespace ROOT {
-   static void delete_TA2GenericApp_CATSAnnulus(void *p);
-   static void deleteArray_TA2GenericApp_CATSAnnulus(void *p);
-   static void destruct_TA2GenericApp_CATSAnnulus(void *p);
-
-   // Function generating the singleton type initializer
-   static TGenericClassInfo *GenerateInitInstanceLocal(const ::TA2GenericApp_CATSAnnulus*)
-   {
-      ::TA2GenericApp_CATSAnnulus *ptr = nullptr;
-      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::TA2GenericApp_CATSAnnulus >(nullptr);
-      static ::ROOT::TGenericClassInfo 
-         instance("TA2GenericApp_CATSAnnulus", ::TA2GenericApp_CATSAnnulus::Class_Version(), "TA2GenericApp_CATSAnnulus.h", 9,
-                  typeid(::TA2GenericApp_CATSAnnulus), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &::TA2GenericApp_CATSAnnulus::Dictionary, isa_proxy, 4,
-                  sizeof(::TA2GenericApp_CATSAnnulus) );
-      instance.SetDelete(&delete_TA2GenericApp_CATSAnnulus);
-      instance.SetDeleteArray(&deleteArray_TA2GenericApp_CATSAnnulus);
-      instance.SetDestructor(&destruct_TA2GenericApp_CATSAnnulus);
-      return &instance;
-   }
-   TGenericClassInfo *GenerateInitInstance(const ::TA2GenericApp_CATSAnnulus*)
-   {
-      return GenerateInitInstanceLocal(static_cast<::TA2GenericApp_CATSAnnulus*>(nullptr));
-   }
-   // Static variable to force the class initialization
-   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const ::TA2GenericApp_CATSAnnulus*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
-} // end of namespace ROOT
-
-namespace ROOT {
-   static void delete_TA2GenericApp_CATSShield(void *p);
-   static void deleteArray_TA2GenericApp_CATSShield(void *p);
-   static void destruct_TA2GenericApp_CATSShield(void *p);
-
-   // Function generating the singleton type initializer
-   static TGenericClassInfo *GenerateInitInstanceLocal(const ::TA2GenericApp_CATSShield*)
-   {
-      ::TA2GenericApp_CATSShield *ptr = nullptr;
-      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::TA2GenericApp_CATSShield >(nullptr);
-      static ::ROOT::TGenericClassInfo 
-         instance("TA2GenericApp_CATSShield", ::TA2GenericApp_CATSShield::Class_Version(), "TA2GenericApp_CATSShield.h", 8,
-                  typeid(::TA2GenericApp_CATSShield), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &::TA2GenericApp_CATSShield::Dictionary, isa_proxy, 4,
-                  sizeof(::TA2GenericApp_CATSShield) );
-      instance.SetDelete(&delete_TA2GenericApp_CATSShield);
-      instance.SetDeleteArray(&deleteArray_TA2GenericApp_CATSShield);
-      instance.SetDestructor(&destruct_TA2GenericApp_CATSShield);
-      return &instance;
-   }
-   TGenericClassInfo *GenerateInitInstance(const ::TA2GenericApp_CATSShield*)
-   {
-      return GenerateInitInstanceLocal(static_cast<::TA2GenericApp_CATSShield*>(nullptr));
-   }
-   // Static variable to force the class initialization
-   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const ::TA2GenericApp_CATSShield*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
-} // end of namespace ROOT
-
-namespace ROOT {
-   static void delete_TA2FPMicro(void *p);
-   static void deleteArray_TA2FPMicro(void *p);
-   static void destruct_TA2FPMicro(void *p);
-   static void streamer_TA2FPMicro(TBuffer &buf, void *obj);
-
-   // Function generating the singleton type initializer
-   static TGenericClassInfo *GenerateInitInstanceLocal(const ::TA2FPMicro*)
-   {
-      ::TA2FPMicro *ptr = nullptr;
-      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::TA2FPMicro >(nullptr);
-      static ::ROOT::TGenericClassInfo 
-         instance("TA2FPMicro", ::TA2FPMicro::Class_Version(), "TA2FPMicro.h", 19,
-                  typeid(::TA2FPMicro), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &::TA2FPMicro::Dictionary, isa_proxy, 16,
-                  sizeof(::TA2FPMicro) );
-      instance.SetDelete(&delete_TA2FPMicro);
-      instance.SetDeleteArray(&deleteArray_TA2FPMicro);
-      instance.SetDestructor(&destruct_TA2FPMicro);
-      instance.SetStreamerFunc(&streamer_TA2FPMicro);
-      return &instance;
-   }
-   TGenericClassInfo *GenerateInitInstance(const ::TA2FPMicro*)
-   {
-      return GenerateInitInstanceLocal(static_cast<::TA2FPMicro*>(nullptr));
-   }
-   // Static variable to force the class initialization
-   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const ::TA2FPMicro*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
-} // end of namespace ROOT
-
-namespace ROOT {
    static void delete_TA2PairSpec(void *p);
    static void deleteArray_TA2PairSpec(void *p);
    static void destruct_TA2PairSpec(void *p);
@@ -777,34 +663,6 @@ namespace ROOT {
    }
    // Static variable to force the class initialization
    static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const ::TA2PairSpec*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
-} // end of namespace ROOT
-
-namespace ROOT {
-   static void delete_TA2GenericApp(void *p);
-   static void deleteArray_TA2GenericApp(void *p);
-   static void destruct_TA2GenericApp(void *p);
-
-   // Function generating the singleton type initializer
-   static TGenericClassInfo *GenerateInitInstanceLocal(const ::TA2GenericApp*)
-   {
-      ::TA2GenericApp *ptr = nullptr;
-      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::TA2GenericApp >(nullptr);
-      static ::ROOT::TGenericClassInfo 
-         instance("TA2GenericApp", ::TA2GenericApp::Class_Version(), "TA2GenericApp.h", 25,
-                  typeid(::TA2GenericApp), ::ROOT::Internal::DefineBehavior(ptr, ptr),
-                  &::TA2GenericApp::Dictionary, isa_proxy, 4,
-                  sizeof(::TA2GenericApp) );
-      instance.SetDelete(&delete_TA2GenericApp);
-      instance.SetDeleteArray(&deleteArray_TA2GenericApp);
-      instance.SetDestructor(&destruct_TA2GenericApp);
-      return &instance;
-   }
-   TGenericClassInfo *GenerateInitInstance(const ::TA2GenericApp*)
-   {
-      return GenerateInitInstanceLocal(static_cast<::TA2GenericApp*>(nullptr));
-   }
-   // Static variable to force the class initialization
-   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const ::TA2GenericApp*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
 } // end of namespace ROOT
 
 namespace ROOT {
@@ -846,7 +704,7 @@ namespace ROOT {
       ::TA2AccessSQL *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::TA2AccessSQL >(nullptr);
       static ::ROOT::TGenericClassInfo 
-         instance("TA2AccessSQL", ::TA2AccessSQL::Class_Version(), "TA2AccessSQL.h", 66,
+         instance("TA2AccessSQL", ::TA2AccessSQL::Class_Version(), "TA2AccessSQL.h", 63,
                   typeid(::TA2AccessSQL), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::TA2AccessSQL::Dictionary, isa_proxy, 4,
                   sizeof(::TA2AccessSQL) );
@@ -977,6 +835,148 @@ namespace ROOT {
    }
    // Static variable to force the class initialization
    static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const ::TA2BeamPolMon*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
+} // end of namespace ROOT
+
+namespace ROOT {
+   static void delete_TA2GenericApp_CATSCore(void *p);
+   static void deleteArray_TA2GenericApp_CATSCore(void *p);
+   static void destruct_TA2GenericApp_CATSCore(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::TA2GenericApp_CATSCore*)
+   {
+      ::TA2GenericApp_CATSCore *ptr = nullptr;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::TA2GenericApp_CATSCore >(nullptr);
+      static ::ROOT::TGenericClassInfo 
+         instance("TA2GenericApp_CATSCore", ::TA2GenericApp_CATSCore::Class_Version(), "TA2GenericApp_CATSCore.h", 8,
+                  typeid(::TA2GenericApp_CATSCore), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &::TA2GenericApp_CATSCore::Dictionary, isa_proxy, 4,
+                  sizeof(::TA2GenericApp_CATSCore) );
+      instance.SetDelete(&delete_TA2GenericApp_CATSCore);
+      instance.SetDeleteArray(&deleteArray_TA2GenericApp_CATSCore);
+      instance.SetDestructor(&destruct_TA2GenericApp_CATSCore);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::TA2GenericApp_CATSCore*)
+   {
+      return GenerateInitInstanceLocal(static_cast<::TA2GenericApp_CATSCore*>(nullptr));
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const ::TA2GenericApp_CATSCore*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
+} // end of namespace ROOT
+
+namespace ROOT {
+   static void delete_TA2GenericApp_CATSAnnulus(void *p);
+   static void deleteArray_TA2GenericApp_CATSAnnulus(void *p);
+   static void destruct_TA2GenericApp_CATSAnnulus(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::TA2GenericApp_CATSAnnulus*)
+   {
+      ::TA2GenericApp_CATSAnnulus *ptr = nullptr;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::TA2GenericApp_CATSAnnulus >(nullptr);
+      static ::ROOT::TGenericClassInfo 
+         instance("TA2GenericApp_CATSAnnulus", ::TA2GenericApp_CATSAnnulus::Class_Version(), "TA2GenericApp_CATSAnnulus.h", 9,
+                  typeid(::TA2GenericApp_CATSAnnulus), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &::TA2GenericApp_CATSAnnulus::Dictionary, isa_proxy, 4,
+                  sizeof(::TA2GenericApp_CATSAnnulus) );
+      instance.SetDelete(&delete_TA2GenericApp_CATSAnnulus);
+      instance.SetDeleteArray(&deleteArray_TA2GenericApp_CATSAnnulus);
+      instance.SetDestructor(&destruct_TA2GenericApp_CATSAnnulus);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::TA2GenericApp_CATSAnnulus*)
+   {
+      return GenerateInitInstanceLocal(static_cast<::TA2GenericApp_CATSAnnulus*>(nullptr));
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const ::TA2GenericApp_CATSAnnulus*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
+} // end of namespace ROOT
+
+namespace ROOT {
+   static void delete_TA2GenericApp_CATSShield(void *p);
+   static void deleteArray_TA2GenericApp_CATSShield(void *p);
+   static void destruct_TA2GenericApp_CATSShield(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::TA2GenericApp_CATSShield*)
+   {
+      ::TA2GenericApp_CATSShield *ptr = nullptr;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::TA2GenericApp_CATSShield >(nullptr);
+      static ::ROOT::TGenericClassInfo 
+         instance("TA2GenericApp_CATSShield", ::TA2GenericApp_CATSShield::Class_Version(), "TA2GenericApp_CATSShield.h", 8,
+                  typeid(::TA2GenericApp_CATSShield), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &::TA2GenericApp_CATSShield::Dictionary, isa_proxy, 4,
+                  sizeof(::TA2GenericApp_CATSShield) );
+      instance.SetDelete(&delete_TA2GenericApp_CATSShield);
+      instance.SetDeleteArray(&deleteArray_TA2GenericApp_CATSShield);
+      instance.SetDestructor(&destruct_TA2GenericApp_CATSShield);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::TA2GenericApp_CATSShield*)
+   {
+      return GenerateInitInstanceLocal(static_cast<::TA2GenericApp_CATSShield*>(nullptr));
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const ::TA2GenericApp_CATSShield*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
+} // end of namespace ROOT
+
+namespace ROOT {
+   static void delete_TA2FPMicro(void *p);
+   static void deleteArray_TA2FPMicro(void *p);
+   static void destruct_TA2FPMicro(void *p);
+   static void streamer_TA2FPMicro(TBuffer &buf, void *obj);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::TA2FPMicro*)
+   {
+      ::TA2FPMicro *ptr = nullptr;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::TA2FPMicro >(nullptr);
+      static ::ROOT::TGenericClassInfo 
+         instance("TA2FPMicro", ::TA2FPMicro::Class_Version(), "TA2FPMicro.h", 19,
+                  typeid(::TA2FPMicro), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &::TA2FPMicro::Dictionary, isa_proxy, 16,
+                  sizeof(::TA2FPMicro) );
+      instance.SetDelete(&delete_TA2FPMicro);
+      instance.SetDeleteArray(&deleteArray_TA2FPMicro);
+      instance.SetDestructor(&destruct_TA2FPMicro);
+      instance.SetStreamerFunc(&streamer_TA2FPMicro);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::TA2FPMicro*)
+   {
+      return GenerateInitInstanceLocal(static_cast<::TA2FPMicro*>(nullptr));
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const ::TA2FPMicro*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
+} // end of namespace ROOT
+
+namespace ROOT {
+   static void delete_TA2GenericApp(void *p);
+   static void deleteArray_TA2GenericApp(void *p);
+   static void destruct_TA2GenericApp(void *p);
+
+   // Function generating the singleton type initializer
+   static TGenericClassInfo *GenerateInitInstanceLocal(const ::TA2GenericApp*)
+   {
+      ::TA2GenericApp *ptr = nullptr;
+      static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::TA2GenericApp >(nullptr);
+      static ::ROOT::TGenericClassInfo 
+         instance("TA2GenericApp", ::TA2GenericApp::Class_Version(), "TA2GenericApp.h", 25,
+                  typeid(::TA2GenericApp), ::ROOT::Internal::DefineBehavior(ptr, ptr),
+                  &::TA2GenericApp::Dictionary, isa_proxy, 4,
+                  sizeof(::TA2GenericApp) );
+      instance.SetDelete(&delete_TA2GenericApp);
+      instance.SetDeleteArray(&deleteArray_TA2GenericApp);
+      instance.SetDestructor(&destruct_TA2GenericApp);
+      return &instance;
+   }
+   TGenericClassInfo *GenerateInitInstance(const ::TA2GenericApp*)
+   {
+      return GenerateInitInstanceLocal(static_cast<::TA2GenericApp*>(nullptr));
+   }
+   // Static variable to force the class initialization
+   static ::ROOT::TGenericClassInfo *_R__UNIQUE_DICT_(Init) = GenerateInitInstanceLocal(static_cast<const ::TA2GenericApp*>(nullptr)); R__UseDummy(_R__UNIQUE_DICT_(Init));
 } // end of namespace ROOT
 
 namespace ROOT {
@@ -1138,7 +1138,7 @@ namespace ROOT {
       ::TA2GoAT *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::TA2GoAT >(nullptr);
       static ::ROOT::TGenericClassInfo 
-         instance("TA2GoAT", ::TA2GoAT::Class_Version(), "TA2GoAT.h", 36,
+         instance("TA2GoAT", ::TA2GoAT::Class_Version(), "TA2GoAT.h", 37,
                   typeid(::TA2GoAT), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::TA2GoAT::Dictionary, isa_proxy, 4,
                   sizeof(::TA2GoAT) );
@@ -2073,146 +2073,6 @@ TClass *TA2LinearPolEpics::Class()
 }
 
 //______________________________________________________________________________
-atomic_TClass_ptr TA2GenericApp_CATSCore::fgIsA(nullptr);  // static to hold class pointer
-
-//______________________________________________________________________________
-const char *TA2GenericApp_CATSCore::Class_Name()
-{
-   return "TA2GenericApp_CATSCore";
-}
-
-//______________________________________________________________________________
-const char *TA2GenericApp_CATSCore::ImplFileName()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSCore*)nullptr)->GetImplFileName();
-}
-
-//______________________________________________________________________________
-int TA2GenericApp_CATSCore::ImplFileLine()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSCore*)nullptr)->GetImplFileLine();
-}
-
-//______________________________________________________________________________
-TClass *TA2GenericApp_CATSCore::Dictionary()
-{
-   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSCore*)nullptr)->GetClass();
-   return fgIsA;
-}
-
-//______________________________________________________________________________
-TClass *TA2GenericApp_CATSCore::Class()
-{
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSCore*)nullptr)->GetClass(); }
-   return fgIsA;
-}
-
-//______________________________________________________________________________
-atomic_TClass_ptr TA2GenericApp_CATSAnnulus::fgIsA(nullptr);  // static to hold class pointer
-
-//______________________________________________________________________________
-const char *TA2GenericApp_CATSAnnulus::Class_Name()
-{
-   return "TA2GenericApp_CATSAnnulus";
-}
-
-//______________________________________________________________________________
-const char *TA2GenericApp_CATSAnnulus::ImplFileName()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSAnnulus*)nullptr)->GetImplFileName();
-}
-
-//______________________________________________________________________________
-int TA2GenericApp_CATSAnnulus::ImplFileLine()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSAnnulus*)nullptr)->GetImplFileLine();
-}
-
-//______________________________________________________________________________
-TClass *TA2GenericApp_CATSAnnulus::Dictionary()
-{
-   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSAnnulus*)nullptr)->GetClass();
-   return fgIsA;
-}
-
-//______________________________________________________________________________
-TClass *TA2GenericApp_CATSAnnulus::Class()
-{
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSAnnulus*)nullptr)->GetClass(); }
-   return fgIsA;
-}
-
-//______________________________________________________________________________
-atomic_TClass_ptr TA2GenericApp_CATSShield::fgIsA(nullptr);  // static to hold class pointer
-
-//______________________________________________________________________________
-const char *TA2GenericApp_CATSShield::Class_Name()
-{
-   return "TA2GenericApp_CATSShield";
-}
-
-//______________________________________________________________________________
-const char *TA2GenericApp_CATSShield::ImplFileName()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSShield*)nullptr)->GetImplFileName();
-}
-
-//______________________________________________________________________________
-int TA2GenericApp_CATSShield::ImplFileLine()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSShield*)nullptr)->GetImplFileLine();
-}
-
-//______________________________________________________________________________
-TClass *TA2GenericApp_CATSShield::Dictionary()
-{
-   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSShield*)nullptr)->GetClass();
-   return fgIsA;
-}
-
-//______________________________________________________________________________
-TClass *TA2GenericApp_CATSShield::Class()
-{
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSShield*)nullptr)->GetClass(); }
-   return fgIsA;
-}
-
-//______________________________________________________________________________
-atomic_TClass_ptr TA2FPMicro::fgIsA(nullptr);  // static to hold class pointer
-
-//______________________________________________________________________________
-const char *TA2FPMicro::Class_Name()
-{
-   return "TA2FPMicro";
-}
-
-//______________________________________________________________________________
-const char *TA2FPMicro::ImplFileName()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::TA2FPMicro*)nullptr)->GetImplFileName();
-}
-
-//______________________________________________________________________________
-int TA2FPMicro::ImplFileLine()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::TA2FPMicro*)nullptr)->GetImplFileLine();
-}
-
-//______________________________________________________________________________
-TClass *TA2FPMicro::Dictionary()
-{
-   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2FPMicro*)nullptr)->GetClass();
-   return fgIsA;
-}
-
-//______________________________________________________________________________
-TClass *TA2FPMicro::Class()
-{
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2FPMicro*)nullptr)->GetClass(); }
-   return fgIsA;
-}
-
-//______________________________________________________________________________
 atomic_TClass_ptr TA2PairSpec::fgIsA(nullptr);  // static to hold class pointer
 
 //______________________________________________________________________________
@@ -2244,41 +2104,6 @@ TClass *TA2PairSpec::Dictionary()
 TClass *TA2PairSpec::Class()
 {
    if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2PairSpec*)nullptr)->GetClass(); }
-   return fgIsA;
-}
-
-//______________________________________________________________________________
-atomic_TClass_ptr TA2GenericApp::fgIsA(nullptr);  // static to hold class pointer
-
-//______________________________________________________________________________
-const char *TA2GenericApp::Class_Name()
-{
-   return "TA2GenericApp";
-}
-
-//______________________________________________________________________________
-const char *TA2GenericApp::ImplFileName()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp*)nullptr)->GetImplFileName();
-}
-
-//______________________________________________________________________________
-int TA2GenericApp::ImplFileLine()
-{
-   return ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp*)nullptr)->GetImplFileLine();
-}
-
-//______________________________________________________________________________
-TClass *TA2GenericApp::Dictionary()
-{
-   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp*)nullptr)->GetClass();
-   return fgIsA;
-}
-
-//______________________________________________________________________________
-TClass *TA2GenericApp::Class()
-{
-   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp*)nullptr)->GetClass(); }
    return fgIsA;
 }
 
@@ -2489,6 +2314,181 @@ TClass *TA2BeamPolMon::Dictionary()
 TClass *TA2BeamPolMon::Class()
 {
    if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2BeamPolMon*)nullptr)->GetClass(); }
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+atomic_TClass_ptr TA2GenericApp_CATSCore::fgIsA(nullptr);  // static to hold class pointer
+
+//______________________________________________________________________________
+const char *TA2GenericApp_CATSCore::Class_Name()
+{
+   return "TA2GenericApp_CATSCore";
+}
+
+//______________________________________________________________________________
+const char *TA2GenericApp_CATSCore::ImplFileName()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSCore*)nullptr)->GetImplFileName();
+}
+
+//______________________________________________________________________________
+int TA2GenericApp_CATSCore::ImplFileLine()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSCore*)nullptr)->GetImplFileLine();
+}
+
+//______________________________________________________________________________
+TClass *TA2GenericApp_CATSCore::Dictionary()
+{
+   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSCore*)nullptr)->GetClass();
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+TClass *TA2GenericApp_CATSCore::Class()
+{
+   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSCore*)nullptr)->GetClass(); }
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+atomic_TClass_ptr TA2GenericApp_CATSAnnulus::fgIsA(nullptr);  // static to hold class pointer
+
+//______________________________________________________________________________
+const char *TA2GenericApp_CATSAnnulus::Class_Name()
+{
+   return "TA2GenericApp_CATSAnnulus";
+}
+
+//______________________________________________________________________________
+const char *TA2GenericApp_CATSAnnulus::ImplFileName()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSAnnulus*)nullptr)->GetImplFileName();
+}
+
+//______________________________________________________________________________
+int TA2GenericApp_CATSAnnulus::ImplFileLine()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSAnnulus*)nullptr)->GetImplFileLine();
+}
+
+//______________________________________________________________________________
+TClass *TA2GenericApp_CATSAnnulus::Dictionary()
+{
+   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSAnnulus*)nullptr)->GetClass();
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+TClass *TA2GenericApp_CATSAnnulus::Class()
+{
+   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSAnnulus*)nullptr)->GetClass(); }
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+atomic_TClass_ptr TA2GenericApp_CATSShield::fgIsA(nullptr);  // static to hold class pointer
+
+//______________________________________________________________________________
+const char *TA2GenericApp_CATSShield::Class_Name()
+{
+   return "TA2GenericApp_CATSShield";
+}
+
+//______________________________________________________________________________
+const char *TA2GenericApp_CATSShield::ImplFileName()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSShield*)nullptr)->GetImplFileName();
+}
+
+//______________________________________________________________________________
+int TA2GenericApp_CATSShield::ImplFileLine()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSShield*)nullptr)->GetImplFileLine();
+}
+
+//______________________________________________________________________________
+TClass *TA2GenericApp_CATSShield::Dictionary()
+{
+   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSShield*)nullptr)->GetClass();
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+TClass *TA2GenericApp_CATSShield::Class()
+{
+   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp_CATSShield*)nullptr)->GetClass(); }
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+atomic_TClass_ptr TA2FPMicro::fgIsA(nullptr);  // static to hold class pointer
+
+//______________________________________________________________________________
+const char *TA2FPMicro::Class_Name()
+{
+   return "TA2FPMicro";
+}
+
+//______________________________________________________________________________
+const char *TA2FPMicro::ImplFileName()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::TA2FPMicro*)nullptr)->GetImplFileName();
+}
+
+//______________________________________________________________________________
+int TA2FPMicro::ImplFileLine()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::TA2FPMicro*)nullptr)->GetImplFileLine();
+}
+
+//______________________________________________________________________________
+TClass *TA2FPMicro::Dictionary()
+{
+   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2FPMicro*)nullptr)->GetClass();
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+TClass *TA2FPMicro::Class()
+{
+   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2FPMicro*)nullptr)->GetClass(); }
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+atomic_TClass_ptr TA2GenericApp::fgIsA(nullptr);  // static to hold class pointer
+
+//______________________________________________________________________________
+const char *TA2GenericApp::Class_Name()
+{
+   return "TA2GenericApp";
+}
+
+//______________________________________________________________________________
+const char *TA2GenericApp::ImplFileName()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp*)nullptr)->GetImplFileName();
+}
+
+//______________________________________________________________________________
+int TA2GenericApp::ImplFileLine()
+{
+   return ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp*)nullptr)->GetImplFileLine();
+}
+
+//______________________________________________________________________________
+TClass *TA2GenericApp::Dictionary()
+{
+   fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp*)nullptr)->GetClass();
+   return fgIsA;
+}
+
+//______________________________________________________________________________
+TClass *TA2GenericApp::Class()
+{
+   if (!fgIsA.load()) { R__LOCKGUARD(gInterpreterMutex); fgIsA = ::ROOT::GenerateInitInstanceLocal((const ::TA2GenericApp*)nullptr)->GetClass(); }
    return fgIsA;
 }
 
@@ -3555,127 +3555,6 @@ namespace ROOT {
 } // end of namespace ROOT for class ::TA2LinearPolEpics
 
 //______________________________________________________________________________
-void TA2GenericApp_CATSCore::Streamer(TBuffer &R__b)
-{
-   // Stream an object of class TA2GenericApp_CATSCore.
-
-   if (R__b.IsReading()) {
-      R__b.ReadClassBuffer(TA2GenericApp_CATSCore::Class(),this);
-   } else {
-      R__b.WriteClassBuffer(TA2GenericApp_CATSCore::Class(),this);
-   }
-}
-
-namespace ROOT {
-   // Wrapper around operator delete
-   static void delete_TA2GenericApp_CATSCore(void *p) {
-      delete (static_cast<::TA2GenericApp_CATSCore*>(p));
-   }
-   static void deleteArray_TA2GenericApp_CATSCore(void *p) {
-      delete [] (static_cast<::TA2GenericApp_CATSCore*>(p));
-   }
-   static void destruct_TA2GenericApp_CATSCore(void *p) {
-      typedef ::TA2GenericApp_CATSCore current_t;
-      (static_cast<current_t*>(p))->~current_t();
-   }
-} // end of namespace ROOT for class ::TA2GenericApp_CATSCore
-
-//______________________________________________________________________________
-void TA2GenericApp_CATSAnnulus::Streamer(TBuffer &R__b)
-{
-   // Stream an object of class TA2GenericApp_CATSAnnulus.
-
-   if (R__b.IsReading()) {
-      R__b.ReadClassBuffer(TA2GenericApp_CATSAnnulus::Class(),this);
-   } else {
-      R__b.WriteClassBuffer(TA2GenericApp_CATSAnnulus::Class(),this);
-   }
-}
-
-namespace ROOT {
-   // Wrapper around operator delete
-   static void delete_TA2GenericApp_CATSAnnulus(void *p) {
-      delete (static_cast<::TA2GenericApp_CATSAnnulus*>(p));
-   }
-   static void deleteArray_TA2GenericApp_CATSAnnulus(void *p) {
-      delete [] (static_cast<::TA2GenericApp_CATSAnnulus*>(p));
-   }
-   static void destruct_TA2GenericApp_CATSAnnulus(void *p) {
-      typedef ::TA2GenericApp_CATSAnnulus current_t;
-      (static_cast<current_t*>(p))->~current_t();
-   }
-} // end of namespace ROOT for class ::TA2GenericApp_CATSAnnulus
-
-//______________________________________________________________________________
-void TA2GenericApp_CATSShield::Streamer(TBuffer &R__b)
-{
-   // Stream an object of class TA2GenericApp_CATSShield.
-
-   if (R__b.IsReading()) {
-      R__b.ReadClassBuffer(TA2GenericApp_CATSShield::Class(),this);
-   } else {
-      R__b.WriteClassBuffer(TA2GenericApp_CATSShield::Class(),this);
-   }
-}
-
-namespace ROOT {
-   // Wrapper around operator delete
-   static void delete_TA2GenericApp_CATSShield(void *p) {
-      delete (static_cast<::TA2GenericApp_CATSShield*>(p));
-   }
-   static void deleteArray_TA2GenericApp_CATSShield(void *p) {
-      delete [] (static_cast<::TA2GenericApp_CATSShield*>(p));
-   }
-   static void destruct_TA2GenericApp_CATSShield(void *p) {
-      typedef ::TA2GenericApp_CATSShield current_t;
-      (static_cast<current_t*>(p))->~current_t();
-   }
-} // end of namespace ROOT for class ::TA2GenericApp_CATSShield
-
-//______________________________________________________________________________
-void TA2FPMicro::Streamer(TBuffer &R__b)
-{
-   // Stream an object of class TA2FPMicro.
-
-   UInt_t R__s, R__c;
-   if (R__b.IsReading()) {
-      Version_t R__v = R__b.ReadVersion(&R__s, &R__c); if (R__v) { }
-      TA2Detector::Streamer(R__b);
-      R__b >> fNFPelem;
-      R__b >> fNFPhits;
-      delete [] fFPhits;
-      fFPhits = new Int_t[fNFPelem];
-      R__b.ReadFastArray(fFPhits,fNFPelem);
-      R__b.CheckByteCount(R__s, R__c, TA2FPMicro::IsA());
-   } else {
-      R__c = R__b.WriteVersion(TA2FPMicro::IsA(), kTRUE);
-      TA2Detector::Streamer(R__b);
-      R__b << fNFPelem;
-      R__b << fNFPhits;
-      R__b.WriteFastArray(fFPhits,fNFPelem);
-      R__b.SetByteCount(R__c, kTRUE);
-   }
-}
-
-namespace ROOT {
-   // Wrapper around operator delete
-   static void delete_TA2FPMicro(void *p) {
-      delete (static_cast<::TA2FPMicro*>(p));
-   }
-   static void deleteArray_TA2FPMicro(void *p) {
-      delete [] (static_cast<::TA2FPMicro*>(p));
-   }
-   static void destruct_TA2FPMicro(void *p) {
-      typedef ::TA2FPMicro current_t;
-      (static_cast<current_t*>(p))->~current_t();
-   }
-   // Wrapper around a custom streamer member function.
-   static void streamer_TA2FPMicro(TBuffer &buf, void *obj) {
-      ((::TA2FPMicro*)obj)->::TA2FPMicro::Streamer(buf);
-   }
-} // end of namespace ROOT for class ::TA2FPMicro
-
-//______________________________________________________________________________
 void TA2PairSpec::Streamer(TBuffer &R__b)
 {
    // Stream an object of class TA2PairSpec.
@@ -3700,32 +3579,6 @@ namespace ROOT {
       (static_cast<current_t*>(p))->~current_t();
    }
 } // end of namespace ROOT for class ::TA2PairSpec
-
-//______________________________________________________________________________
-void TA2GenericApp::Streamer(TBuffer &R__b)
-{
-   // Stream an object of class TA2GenericApp.
-
-   if (R__b.IsReading()) {
-      R__b.ReadClassBuffer(TA2GenericApp::Class(),this);
-   } else {
-      R__b.WriteClassBuffer(TA2GenericApp::Class(),this);
-   }
-}
-
-namespace ROOT {
-   // Wrapper around operator delete
-   static void delete_TA2GenericApp(void *p) {
-      delete (static_cast<::TA2GenericApp*>(p));
-   }
-   static void deleteArray_TA2GenericApp(void *p) {
-      delete [] (static_cast<::TA2GenericApp*>(p));
-   }
-   static void destruct_TA2GenericApp(void *p) {
-      typedef ::TA2GenericApp current_t;
-      (static_cast<current_t*>(p))->~current_t();
-   }
-} // end of namespace ROOT for class ::TA2GenericApp
 
 //______________________________________________________________________________
 void TA2Moeller::Streamer(TBuffer &R__b)
@@ -3889,6 +3742,153 @@ namespace ROOT {
       (static_cast<current_t*>(p))->~current_t();
    }
 } // end of namespace ROOT for class ::TA2BeamPolMon
+
+//______________________________________________________________________________
+void TA2GenericApp_CATSCore::Streamer(TBuffer &R__b)
+{
+   // Stream an object of class TA2GenericApp_CATSCore.
+
+   if (R__b.IsReading()) {
+      R__b.ReadClassBuffer(TA2GenericApp_CATSCore::Class(),this);
+   } else {
+      R__b.WriteClassBuffer(TA2GenericApp_CATSCore::Class(),this);
+   }
+}
+
+namespace ROOT {
+   // Wrapper around operator delete
+   static void delete_TA2GenericApp_CATSCore(void *p) {
+      delete (static_cast<::TA2GenericApp_CATSCore*>(p));
+   }
+   static void deleteArray_TA2GenericApp_CATSCore(void *p) {
+      delete [] (static_cast<::TA2GenericApp_CATSCore*>(p));
+   }
+   static void destruct_TA2GenericApp_CATSCore(void *p) {
+      typedef ::TA2GenericApp_CATSCore current_t;
+      (static_cast<current_t*>(p))->~current_t();
+   }
+} // end of namespace ROOT for class ::TA2GenericApp_CATSCore
+
+//______________________________________________________________________________
+void TA2GenericApp_CATSAnnulus::Streamer(TBuffer &R__b)
+{
+   // Stream an object of class TA2GenericApp_CATSAnnulus.
+
+   if (R__b.IsReading()) {
+      R__b.ReadClassBuffer(TA2GenericApp_CATSAnnulus::Class(),this);
+   } else {
+      R__b.WriteClassBuffer(TA2GenericApp_CATSAnnulus::Class(),this);
+   }
+}
+
+namespace ROOT {
+   // Wrapper around operator delete
+   static void delete_TA2GenericApp_CATSAnnulus(void *p) {
+      delete (static_cast<::TA2GenericApp_CATSAnnulus*>(p));
+   }
+   static void deleteArray_TA2GenericApp_CATSAnnulus(void *p) {
+      delete [] (static_cast<::TA2GenericApp_CATSAnnulus*>(p));
+   }
+   static void destruct_TA2GenericApp_CATSAnnulus(void *p) {
+      typedef ::TA2GenericApp_CATSAnnulus current_t;
+      (static_cast<current_t*>(p))->~current_t();
+   }
+} // end of namespace ROOT for class ::TA2GenericApp_CATSAnnulus
+
+//______________________________________________________________________________
+void TA2GenericApp_CATSShield::Streamer(TBuffer &R__b)
+{
+   // Stream an object of class TA2GenericApp_CATSShield.
+
+   if (R__b.IsReading()) {
+      R__b.ReadClassBuffer(TA2GenericApp_CATSShield::Class(),this);
+   } else {
+      R__b.WriteClassBuffer(TA2GenericApp_CATSShield::Class(),this);
+   }
+}
+
+namespace ROOT {
+   // Wrapper around operator delete
+   static void delete_TA2GenericApp_CATSShield(void *p) {
+      delete (static_cast<::TA2GenericApp_CATSShield*>(p));
+   }
+   static void deleteArray_TA2GenericApp_CATSShield(void *p) {
+      delete [] (static_cast<::TA2GenericApp_CATSShield*>(p));
+   }
+   static void destruct_TA2GenericApp_CATSShield(void *p) {
+      typedef ::TA2GenericApp_CATSShield current_t;
+      (static_cast<current_t*>(p))->~current_t();
+   }
+} // end of namespace ROOT for class ::TA2GenericApp_CATSShield
+
+//______________________________________________________________________________
+void TA2FPMicro::Streamer(TBuffer &R__b)
+{
+   // Stream an object of class TA2FPMicro.
+
+   UInt_t R__s, R__c;
+   if (R__b.IsReading()) {
+      Version_t R__v = R__b.ReadVersion(&R__s, &R__c); if (R__v) { }
+      TA2Detector::Streamer(R__b);
+      R__b >> fNFPelem;
+      R__b >> fNFPhits;
+      delete [] fFPhits;
+      fFPhits = new Int_t[fNFPelem];
+      R__b.ReadFastArray(fFPhits,fNFPelem);
+      R__b.CheckByteCount(R__s, R__c, TA2FPMicro::IsA());
+   } else {
+      R__c = R__b.WriteVersion(TA2FPMicro::IsA(), kTRUE);
+      TA2Detector::Streamer(R__b);
+      R__b << fNFPelem;
+      R__b << fNFPhits;
+      R__b.WriteFastArray(fFPhits,fNFPelem);
+      R__b.SetByteCount(R__c, kTRUE);
+   }
+}
+
+namespace ROOT {
+   // Wrapper around operator delete
+   static void delete_TA2FPMicro(void *p) {
+      delete (static_cast<::TA2FPMicro*>(p));
+   }
+   static void deleteArray_TA2FPMicro(void *p) {
+      delete [] (static_cast<::TA2FPMicro*>(p));
+   }
+   static void destruct_TA2FPMicro(void *p) {
+      typedef ::TA2FPMicro current_t;
+      (static_cast<current_t*>(p))->~current_t();
+   }
+   // Wrapper around a custom streamer member function.
+   static void streamer_TA2FPMicro(TBuffer &buf, void *obj) {
+      ((::TA2FPMicro*)obj)->::TA2FPMicro::Streamer(buf);
+   }
+} // end of namespace ROOT for class ::TA2FPMicro
+
+//______________________________________________________________________________
+void TA2GenericApp::Streamer(TBuffer &R__b)
+{
+   // Stream an object of class TA2GenericApp.
+
+   if (R__b.IsReading()) {
+      R__b.ReadClassBuffer(TA2GenericApp::Class(),this);
+   } else {
+      R__b.WriteClassBuffer(TA2GenericApp::Class(),this);
+   }
+}
+
+namespace ROOT {
+   // Wrapper around operator delete
+   static void delete_TA2GenericApp(void *p) {
+      delete (static_cast<::TA2GenericApp*>(p));
+   }
+   static void deleteArray_TA2GenericApp(void *p) {
+      delete [] (static_cast<::TA2GenericApp*>(p));
+   }
+   static void destruct_TA2GenericApp(void *p) {
+      typedef ::TA2GenericApp current_t;
+      (static_cast<current_t*>(p))->~current_t();
+   }
+} // end of namespace ROOT for class ::TA2GenericApp
 
 //______________________________________________________________________________
 void TA2CATSPhysics::Streamer(TBuffer &R__b)
@@ -4309,7 +4309,7 @@ namespace ROOT {
       vector<unsigned int> *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<unsigned int>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<unsigned int>", -2, "vector", 386,
+         instance("vector<unsigned int>", -2, "vector", 458,
                   typeid(vector<unsigned int>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEunsignedsPintgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<unsigned int>) );
@@ -4341,10 +4341,10 @@ namespace ROOT {
 namespace ROOT {
    // Wrappers around operator new
    static void *new_vectorlEunsignedsPintgR(void *p) {
-      return  p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<unsigned int> : new vector<unsigned int>;
+      return  p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<unsigned int> : new vector<unsigned int>;
    }
    static void *newArray_vectorlEunsignedsPintgR(Long_t nElements, void *p) {
-      return p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<unsigned int>[nElements] : new vector<unsigned int>[nElements];
+      return p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<unsigned int>[nElements] : new vector<unsigned int>[nElements];
    }
    // Wrapper around operator delete
    static void delete_vectorlEunsignedsPintgR(void *p) {
@@ -4374,7 +4374,7 @@ namespace ROOT {
       vector<unsigned int*> *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<unsigned int*>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<unsigned int*>", -2, "vector", 386,
+         instance("vector<unsigned int*>", -2, "vector", 458,
                   typeid(vector<unsigned int*>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEunsignedsPintmUgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<unsigned int*>) );
@@ -4406,10 +4406,10 @@ namespace ROOT {
 namespace ROOT {
    // Wrappers around operator new
    static void *new_vectorlEunsignedsPintmUgR(void *p) {
-      return  p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<unsigned int*> : new vector<unsigned int*>;
+      return  p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<unsigned int*> : new vector<unsigned int*>;
    }
    static void *newArray_vectorlEunsignedsPintmUgR(Long_t nElements, void *p) {
-      return p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<unsigned int*>[nElements] : new vector<unsigned int*>[nElements];
+      return p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<unsigned int*>[nElements] : new vector<unsigned int*>[nElements];
    }
    // Wrapper around operator delete
    static void delete_vectorlEunsignedsPintmUgR(void *p) {
@@ -4439,7 +4439,7 @@ namespace ROOT {
       vector<const char*> *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<const char*>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<const char*>", -2, "vector", 386,
+         instance("vector<const char*>", -2, "vector", 458,
                   typeid(vector<const char*>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEconstsPcharmUgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<const char*>) );
@@ -4471,10 +4471,10 @@ namespace ROOT {
 namespace ROOT {
    // Wrappers around operator new
    static void *new_vectorlEconstsPcharmUgR(void *p) {
-      return  p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<const char*> : new vector<const char*>;
+      return  p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<const char*> : new vector<const char*>;
    }
    static void *newArray_vectorlEconstsPcharmUgR(Long_t nElements, void *p) {
-      return p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<const char*>[nElements] : new vector<const char*>[nElements];
+      return p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<const char*>[nElements] : new vector<const char*>[nElements];
    }
    // Wrapper around operator delete
    static void delete_vectorlEconstsPcharmUgR(void *p) {
@@ -4504,7 +4504,7 @@ namespace ROOT {
       vector<TCutG*> *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<TCutG*>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<TCutG*>", -2, "vector", 386,
+         instance("vector<TCutG*>", -2, "vector", 458,
                   typeid(vector<TCutG*>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlETCutGmUgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<TCutG*>) );
@@ -4536,10 +4536,10 @@ namespace ROOT {
 namespace ROOT {
    // Wrappers around operator new
    static void *new_vectorlETCutGmUgR(void *p) {
-      return  p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<TCutG*> : new vector<TCutG*>;
+      return  p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<TCutG*> : new vector<TCutG*>;
    }
    static void *newArray_vectorlETCutGmUgR(Long_t nElements, void *p) {
-      return p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<TCutG*>[nElements] : new vector<TCutG*>[nElements];
+      return p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<TCutG*>[nElements] : new vector<TCutG*>[nElements];
    }
    // Wrapper around operator delete
    static void delete_vectorlETCutGmUgR(void *p) {
@@ -4569,7 +4569,7 @@ namespace ROOT {
       map<int,TGraph2D*> *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(map<int,TGraph2D*>));
       static ::ROOT::TGenericClassInfo 
-         instance("map<int,TGraph2D*>", -2, "map", 100,
+         instance("map<int,TGraph2D*>", -2, "map", 105,
                   typeid(map<int,TGraph2D*>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &maplEintcOTGraph2DmUgR_Dictionary, isa_proxy, 0,
                   sizeof(map<int,TGraph2D*>) );
@@ -4601,10 +4601,10 @@ namespace ROOT {
 namespace ROOT {
    // Wrappers around operator new
    static void *new_maplEintcOTGraph2DmUgR(void *p) {
-      return  p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) map<int,TGraph2D*> : new map<int,TGraph2D*>;
+      return  p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) map<int,TGraph2D*> : new map<int,TGraph2D*>;
    }
    static void *newArray_maplEintcOTGraph2DmUgR(Long_t nElements, void *p) {
-      return p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) map<int,TGraph2D*>[nElements] : new map<int,TGraph2D*>[nElements];
+      return p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) map<int,TGraph2D*>[nElements] : new map<int,TGraph2D*>[nElements];
    }
    // Wrapper around operator delete
    static void delete_maplEintcOTGraph2DmUgR(void *p) {
@@ -4634,7 +4634,7 @@ namespace ROOT {
       map<double,pair<int,int> > *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(map<double,pair<int,int> >));
       static ::ROOT::TGenericClassInfo 
-         instance("map<double,pair<int,int> >", -2, "map", 100,
+         instance("map<double,pair<int,int> >", -2, "map", 105,
                   typeid(map<double,pair<int,int> >), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &maplEdoublecOpairlEintcOintgRsPgR_Dictionary, isa_proxy, 0,
                   sizeof(map<double,pair<int,int> >) );
@@ -4666,10 +4666,10 @@ namespace ROOT {
 namespace ROOT {
    // Wrappers around operator new
    static void *new_maplEdoublecOpairlEintcOintgRsPgR(void *p) {
-      return  p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) map<double,pair<int,int> > : new map<double,pair<int,int> >;
+      return  p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) map<double,pair<int,int> > : new map<double,pair<int,int> >;
    }
    static void *newArray_maplEdoublecOpairlEintcOintgRsPgR(Long_t nElements, void *p) {
-      return p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) map<double,pair<int,int> >[nElements] : new map<double,pair<int,int> >[nElements];
+      return p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) map<double,pair<int,int> >[nElements] : new map<double,pair<int,int> >[nElements];
    }
    // Wrapper around operator delete
    static void delete_maplEdoublecOpairlEintcOintgRsPgR(void *p) {
@@ -4699,7 +4699,7 @@ namespace ROOT {
       map<double,int> *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(map<double,int>));
       static ::ROOT::TGenericClassInfo 
-         instance("map<double,int>", -2, "map", 100,
+         instance("map<double,int>", -2, "map", 105,
                   typeid(map<double,int>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &maplEdoublecOintgR_Dictionary, isa_proxy, 0,
                   sizeof(map<double,int>) );
@@ -4731,10 +4731,10 @@ namespace ROOT {
 namespace ROOT {
    // Wrappers around operator new
    static void *new_maplEdoublecOintgR(void *p) {
-      return  p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) map<double,int> : new map<double,int>;
+      return  p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) map<double,int> : new map<double,int>;
    }
    static void *newArray_maplEdoublecOintgR(Long_t nElements, void *p) {
-      return p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) map<double,int>[nElements] : new map<double,int>[nElements];
+      return p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) map<double,int>[nElements] : new map<double,int>[nElements];
    }
    // Wrapper around operator delete
    static void delete_maplEdoublecOintgR(void *p) {
@@ -4749,6 +4749,13 @@ namespace ROOT {
    }
 } // end of namespace ROOT for class map<double,int>
 
+namespace ROOT {
+   // Registration Schema evolution read functions
+   int RecordReadRules_UserDict() {
+      return 0;
+   }
+   static int _R__UNIQUE_DICT_(ReadRules_UserDict) = RecordReadRules_UserDict();R__UseDummy(_R__UNIQUE_DICT_(ReadRules_UserDict));
+} // namespace ROOT
 namespace {
   void TriggerDictionaryInitialization_UserDict_Impl() {
     static const char* headers[] = {
@@ -4801,15 +4808,15 @@ namespace {
 nullptr
     };
     static const char* includePaths[] = {
-"/opt/root_v6.28.06_cxx14/include",
+"/opt/root_v6.36.00/include",
 "/home/dave/opt/AR.CATS/acqu_user/root/src",
 "/home/dave/opt/AR.CATS/acqu_user/root/src-mc",
-"/opt/root_v6.28.06_cxx14/include",
+"/opt/root_v6.36.00/include",
 "/home/dave/opt/AR.CATS/Tools/OSCAR/A2/include",
 "/home/dave/opt/AR.CATS/Tools/OSCAR/MC/include",
 "/home/dave/opt/AR.CATS/Tools/OSCAR/main/include",
 "/home/dave/opt/AR.CATS/Tools/OSCAR/utils/include",
-"/opt/root_v6.28.06_cxx14/include",
+"/opt/root_v6.36.00/include",
 "/usr/include",
 "/home/dave/opt/AR.CATS/acqu_core/AcquDAQ/src",
 "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src",
@@ -4817,7 +4824,7 @@ nullptr
 "/home/dave/opt/AR.CATS/acqu_core/ezcaRoot/src",
 "/home/dave/opt/AR.CATS/build/acqu_core/AcquRoot/src",
 "/home/dave/opt/AR.CATS/Tools/a2display/inc",
-"/opt/root_v6.28.06_cxx14/include/",
+"/opt/root_v6.36.00/include/",
 "/home/dave/opt/AR.CATS/build/acqu_user/",
 nullptr
     };
@@ -4846,18 +4853,18 @@ class __attribute__((annotate("$clingAutoload$TA2TAPS_Veto.h")))  __attribute__(
 class __attribute__((annotate("$clingAutoload$TA2Calorimeter.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2AccessSQL.h")))  TA2Calorimeter;
 class __attribute__((annotate("$clingAutoload$TA2Taps.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2AccessSQL.h")))  TA2Taps;
 class __attribute__((annotate("$clingAutoload$TA2LinearPolEpics.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2AccessSQL.h")))  TA2LinearPolEpics;
-class __attribute__((annotate("$clingAutoload$TA2GenericApp_CATSCore.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2AccessSQL.h")))  TA2GenericApp_CATSCore;
-class __attribute__((annotate("$clingAutoload$TA2GenericApp_CATSAnnulus.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2AccessSQL.h")))  TA2GenericApp_CATSAnnulus;
-class __attribute__((annotate("$clingAutoload$TA2GenericApp_CATSShield.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2AccessSQL.h")))  TA2GenericApp_CATSShield;
-class __attribute__((annotate("$clingAutoload$TA2FPMicro.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2AccessSQL.h")))  TA2FPMicro;
 class __attribute__((annotate("$clingAutoload$TA2PairSpec.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2AccessSQL.h")))  TA2PairSpec;
-class __attribute__((annotate("$clingAutoload$TA2GenericApp.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2AccessSQL.h")))  TA2GenericApp;
 class __attribute__((annotate("$clingAutoload$TA2Moeller.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2AccessSQL.h")))  TA2Moeller;
 class __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2AccessSQL.h")))  TA2AccessSQL;
 class __attribute__((annotate("$clingAutoload$TA2CB.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2BasePhysics.h")))  TA2CB;
 class __attribute__((annotate("$clingAutoload$TA2Event.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2BasePhysics.h")))  TA2Event;
 class __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2BasePhysics.h")))  TA2BasePhysics;
 class __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2BeamPolMon.h")))  TA2BeamPolMon;
+class __attribute__((annotate("$clingAutoload$TA2GenericApp_CATSCore.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2CATSPhysics.h")))  TA2GenericApp_CATSCore;
+class __attribute__((annotate("$clingAutoload$TA2GenericApp_CATSAnnulus.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2CATSPhysics.h")))  TA2GenericApp_CATSAnnulus;
+class __attribute__((annotate("$clingAutoload$TA2GenericApp_CATSShield.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2CATSPhysics.h")))  TA2GenericApp_CATSShield;
+class __attribute__((annotate("$clingAutoload$TA2FPMicro.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2CATSPhysics.h")))  TA2FPMicro;
+class __attribute__((annotate("$clingAutoload$TA2GenericApp.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2CATSPhysics.h")))  TA2GenericApp;
 class __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2CATSPhysics.h")))  TA2CATSPhysics;
 class __attribute__((annotate("$clingAutoload$TA2KFParticle.h")))  __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2CBKinematicFitter.h")))  TA2KFParticle;
 class __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_user/root/src/TA2CBKinematicFitter.h")))  TA2CBKinematicFitter;

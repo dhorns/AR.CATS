@@ -30,6 +30,7 @@
 #ifndef __TVME_VUPROM_h__
 #define __TVME_VUPROM_h__
 
+#include <unistd.h>
 #include "TVMEmodule.h"
 //
 enum{ EVU_MaxCPU=14 };     // maximum number of CPUs VUPROM can handle

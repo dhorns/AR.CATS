@@ -20,6 +20,7 @@
 #ifndef _ARSocket_t_h_
 #define _ARSocket_t_h_
 
+#include <unistd.h>
 
 #include "TA2System.h"
 #include "EnumConst.h"			// integer constant defs

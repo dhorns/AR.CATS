@@ -1,42 +1,23 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
-  )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/dave/opt/AR.CATS/acqu_user/root/src-mc/MainAcquMC.cc" "/home/dave/opt/AR.CATS/build/acqu_user/CMakeFiles/AcquMC.dir/root/src-mc/MainAcquMC.cc.o"
-  )
-set(CMAKE_CXX_COMPILER_ID "GNU")
-
-# Preprocessor definitions for this target.
-set(CMAKE_TARGET_DEFINITIONS_CXX
-  "_FORTIFY_SOURCE=2"
   )
 
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/opt/root_v6.28.06_cxx14/include"
-  "../acqu_user/root/src"
-  "../acqu_user/root/src-mc"
-  "../Tools/OSCAR/A2/include"
-  "../Tools/OSCAR/MC/include"
-  "../Tools/OSCAR/main/include"
-  "../Tools/OSCAR/utils/include"
-  "../acqu_core/AcquDAQ/src"
-  "../acqu_core/AcquMC/src"
-  "../acqu_core/AcquRoot/src"
-  "../acqu_core/ezcaRoot/src"
-  "acqu_core/AcquRoot/src"
-  "../Tools/a2display/inc"
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/dave/opt/AR.CATS/acqu_user/root/src-mc/MainAcquMC.cc" "acqu_user/CMakeFiles/AcquMC.dir/root/src-mc/MainAcquMC.cc.o" "gcc" "acqu_user/CMakeFiles/AcquMC.dir/root/src-mc/MainAcquMC.cc.o.d"
+  "" "bin/AcquMC" "gcc" "acqu_user/CMakeFiles/AcquMC.dir/link.d"
   )
 
-# Targets to which this target links.
-set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/dave/opt/AR.CATS/build/acqu_user/CMakeFiles/libMCUserRoot.dir/DependInfo.cmake"
-  "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquMC.dir/DependInfo.cmake"
-  "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/DependInfo.cmake"
-  "/home/dave/opt/AR.CATS/build/Tools/a2display/CMakeFiles/a2display.dir/DependInfo.cmake"
-  "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquDAQ.dir/DependInfo.cmake"
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.

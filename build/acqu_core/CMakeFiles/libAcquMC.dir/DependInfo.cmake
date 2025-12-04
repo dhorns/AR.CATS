@@ -1,40 +1,26 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
-  )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/dave/opt/AR.CATS/build/acqu_core/AcquMC/src/AcquMCDict.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/AcquMCDict.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCDgpInt.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCDgpInt.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCFoamGenerator.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCFoamGenerator.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCFoamInt.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCFoamInt.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCFoamParticle.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCFoamParticle.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCGenerator.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCGenerator.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCParticle.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCParticle.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCPhotoPSGenerator.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCPhotoPSGenerator.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCPhotoPSInt.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCPhotoPSInt.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCResonance.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCResonance.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCdS5MDMInt.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCdS5MDMInt.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCdS5MDMParticle.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCdS5MDMParticle.cc.o"
-  )
-set(CMAKE_CXX_COMPILER_ID "GNU")
-
-# Preprocessor definitions for this target.
-set(CMAKE_TARGET_DEFINITIONS_CXX
-  "WITH_LIBLZMA"
-  "_FORTIFY_SOURCE=2"
-  "libAcquMC_EXPORTS"
   )
 
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/opt/root_v6.28.06_cxx14/include"
-  "../acqu_core/AcquDAQ/src"
-  "../acqu_core/AcquMC/src"
-  "../acqu_core/AcquRoot/src"
-  "../acqu_core/ezcaRoot/src"
-  "acqu_core/AcquRoot/src"
-  "../Tools/a2display/inc"
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/dave/opt/AR.CATS/build/acqu_core/AcquMC/src/AcquMCDict.cc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/AcquMCDict.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/AcquMCDict.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCDgpInt.cc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCDgpInt.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCDgpInt.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCFoamGenerator.cc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCFoamGenerator.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCFoamGenerator.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCFoamInt.cc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCFoamInt.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCFoamInt.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCFoamParticle.cc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCFoamParticle.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCFoamParticle.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCGenerator.cc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCGenerator.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCGenerator.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCParticle.cc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCParticle.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCParticle.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCPhotoPSGenerator.cc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCPhotoPSGenerator.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCPhotoPSGenerator.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCPhotoPSInt.cc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCPhotoPSInt.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCPhotoPSInt.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCResonance.cc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCResonance.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCResonance.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCdS5MDMInt.cc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCdS5MDMInt.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCdS5MDMInt.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src/TMCdS5MDMParticle.cc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCdS5MDMParticle.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquMC.dir/AcquMC/src/TMCdS5MDMParticle.cc.o.d"
+  "" "lib/libAcquMC.so" "gcc" "acqu_core/CMakeFiles/libAcquMC.dir/link.d"
   )
 
 # Pairs of files generated by the same build rule.
@@ -43,8 +29,12 @@ set(CMAKE_MULTIPLE_OUTPUT_PAIRS
   )
 
 
-# Targets to which this target links.
-set(CMAKE_TARGET_LINKED_INFO_FILES
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.

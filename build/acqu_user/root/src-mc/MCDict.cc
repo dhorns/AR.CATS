@@ -311,6 +311,13 @@ namespace ROOT {
    }
 } // end of namespace ROOT for class ::TMCUserParticle
 
+namespace ROOT {
+   // Registration Schema evolution read functions
+   int RecordReadRules_MCDict() {
+      return 0;
+   }
+   static int _R__UNIQUE_DICT_(ReadRules_MCDict) = RecordReadRules_MCDict();R__UseDummy(_R__UNIQUE_DICT_(ReadRules_MCDict));
+} // namespace ROOT
 namespace {
   void TriggerDictionaryInitialization_MCDict_Impl() {
     static const char* headers[] = {
@@ -320,15 +327,15 @@ namespace {
 nullptr
     };
     static const char* includePaths[] = {
-"/opt/root_v6.28.06_cxx14/include",
+"/opt/root_v6.36.00/include",
 "/home/dave/opt/AR.CATS/acqu_user/root/src",
 "/home/dave/opt/AR.CATS/acqu_user/root/src-mc",
-"/opt/root_v6.28.06_cxx14/include",
+"/opt/root_v6.36.00/include",
 "/home/dave/opt/AR.CATS/Tools/OSCAR/A2/include",
 "/home/dave/opt/AR.CATS/Tools/OSCAR/MC/include",
 "/home/dave/opt/AR.CATS/Tools/OSCAR/main/include",
 "/home/dave/opt/AR.CATS/Tools/OSCAR/utils/include",
-"/opt/root_v6.28.06_cxx14/include",
+"/opt/root_v6.36.00/include",
 "/usr/include",
 "/home/dave/opt/AR.CATS/acqu_core/AcquDAQ/src",
 "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src",
@@ -336,7 +343,7 @@ nullptr
 "/home/dave/opt/AR.CATS/acqu_core/ezcaRoot/src",
 "/home/dave/opt/AR.CATS/build/acqu_core/AcquRoot/src",
 "/home/dave/opt/AR.CATS/Tools/a2display/inc",
-"/opt/root_v6.28.06_cxx14/include/",
+"/opt/root_v6.36.00/include/",
 "/home/dave/opt/AR.CATS/build/acqu_user/",
 nullptr
     };

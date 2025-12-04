@@ -142,6 +142,13 @@ namespace ROOT {
    }
 } // end of namespace ROOT for class ::TProcessor
 
+namespace ROOT {
+   // Registration Schema evolution read functions
+   int RecordReadRules_WorkerDict() {
+      return 0;
+   }
+   static int _R__UNIQUE_DICT_(ReadRules_WorkerDict) = RecordReadRules_WorkerDict();R__UseDummy(_R__UNIQUE_DICT_(ReadRules_WorkerDict));
+} // namespace ROOT
 namespace {
   void TriggerDictionaryInitialization_WorkerDict_Impl() {
     static const char* headers[] = {
@@ -149,9 +156,9 @@ namespace {
 nullptr
     };
     static const char* includePaths[] = {
-"/opt/root_v6.28.06_cxx14/include",
+"/opt/root_v6.36.00/include",
 "/home/dave/opt/AR.CATS/Tools/Worker/src",
-"/opt/root_v6.28.06_cxx14/include/",
+"/opt/root_v6.36.00/include/",
 "/home/dave/opt/AR.CATS/build/Tools/Worker/",
 nullptr
     };

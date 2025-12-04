@@ -32,11 +32,11 @@ CMAKE_CXX_COMPILER:FILEPATH=/usr/bin/c++
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_CXX_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar-9
+CMAKE_CXX_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar
 
 //A wrapper around 'ranlib' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_CXX_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib-9
+CMAKE_CXX_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib
 
 //Flags used by the CXX compiler during all build types.
 CMAKE_CXX_FLAGS:STRING=
@@ -58,11 +58,11 @@ CMAKE_C_COMPILER:FILEPATH=/usr/bin/cc
 
 //A wrapper around 'ar' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_C_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar-9
+CMAKE_C_COMPILER_AR:FILEPATH=/usr/bin/gcc-ar
 
 //A wrapper around 'ranlib' adding the appropriate '--plugin' option
 // for the GCC compiler
-CMAKE_C_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib-9
+CMAKE_C_COMPILER_RANLIB:FILEPATH=/usr/bin/gcc-ranlib
 
 //Flags used by the C compiler during all build types.
 CMAKE_C_FLAGS:STRING=
@@ -98,7 +98,10 @@ CMAKE_EXE_LINKER_FLAGS_RELEASE:STRING=
 CMAKE_EXE_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 
 //Enable/Disable output of compile commands during generation.
-CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=OFF
+CMAKE_EXPORT_COMPILE_COMMANDS:BOOL=
+
+//Value Computed by CMake.
+CMAKE_FIND_PACKAGE_REDIRECTS_DIR:STATIC=/home/dave/opt/AR.CATS/build/CMakeFiles/pkgRedirects
 
 //Install path prefix, prepended onto install directories.
 CMAKE_INSTALL_PREFIX:PATH=/usr/local
@@ -107,7 +110,7 @@ CMAKE_INSTALL_PREFIX:PATH=/usr/local
 CMAKE_LINKER:FILEPATH=/usr/bin/ld
 
 //Path to a program.
-CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/make
+CMAKE_MAKE_PROGRAM:FILEPATH=/usr/bin/gmake
 
 //Flags used by the linker during the creation of modules during
 // all build types.
@@ -203,6 +206,9 @@ CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO:STRING=
 //Path to a program.
 CMAKE_STRIP:FILEPATH=/usr/bin/strip
 
+//Path to a program.
+CMAKE_TAPI:FILEPATH=CMAKE_TAPI-NOTFOUND
+
 //If this value is on, makefiles will be generated without the
 // .SILENT directive, and all commands will be echoed to the console
 // during the make.  This is useful for debugging only. With Visual
@@ -210,51 +216,49 @@ CMAKE_STRIP:FILEPATH=/usr/bin/strip
 CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 
 //Path to a library.
-CURSES_CURSES_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libcurses.so
+CURSES_CURSES_LIBRARY:FILEPATH=/usr/lib64/libcurses.so
 
 //Path to a library.
-CURSES_FORM_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libform.so
+CURSES_FORM_LIBRARY:FILEPATH=/usr/lib64/libform.so
 
 //Path to a file.
 CURSES_INCLUDE_PATH:PATH=/usr/include
 
 //Path to a library.
-CURSES_NCURSES_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/libncurses.so
-
-//Path to a program.
-DOXYGEN_DOT_EXE:FILEPATH=DOXYGEN_DOT_EXE-NOTFOUND
+CURSES_NCURSES_LIBRARY:FILEPATH=/usr/lib64/libncurses.so
 
 //Dot tool for use with Doxygen
-DOXYGEN_DOT_EXECUTABLE:FILEPATH=DOXYGEN_DOT_EXECUTABLE-NOTFOUND
+DOXYGEN_DOT_EXECUTABLE:FILEPATH=/usr/bin/dot
 
-//Doxygen documentation generation tool (http://www.doxygen.org)
-DOXYGEN_EXECUTABLE:FILEPATH=/usr/bin/doxygen
+//Doxygen documentation generation tool (https://www.doxygen.nl)
+DOXYGEN_EXECUTABLE:FILEPATH=DOXYGEN_EXECUTABLE-NOTFOUND
 
 //Path to a file.
 LIBLZMA_INCLUDE_DIR:PATH=/usr/include
 
 //Path to a library.
-LIBLZMA_LIBRARY:FILEPATH=/usr/lib/x86_64-linux-gnu/liblzma.so
+LIBLZMA_LIBRARY:FILEPATH=/usr/lib64/liblzma.so
 
 //Name of the computer/site where compile is being run
-MY_HOSTNAME:STRING=thanos
+MY_HOSTNAME:STRING=pedropascal
+
+//Arguments to supply to pkg-config
+PKG_CONFIG_ARGN:STRING=
 
 //pkg-config executable
 PKG_CONFIG_EXECUTABLE:FILEPATH=/usr/bin/pkg-config
-
-QT_QMAKE_EXECUTABLE:FILEPATH=NOTFOUND
 
 //Path to a program.
 RLIBMAP_EXECUTABLE:FILEPATH=RLIBMAP_EXECUTABLE-NOTFOUND
 
 //Path to the ROOT installation directory
-ROOTSYS:PATH=/opt/root_v6.28.06_cxx14
+ROOTSYS:PATH=/opt/root_v6.36.00
 
 //Path to a program.
-ROOT_CINT_EXECUTABLE:FILEPATH=/opt/root_v6.28.06_cxx14/bin/rootcint
+ROOT_CINT_EXECUTABLE:FILEPATH=/opt/root_v6.36.00/bin/rootcint
 
 //Path to a program.
-ROOT_CONFIG_EXECUTABLE:FILEPATH=/opt/root_v6.28.06_cxx14/bin/root-config
+ROOT_CONFIG_EXECUTABLE:FILEPATH=/opt/root_v6.36.00/bin/root-config
 
 //Path to a file.
 ZLIB_INCLUDE_DIR:PATH=/usr/include
@@ -263,46 +267,22 @@ ZLIB_INCLUDE_DIR:PATH=/usr/include
 ZLIB_LIBRARY_DEBUG:FILEPATH=ZLIB_LIBRARY_DEBUG-NOTFOUND
 
 //Path to a library.
-ZLIB_LIBRARY_RELEASE:FILEPATH=/usr/lib/x86_64-linux-gnu/libz.so
-
-//Dependencies for the target
-a2display_LIB_DEPENDS:STATIC=general;-L/opt/root_v6.28.06_cxx14/lib -lGui -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -Wl,-rpath,/opt/root_v6.28.06_cxx14/lib -pthread -lm -ldl -rdynamic;
+ZLIB_LIBRARY_RELEASE:FILEPATH=/usr/lib64/libz.so
 
 //Value Computed by CMake
 acqu_BINARY_DIR:STATIC=/home/dave/opt/AR.CATS/build
 
 //Value Computed by CMake
+acqu_IS_TOP_LEVEL:STATIC=ON
+
+//Value Computed by CMake
 acqu_SOURCE_DIR:STATIC=/home/dave/opt/AR.CATS
 
-//Dependencies for the target
-libAcquDAQ_LIB_DEPENDS:STATIC=general;-L/opt/root_v6.28.06_cxx14/lib -lGui -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -Wl,-rpath,/opt/root_v6.28.06_cxx14/lib -pthread -lm -ldl -rdynamic;general;EG;general;Foam;general;rt;
-
-//Dependencies for the target
-libAcquMC_LIB_DEPENDS:STATIC=general;-L/opt/root_v6.28.06_cxx14/lib -lGui -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -Wl,-rpath,/opt/root_v6.28.06_cxx14/lib -pthread -lm -ldl -rdynamic;general;EG;general;Foam;general;rt;
-
-//Dependencies for the target
-libAcquRoot_LIB_DEPENDS:STATIC=general;-L/opt/root_v6.28.06_cxx14/lib -lGui -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -Wl,-rpath,/opt/root_v6.28.06_cxx14/lib -pthread -lm -ldl -rdynamic;general;EG;general;Foam;general;rt;general;/usr/lib/x86_64-linux-gnu/liblzma.so;general;a2display;
-
-//Dependencies for the target
-libCaLib_LIB_DEPENDS:STATIC=general;-L/opt/root_v6.28.06_cxx14/lib -lGui -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -Wl,-rpath,/opt/root_v6.28.06_cxx14/lib -pthread -lm -ldl -rdynamic;general;/usr/lib/x86_64-linux-gnu/libcurses.so;general;/usr/lib/x86_64-linux-gnu/libform.so;general;/usr/lib/x86_64-linux-gnu/libz.so;general;Spectrum;general;a2display;
-
-//Dependencies for the target
-libMCUserRoot_LIB_DEPENDS:STATIC=general;-L/opt/root_v6.28.06_cxx14/lib -lGui -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -Wl,-rpath,/opt/root_v6.28.06_cxx14/lib -pthread -lm -ldl -rdynamic;general;libAcquMC;general;libAcquRoot;general;libAcquDAQ;
-
-//Dependencies for the target
-libOSCAR_LIB_DEPENDS:STATIC=general;-L/opt/root_v6.28.06_cxx14/lib -lGui -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -Wl,-rpath,/opt/root_v6.28.06_cxx14/lib -pthread -lm -ldl -rdynamic;general;EG;
-
-//Dependencies for the target
-libUserRoot_LIB_DEPENDS:STATIC=general;-L/opt/root_v6.28.06_cxx14/lib -lGui -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -Wl,-rpath,/opt/root_v6.28.06_cxx14/lib -pthread -lm -ldl -rdynamic;general;libOSCAR;general;libAcquRoot;general;libAcquDAQ;general;libAcquMC;general;Minuit;
-
-//Dependencies for the target
-libWorker_LIB_DEPENDS:STATIC=general;-L/opt/root_v6.28.06_cxx14/lib -lGui -lCore -lImt -lRIO -lNet -lHist -lGraf -lGraf3d -lGpad -lROOTVecOps -lTree -lTreePlayer -lRint -lPostscript -lMatrix -lPhysics -lMathCore -lThread -lMultiProc -lROOTDataFrame -Wl,-rpath,/opt/root_v6.28.06_cxx14/lib -pthread -lm -ldl -rdynamic;
+//Path to a library.
+pkgcfg_lib_NCURSES_ncurses:FILEPATH=/usr/lib64/libncurses.so
 
 //Path to a library.
-pkgcfg_lib_NCURSES_ncurses:FILEPATH=/usr/lib/x86_64-linux-gnu/libncurses.so
-
-//Path to a library.
-pkgcfg_lib_NCURSES_tinfo:FILEPATH=/usr/lib/x86_64-linux-gnu/libtinfo.so
+pkgcfg_lib_NCURSES_tinfo:FILEPATH=/usr/lib64/libtinfo.so
 
 
 ########################
@@ -318,9 +298,9 @@ CMAKE_CACHEFILE_DIR:INTERNAL=/home/dave/opt/AR.CATS/build
 //Major version of cmake used to create the current loaded cache
 CMAKE_CACHE_MAJOR_VERSION:INTERNAL=3
 //Minor version of cmake used to create the current loaded cache
-CMAKE_CACHE_MINOR_VERSION:INTERNAL=16
+CMAKE_CACHE_MINOR_VERSION:INTERNAL=31
 //Patch version of cmake used to create the current loaded cache
-CMAKE_CACHE_PATCH_VERSION:INTERNAL=3
+CMAKE_CACHE_PATCH_VERSION:INTERNAL=6
 //ADVANCED property for variable: CMAKE_COLOR_MAKEFILE
 CMAKE_COLOR_MAKEFILE-ADVANCED:INTERNAL=1
 //Path to CMake executable.
@@ -363,6 +343,8 @@ CMAKE_C_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 CMAKE_C_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_DLLTOOL
 CMAKE_DLLTOOL-ADVANCED:INTERNAL=1
+//Path to cache edit program executable.
+CMAKE_EDIT_COMMAND:INTERNAL=/usr/bin/ccmake
 //Executable file format
 CMAKE_EXECUTABLE_FORMAT:INTERNAL=ELF
 //ADVANCED property for variable: CMAKE_EXE_LINKER_FLAGS
@@ -391,7 +373,7 @@ CMAKE_GENERATOR_TOOLSET:INTERNAL=
 // project
 CMAKE_HOME_DIRECTORY:INTERNAL=/home/dave/opt/AR.CATS
 //Install .so files without execute permission.
-CMAKE_INSTALL_SO_NO_EXE:INTERNAL=1
+CMAKE_INSTALL_SO_NO_EXE:INTERNAL=0
 //ADVANCED property for variable: CMAKE_LINKER
 CMAKE_LINKER-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_MAKE_PROGRAM
@@ -421,7 +403,7 @@ CMAKE_RANLIB-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_READELF
 CMAKE_READELF-ADVANCED:INTERNAL=1
 //Path to CMake installation.
-CMAKE_ROOT:INTERNAL=/usr/share/cmake-3.16
+CMAKE_ROOT:INTERNAL=/usr/share/cmake
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS
 CMAKE_SHARED_LINKER_FLAGS-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_SHARED_LINKER_FLAGS_DEBUG
@@ -448,6 +430,8 @@ CMAKE_STATIC_LINKER_FLAGS_RELEASE-ADVANCED:INTERNAL=1
 CMAKE_STATIC_LINKER_FLAGS_RELWITHDEBINFO-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: CMAKE_STRIP
 CMAKE_STRIP-ADVANCED:INTERNAL=1
+//ADVANCED property for variable: CMAKE_TAPI
+CMAKE_TAPI-ADVANCED:INTERNAL=1
 //uname command
 CMAKE_UNAME:INTERNAL=/usr/bin/uname
 //ADVANCED property for variable: CMAKE_VERBOSE_MAKEFILE
@@ -465,18 +449,16 @@ DOXYGEN_DOT_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: DOXYGEN_EXECUTABLE
 DOXYGEN_EXECUTABLE-ADVANCED:INTERNAL=1
 //Details about finding Curses
-FIND_PACKAGE_MESSAGE_DETAILS_Curses:INTERNAL=[/usr/lib/x86_64-linux-gnu/libcurses.so][/usr/include][v()]
-//Details about finding Doxygen
-FIND_PACKAGE_MESSAGE_DETAILS_Doxygen:INTERNAL=[/usr/bin/doxygen][cfound components: doxygen missing components: dot][v1.8.17()]
+FIND_PACKAGE_MESSAGE_DETAILS_Curses:INTERNAL=[/usr/lib64/libcurses.so][/usr/include][v()]
 //Details about finding LibLZMA
-FIND_PACKAGE_MESSAGE_DETAILS_LibLZMA:INTERNAL=[/usr/include][/usr/lib/x86_64-linux-gnu/liblzma.so][1][1][1][5.2.4][v()]
+FIND_PACKAGE_MESSAGE_DETAILS_LibLZMA:INTERNAL=[/usr/include][/usr/lib64/liblzma.so][1][1][1][5.8.1][v()]
 //Details about finding ZLIB
-FIND_PACKAGE_MESSAGE_DETAILS_ZLIB:INTERNAL=[/usr/lib/x86_64-linux-gnu/libz.so][/usr/include][v1.2.11()]
-//Have library /usr/lib/x86_64-linux-gnu/liblzma.so
+FIND_PACKAGE_MESSAGE_DETAILS_ZLIB:INTERNAL=[/usr/lib64/libz.so][/usr/include][c ][v1.3.1()]
+//Have library /usr/lib64/liblzma.so
 LIBLZMA_HAS_AUTO_DECODER:INTERNAL=1
-//Have library /usr/lib/x86_64-linux-gnu/liblzma.so
+//Have library /usr/lib64/liblzma.so
 LIBLZMA_HAS_EASY_ENCODER:INTERNAL=1
-//Have library /usr/lib/x86_64-linux-gnu/liblzma.so
+//Have library /usr/lib64/liblzma.so
 LIBLZMA_HAS_LZMA_PRESET:INTERNAL=1
 //ADVANCED property for variable: LIBLZMA_INCLUDE_DIR
 LIBLZMA_INCLUDE_DIR-ADVANCED:INTERNAL=1
@@ -488,9 +470,9 @@ NCURSES_CFLAGS_OTHER:INTERNAL=-D_DEFAULT_SOURCE;-D_XOPEN_SOURCE=600
 NCURSES_FOUND:INTERNAL=1
 NCURSES_INCLUDEDIR:INTERNAL=/usr/include
 NCURSES_INCLUDE_DIRS:INTERNAL=
-NCURSES_LDFLAGS:INTERNAL=-Wl,-Bsymbolic-functions;-lncurses;-ltinfo
-NCURSES_LDFLAGS_OTHER:INTERNAL=-Wl,-Bsymbolic-functions
-NCURSES_LIBDIR:INTERNAL=/usr/lib/x86_64-linux-gnu
+NCURSES_LDFLAGS:INTERNAL=-lncurses;-ltinfo
+NCURSES_LDFLAGS_OTHER:INTERNAL=
+NCURSES_LIBDIR:INTERNAL=/usr/lib64
 NCURSES_LIBRARIES:INTERNAL=ncurses;tinfo
 NCURSES_LIBRARY_DIRS:INTERNAL=
 NCURSES_LIBS:INTERNAL=
@@ -503,8 +485,8 @@ NCURSES_STATIC_CFLAGS:INTERNAL=-D_DEFAULT_SOURCE;-D_XOPEN_SOURCE=600
 NCURSES_STATIC_CFLAGS_I:INTERNAL=
 NCURSES_STATIC_CFLAGS_OTHER:INTERNAL=-D_DEFAULT_SOURCE;-D_XOPEN_SOURCE=600
 NCURSES_STATIC_INCLUDE_DIRS:INTERNAL=
-NCURSES_STATIC_LDFLAGS:INTERNAL=-Wl,-Bsymbolic-functions;-lncurses;-ltinfo;-ldl
-NCURSES_STATIC_LDFLAGS_OTHER:INTERNAL=-Wl,-Bsymbolic-functions
+NCURSES_STATIC_LDFLAGS:INTERNAL=-lncurses;-ltinfo;-ldl
+NCURSES_STATIC_LDFLAGS_OTHER:INTERNAL=
 NCURSES_STATIC_LIBDIR:INTERNAL=
 NCURSES_STATIC_LIBRARIES:INTERNAL=ncurses;tinfo;dl
 NCURSES_STATIC_LIBRARY_DIRS:INTERNAL=
@@ -512,11 +494,13 @@ NCURSES_STATIC_LIBS:INTERNAL=
 NCURSES_STATIC_LIBS_L:INTERNAL=
 NCURSES_STATIC_LIBS_OTHER:INTERNAL=
 NCURSES_STATIC_LIBS_PATHS:INTERNAL=
-NCURSES_VERSION:INTERNAL=6.2.20200212
+NCURSES_VERSION:INTERNAL=6.5.20250125
 NCURSES_ncurses_INCLUDEDIR:INTERNAL=
 NCURSES_ncurses_LIBDIR:INTERNAL=
 NCURSES_ncurses_PREFIX:INTERNAL=
 NCURSES_ncurses_VERSION:INTERNAL=
+//ADVANCED property for variable: PKG_CONFIG_ARGN
+PKG_CONFIG_ARGN-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: PKG_CONFIG_EXECUTABLE
 PKG_CONFIG_EXECUTABLE-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ZLIB_INCLUDE_DIR
@@ -525,11 +509,17 @@ ZLIB_INCLUDE_DIR-ADVANCED:INTERNAL=1
 ZLIB_LIBRARY_DEBUG-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: ZLIB_LIBRARY_RELEASE
 ZLIB_LIBRARY_RELEASE-ADVANCED:INTERNAL=1
+//linker supports push/pop state
+_CMAKE_CXX_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
+//linker supports push/pop state
+_CMAKE_C_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
+//linker supports push/pop state
+_CMAKE_LINKER_PUSHPOP_STATE_SUPPORTED:INTERNAL=TRUE
 __pkg_config_arguments_NCURSES:INTERNAL=QUIET;ncurses
 __pkg_config_checked_NCURSES:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_NCURSES_ncurses
 pkgcfg_lib_NCURSES_ncurses-ADVANCED:INTERNAL=1
 //ADVANCED property for variable: pkgcfg_lib_NCURSES_tinfo
 pkgcfg_lib_NCURSES_tinfo-ADVANCED:INTERNAL=1
-prefix_result:INTERNAL=/usr/lib/x86_64-linux-gnu
+prefix_result:INTERNAL=/usr/lib64
 

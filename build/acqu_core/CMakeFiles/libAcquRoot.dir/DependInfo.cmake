@@ -1,79 +1,65 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
-  )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/ARFile_t.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/ARFile_t.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/ARSocket_t.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/ARSocket_t.cc.o"
-  "/home/dave/opt/AR.CATS/build/acqu_core/AcquRoot/src/AcquRootDict.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/AcquRootDict.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/HitClusterNextGen_t.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitClusterNextGen_t.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/HitClusterTAPS_t.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitClusterTAPS_t.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/HitClusterTrad_t.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitClusterTrad_t.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/HitClusterUCLA_t.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitClusterUCLA_t.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/HitCluster_t.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitCluster_t.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/HitD2A_t.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitD2A_t.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/LongBar_t.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/LongBar_t.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Analysis.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Analysis.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Apparatus.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Apparatus.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2BitPattern.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2BitPattern.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2ClusterDetector.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2ClusterDetector.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Control.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Control.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Cut.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Cut.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2CylStrip.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2CylStrip.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2CylWire.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2CylWire.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2DataFormat.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2DataFormat.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2DataManager.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2DataManager.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2DataServer.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2DataServer.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2DataSource.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2DataSource.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Detector.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Detector.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2FileSource.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2FileSource.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2GenericApparatus.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2GenericApparatus.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2GenericDetector.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2GenericDetector.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2GenericPhysics.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2GenericPhysics.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2H.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2H.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2H1.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2H1.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2H2.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2H2.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2HistManager.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2HistManager.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Ladder.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Ladder.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2LocalSource.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2LocalSource.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2LongScint.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2LongScint.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Mk1Format.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Mk1Format.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Mk2Format.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Mk2Format.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2MultiCut.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2MultiCut.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2NetSource.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2NetSource.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Particle.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Particle.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2ParticleID.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2ParticleID.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Physics.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Physics.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2RateMonitor.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2RateMonitor.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2RingBuffer.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2RingBuffer.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2System.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2System.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2TAPSFormat.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2TAPSFormat.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2TAPSMk2Format.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2TAPSMk2Format.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Tagger.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Tagger.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Track.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Track.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2WCLayer.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2WCLayer.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2WireChamber.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2WireChamber.cc.o"
-  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TAcquRoot.cc" "/home/dave/opt/AR.CATS/build/acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TAcquRoot.cc.o"
-  )
-set(CMAKE_CXX_COMPILER_ID "GNU")
-
-# Preprocessor definitions for this target.
-set(CMAKE_TARGET_DEFINITIONS_CXX
-  "WITH_LIBLZMA"
-  "_FORTIFY_SOURCE=2"
-  "libAcquRoot_EXPORTS"
   )
 
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/opt/root_v6.28.06_cxx14/include"
-  "../acqu_core/AcquDAQ/src"
-  "../acqu_core/AcquMC/src"
-  "../acqu_core/AcquRoot/src"
-  "../acqu_core/ezcaRoot/src"
-  "acqu_core/AcquRoot/src"
-  "../Tools/a2display/inc"
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/ARFile_t.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/ARFile_t.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/ARFile_t.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/ARSocket_t.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/ARSocket_t.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/ARSocket_t.cc.o.d"
+  "/home/dave/opt/AR.CATS/build/acqu_core/AcquRoot/src/AcquRootDict.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/AcquRootDict.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/AcquRootDict.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/HitClusterNextGen_t.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitClusterNextGen_t.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitClusterNextGen_t.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/HitClusterTAPS_t.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitClusterTAPS_t.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitClusterTAPS_t.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/HitClusterTrad_t.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitClusterTrad_t.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitClusterTrad_t.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/HitClusterUCLA_t.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitClusterUCLA_t.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitClusterUCLA_t.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/HitCluster_t.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitCluster_t.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitCluster_t.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/HitD2A_t.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitD2A_t.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/HitD2A_t.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/LongBar_t.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/LongBar_t.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/LongBar_t.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Analysis.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Analysis.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Analysis.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Apparatus.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Apparatus.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Apparatus.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2BitPattern.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2BitPattern.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2BitPattern.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2ClusterDetector.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2ClusterDetector.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2ClusterDetector.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Control.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Control.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Control.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Cut.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Cut.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Cut.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2CylStrip.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2CylStrip.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2CylStrip.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2CylWire.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2CylWire.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2CylWire.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2DataFormat.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2DataFormat.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2DataFormat.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2DataManager.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2DataManager.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2DataManager.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2DataServer.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2DataServer.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2DataServer.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2DataSource.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2DataSource.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2DataSource.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Detector.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Detector.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Detector.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2FileSource.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2FileSource.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2FileSource.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2GenericApparatus.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2GenericApparatus.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2GenericApparatus.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2GenericDetector.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2GenericDetector.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2GenericDetector.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2GenericPhysics.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2GenericPhysics.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2GenericPhysics.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2H.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2H.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2H.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2H1.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2H1.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2H1.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2H2.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2H2.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2H2.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2HistManager.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2HistManager.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2HistManager.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Ladder.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Ladder.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Ladder.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2LocalSource.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2LocalSource.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2LocalSource.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2LongScint.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2LongScint.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2LongScint.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Mk1Format.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Mk1Format.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Mk1Format.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Mk2Format.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Mk2Format.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Mk2Format.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2MultiCut.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2MultiCut.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2MultiCut.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2NetSource.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2NetSource.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2NetSource.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Particle.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Particle.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Particle.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2ParticleID.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2ParticleID.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2ParticleID.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Physics.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Physics.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Physics.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2RateMonitor.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2RateMonitor.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2RateMonitor.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2RingBuffer.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2RingBuffer.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2RingBuffer.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2System.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2System.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2System.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2TAPSFormat.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2TAPSFormat.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2TAPSFormat.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2TAPSMk2Format.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2TAPSMk2Format.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2TAPSMk2Format.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Tagger.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Tagger.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Tagger.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2Track.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Track.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2Track.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2WCLayer.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2WCLayer.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2WCLayer.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TA2WireChamber.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2WireChamber.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TA2WireChamber.cc.o.d"
+  "/home/dave/opt/AR.CATS/acqu_core/AcquRoot/src/TAcquRoot.cc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TAcquRoot.cc.o" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/AcquRoot/src/TAcquRoot.cc.o.d"
+  "" "lib/libAcquRoot.so" "gcc" "acqu_core/CMakeFiles/libAcquRoot.dir/link.d"
   )
 
 # Pairs of files generated by the same build rule.
@@ -82,9 +68,12 @@ set(CMAKE_MULTIPLE_OUTPUT_PAIRS
   )
 
 
-# Targets to which this target links.
-set(CMAKE_TARGET_LINKED_INFO_FILES
-  "/home/dave/opt/AR.CATS/build/Tools/a2display/CMakeFiles/a2display.dir/DependInfo.cmake"
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.

@@ -3487,7 +3487,7 @@ namespace ROOT {
       vector<unsigned short> *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<unsigned short>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<unsigned short>", -2, "vector", 386,
+         instance("vector<unsigned short>", -2, "vector", 458,
                   typeid(vector<unsigned short>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEunsignedsPshortgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<unsigned short>) );
@@ -3519,10 +3519,10 @@ namespace ROOT {
 namespace ROOT {
    // Wrappers around operator new
    static void *new_vectorlEunsignedsPshortgR(void *p) {
-      return  p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<unsigned short> : new vector<unsigned short>;
+      return  p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<unsigned short> : new vector<unsigned short>;
    }
    static void *newArray_vectorlEunsignedsPshortgR(Long_t nElements, void *p) {
-      return p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<unsigned short>[nElements] : new vector<unsigned short>[nElements];
+      return p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<unsigned short>[nElements] : new vector<unsigned short>[nElements];
    }
    // Wrapper around operator delete
    static void delete_vectorlEunsignedsPshortgR(void *p) {
@@ -3537,6 +3537,13 @@ namespace ROOT {
    }
 } // end of namespace ROOT for class vector<unsigned short>
 
+namespace ROOT {
+   // Registration Schema evolution read functions
+   int RecordReadRules_AcquRootDict() {
+      return 0;
+   }
+   static int _R__UNIQUE_DICT_(ReadRules_AcquRootDict) = RecordReadRules_AcquRootDict();R__UseDummy(_R__UNIQUE_DICT_(ReadRules_AcquRootDict));
+} // namespace ROOT
 namespace {
   void TriggerDictionaryInitialization_AcquRootDict_Impl() {
     static const char* headers[] = {
@@ -3581,7 +3588,7 @@ namespace {
 nullptr
     };
     static const char* includePaths[] = {
-"/opt/root_v6.28.06_cxx14/include",
+"/opt/root_v6.36.00/include",
 "/usr/include",
 "/home/dave/opt/AR.CATS/acqu_core/AcquDAQ/src",
 "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src",
@@ -3589,7 +3596,7 @@ nullptr
 "/home/dave/opt/AR.CATS/acqu_core/ezcaRoot/src",
 "/home/dave/opt/AR.CATS/build/acqu_core/AcquRoot/src",
 "/home/dave/opt/AR.CATS/Tools/a2display/inc",
-"/opt/root_v6.28.06_cxx14/include/",
+"/opt/root_v6.36.00/include/",
 "/home/dave/opt/AR.CATS/build/acqu_core/",
 nullptr
     };
@@ -3646,6 +3653,9 @@ class __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_core/A
 #endif
 #ifndef WITH_LIBLZMA
   #define WITH_LIBLZMA 1
+#endif
+#ifndef VME_HOST
+  #define VME_HOST 1
 #endif
 
 #define _BACKWARD_BACKWARD_WARNING_H

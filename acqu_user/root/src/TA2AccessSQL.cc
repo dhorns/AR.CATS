@@ -30,28 +30,27 @@ TA2AccessSQL::TA2AccessSQL(const char* name, TA2Analysis* analysis)	: TA2Physics
   if (fAnalysisMode == EMCProcess) fIsMC = kTRUE;
   else fIsMC = kFALSE;
   
-  fTagger	= 0;         				// pointer to the Tagger
-  fLadder	= 0;    				// pointer to the Ladder
-  fCB		= 0;   					// pointer to the Crystal Ball
-  fNaI		= 0;       				// pointer to the NaI elements
+  fTagger		= 0;         				// pointer to the Tagger
+  fLadder		= 0;    					// pointer to the Ladder
+  fCB			= 0;   						// pointer to the Crystal Ball
+  fNaI		= 0;       					// pointer to the NaI elements
   fPID		= 0;           				// pointer to the PID
-  fMWPC 	= 0;					// pointer to the MWPC
-  fTAPS		= 0;       				// pointer to TAPS
+  fMWPC       	= 0;						// pointer to the MWPC
+  fTAPS		= 0;       					// pointer to TAPS
   fBaF2PWO	= 0;	       				// pointer to the BaF2 (or the BaF2/PWO) array
   fVeto		= 0;           				// pointer to the TAPS Vetos
   fLinPol	= 0;           				// pointer to the linear Polarization class (if available)
-  fPbWO4        = 0;
-  fCATS         = 0;                                    // pointer to CATS
-  fCATSCore     = 0;                                    // pointer to CATSCore
-  fCATSAnnulus  = 0;                                    // pointer to CATSAnnulus
-  fCATSShield   = 0;                                    // pointer to CATSShield
-  fTOF          = 0;   
-  fPbGlassApp   = 0;
-  fPbGlass      = 0;  
-  fMoeller      = 0;
+  fPairSpec     = 0;
+  fPbWO4            = 0;
+  fTOF              = 0;   
+  fPbGlassApp       = 0;
+  fPbGlass          = 0;  
+  fMoeller          = 0;
   
   fRunNumber = fIsMC ? 0 : TOSUtils::ExtractRunNumber(gAR->GetFileName());
 }
+
+
 
 TA2AccessSQL::~TA2AccessSQL()
 {
@@ -324,31 +323,17 @@ void TA2AccessSQL::LoadDetectors(TA2DataManager* parent, Int_t depth)
       fLinPol = (TA2LinearPolEpics*) obj;
       added = kTRUE;
     }
+    else if (!strcmp(obj->ClassName(), "TA2PairSpec"))
+    {
+      fPairSpec = (TA2PairSpec*) obj;
+      added = kTRUE;
+    }
     else if (!strcmp(obj->ClassName(), "TA2Moeller"))
     {
       fMoeller = (TA2Moeller*) obj;
       added = kTRUE;
     }
-    else if (!strcmp(obj->ClassName(), "TA2GenericApp"))
-    {
-      fCATS = (TA2GenericApp*) obj;
-      added = kTRUE;
-    }
-    else if (!strcmp(obj->ClassName(), "TA2GenericApp_CATSCore"))
-    {
-        fCATSCore = (TA2GenericApp_CATSCore*) obj;
-        added = kTRUE;
-    }
-    else if (!strcmp(obj->ClassName(), "TA2GenericApp_CATSAnnulus"))
-    {
-        fCATSAnnulus = (TA2GenericApp_CATSAnnulus*) obj;
-        added = kTRUE;
-    }
-    else if (!strcmp(obj->ClassName(), "TA2GenericApp_CATSShield"))
-    {
-        fCATSShield = (TA2GenericApp_CATSShield*) obj;
-        added = kTRUE;
-    }
+
     // print information if a detector was added
     if (added)
     {

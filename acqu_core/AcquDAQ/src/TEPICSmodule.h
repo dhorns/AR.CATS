@@ -12,6 +12,7 @@
 #ifndef __TEPICSmodule_h__
 #define __TEPICSmodule_h__
 
+#include <unistd.h>
 #include "TDAQmodule.h"
 class TTimer;
 

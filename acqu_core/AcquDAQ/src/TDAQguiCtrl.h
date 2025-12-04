@@ -65,6 +65,7 @@
 #include "TGuiBldDragManager.h"
 #include "TTimer.h"
 #include "TH1F.h"
+#include <unistd.h>
 
 #include "Riostream.h"
 

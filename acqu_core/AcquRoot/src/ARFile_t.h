@@ -30,6 +30,8 @@
 #include "TA2System.h"                  // AcquRoot base class
 #include "EnumConst.h"			// integer constant defs
 
+#include <unistd.h>
+
 // Unix system headers....these screw up the ROOT dictionary generator
 // hence ARFile_t is not rootified
 extern "C"{

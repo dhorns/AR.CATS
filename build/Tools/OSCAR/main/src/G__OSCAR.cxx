@@ -1320,6 +1320,13 @@ namespace ROOT {
    }
 } // end of namespace ROOT for class ::TONumberReader
 
+namespace ROOT {
+   // Registration Schema evolution read functions
+   int RecordReadRules_G__OSCAR() {
+      return 0;
+   }
+   static int _R__UNIQUE_DICT_(ReadRules_G__OSCAR) = RecordReadRules_G__OSCAR();R__UseDummy(_R__UNIQUE_DICT_(ReadRules_G__OSCAR));
+} // namespace ROOT
 namespace {
   void TriggerDictionaryInitialization_G__OSCAR_Impl() {
     static const char* headers[] = {
@@ -1341,12 +1348,12 @@ namespace {
 nullptr
     };
     static const char* includePaths[] = {
-"/opt/root_v6.28.06_cxx14/include",
+"/opt/root_v6.36.00/include",
 "/home/dave/opt/AR.CATS/Tools/OSCAR/A2/include",
 "/home/dave/opt/AR.CATS/Tools/OSCAR/MC/include",
 "/home/dave/opt/AR.CATS/Tools/OSCAR/main/include",
 "/home/dave/opt/AR.CATS/Tools/OSCAR/utils/include",
-"/opt/root_v6.28.06_cxx14/include/",
+"/opt/root_v6.36.00/include/",
 "/home/dave/opt/AR.CATS/build/Tools/OSCAR/",
 nullptr
     };

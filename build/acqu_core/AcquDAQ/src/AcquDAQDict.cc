@@ -242,7 +242,7 @@ namespace ROOT {
       ::TDAQexperiment *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::TDAQexperiment >(nullptr);
       static ::ROOT::TGenericClassInfo 
-         instance("TDAQexperiment", ::TDAQexperiment::Class_Version(), "TDAQexperiment.h", 91,
+         instance("TDAQexperiment", ::TDAQexperiment::Class_Version(), "TDAQexperiment.h", 92,
                   typeid(::TDAQexperiment), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::TDAQexperiment::Dictionary, isa_proxy, 4,
                   sizeof(::TDAQexperiment) );
@@ -662,7 +662,7 @@ namespace ROOT {
       ::TDAQguiCtrl *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::TDAQguiCtrl >(nullptr);
       static ::ROOT::TGenericClassInfo 
-         instance("TDAQguiCtrl", ::TDAQguiCtrl::Class_Version(), "TDAQguiCtrl.h", 75,
+         instance("TDAQguiCtrl", ::TDAQguiCtrl::Class_Version(), "TDAQguiCtrl.h", 76,
                   typeid(::TDAQguiCtrl), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::TDAQguiCtrl::Dictionary, isa_proxy, 4,
                   sizeof(::TDAQguiCtrl) );
@@ -692,7 +692,7 @@ namespace ROOT {
       ::TEPICSmodule *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::TEPICSmodule >(nullptr);
       static ::ROOT::TGenericClassInfo 
-         instance("TEPICSmodule", ::TEPICSmodule::Class_Version(), "TEPICSmodule.h", 20,
+         instance("TEPICSmodule", ::TEPICSmodule::Class_Version(), "TEPICSmodule.h", 21,
                   typeid(::TEPICSmodule), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::TEPICSmodule::Dictionary, isa_proxy, 4,
                   sizeof(::TEPICSmodule) );
@@ -1338,7 +1338,7 @@ namespace ROOT {
       ::TVME_VUPROM *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TInstrumentedIsAProxy< ::TVME_VUPROM >(nullptr);
       static ::ROOT::TGenericClassInfo 
-         instance("TVME_VUPROM", ::TVME_VUPROM::Class_Version(), "TVME_VUPROM.h", 95,
+         instance("TVME_VUPROM", ::TVME_VUPROM::Class_Version(), "TVME_VUPROM.h", 96,
                   typeid(::TVME_VUPROM), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &::TVME_VUPROM::Dictionary, isa_proxy, 4,
                   sizeof(::TVME_VUPROM) );
@@ -4567,7 +4567,7 @@ namespace ROOT {
       vector<unsigned long> *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<unsigned long>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<unsigned long>", -2, "vector", 386,
+         instance("vector<unsigned long>", -2, "vector", 458,
                   typeid(vector<unsigned long>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEunsignedsPlonggR_Dictionary, isa_proxy, 0,
                   sizeof(vector<unsigned long>) );
@@ -4599,10 +4599,10 @@ namespace ROOT {
 namespace ROOT {
    // Wrappers around operator new
    static void *new_vectorlEunsignedsPlonggR(void *p) {
-      return  p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<unsigned long> : new vector<unsigned long>;
+      return  p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<unsigned long> : new vector<unsigned long>;
    }
    static void *newArray_vectorlEunsignedsPlonggR(Long_t nElements, void *p) {
-      return p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<unsigned long>[nElements] : new vector<unsigned long>[nElements];
+      return p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<unsigned long>[nElements] : new vector<unsigned long>[nElements];
    }
    // Wrapper around operator delete
    static void delete_vectorlEunsignedsPlonggR(void *p) {
@@ -4632,7 +4632,7 @@ namespace ROOT {
       vector<pair<unsigned long,unsigned long> > *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<pair<unsigned long,unsigned long> >));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<pair<unsigned long,unsigned long> >", -2, "vector", 386,
+         instance("vector<pair<unsigned long,unsigned long> >", -2, "vector", 458,
                   typeid(vector<pair<unsigned long,unsigned long> >), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEpairlEunsignedsPlongcOunsignedsPlonggRsPgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<pair<unsigned long,unsigned long> >) );
@@ -4664,10 +4664,10 @@ namespace ROOT {
 namespace ROOT {
    // Wrappers around operator new
    static void *new_vectorlEpairlEunsignedsPlongcOunsignedsPlonggRsPgR(void *p) {
-      return  p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<pair<unsigned long,unsigned long> > : new vector<pair<unsigned long,unsigned long> >;
+      return  p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<pair<unsigned long,unsigned long> > : new vector<pair<unsigned long,unsigned long> >;
    }
    static void *newArray_vectorlEpairlEunsignedsPlongcOunsignedsPlonggRsPgR(Long_t nElements, void *p) {
-      return p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<pair<unsigned long,unsigned long> >[nElements] : new vector<pair<unsigned long,unsigned long> >[nElements];
+      return p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<pair<unsigned long,unsigned long> >[nElements] : new vector<pair<unsigned long,unsigned long> >[nElements];
    }
    // Wrapper around operator delete
    static void delete_vectorlEpairlEunsignedsPlongcOunsignedsPlonggRsPgR(void *p) {
@@ -4697,7 +4697,7 @@ namespace ROOT {
       vector<VMEreg_t> *ptr = nullptr;
       static ::TVirtualIsAProxy* isa_proxy = new ::TIsAProxy(typeid(vector<VMEreg_t>));
       static ::ROOT::TGenericClassInfo 
-         instance("vector<VMEreg_t>", -2, "vector", 386,
+         instance("vector<VMEreg_t>", -2, "vector", 458,
                   typeid(vector<VMEreg_t>), ::ROOT::Internal::DefineBehavior(ptr, ptr),
                   &vectorlEVMEreg_tgR_Dictionary, isa_proxy, 0,
                   sizeof(vector<VMEreg_t>) );
@@ -4729,10 +4729,10 @@ namespace ROOT {
 namespace ROOT {
    // Wrappers around operator new
    static void *new_vectorlEVMEreg_tgR(void *p) {
-      return  p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<VMEreg_t> : new vector<VMEreg_t>;
+      return  p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<VMEreg_t> : new vector<VMEreg_t>;
    }
    static void *newArray_vectorlEVMEreg_tgR(Long_t nElements, void *p) {
-      return p ? ::new((::ROOT::Internal::TOperatorNewHelper*)p) vector<VMEreg_t>[nElements] : new vector<VMEreg_t>[nElements];
+      return p ? ::new(static_cast<::ROOT::Internal::TOperatorNewHelper*>(p)) vector<VMEreg_t>[nElements] : new vector<VMEreg_t>[nElements];
    }
    // Wrapper around operator delete
    static void delete_vectorlEVMEreg_tgR(void *p) {
@@ -4747,6 +4747,13 @@ namespace ROOT {
    }
 } // end of namespace ROOT for class vector<VMEreg_t>
 
+namespace ROOT {
+   // Registration Schema evolution read functions
+   int RecordReadRules_AcquDAQDict() {
+      return 0;
+   }
+   static int _R__UNIQUE_DICT_(ReadRules_AcquDAQDict) = RecordReadRules_AcquDAQDict();R__UseDummy(_R__UNIQUE_DICT_(ReadRules_AcquDAQDict));
+} // namespace ROOT
 namespace {
   void TriggerDictionaryInitialization_AcquDAQDict_Impl() {
     static const char* headers[] = {
@@ -4803,7 +4810,7 @@ namespace {
 nullptr
     };
     static const char* includePaths[] = {
-"/opt/root_v6.28.06_cxx14/include",
+"/opt/root_v6.36.00/include",
 "/usr/include",
 "/home/dave/opt/AR.CATS/acqu_core/AcquDAQ/src",
 "/home/dave/opt/AR.CATS/acqu_core/AcquMC/src",
@@ -4811,7 +4818,7 @@ nullptr
 "/home/dave/opt/AR.CATS/acqu_core/ezcaRoot/src",
 "/home/dave/opt/AR.CATS/build/acqu_core/AcquRoot/src",
 "/home/dave/opt/AR.CATS/Tools/a2display/inc",
-"/opt/root_v6.28.06_cxx14/include/",
+"/opt/root_v6.36.00/include/",
 "/home/dave/opt/AR.CATS/build/acqu_core/",
 nullptr
     };
@@ -4880,6 +4887,9 @@ class __attribute__((annotate("$clingAutoload$/home/dave/opt/AR.CATS/acqu_core/A
 #endif
 #ifndef WITH_LIBLZMA
   #define WITH_LIBLZMA 1
+#endif
+#ifndef VME_HOST
+  #define VME_HOST 1
 #endif
 
 #define _BACKWARD_BACKWARD_WARNING_H

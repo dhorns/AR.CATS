@@ -709,6 +709,13 @@ namespace ROOT {
    }
 } // end of namespace ROOT for class ::PollingHistogram<TH2TAPS>
 
+namespace ROOT {
+   // Registration Schema evolution read functions
+   int RecordReadRules_Dict() {
+      return 0;
+   }
+   static int _R__UNIQUE_DICT_(ReadRules_Dict) = RecordReadRules_Dict();R__UseDummy(_R__UNIQUE_DICT_(ReadRules_Dict));
+} // namespace ROOT
 namespace {
   void TriggerDictionaryInitialization_Dict_Impl() {
     static const char* headers[] = {
@@ -719,9 +726,9 @@ namespace {
 nullptr
     };
     static const char* includePaths[] = {
-"/opt/root_v6.28.06_cxx14/include",
+"/opt/root_v6.36.00/include",
 "/home/dave/opt/AR.CATS/Tools/a2display/inc",
-"/opt/root_v6.28.06_cxx14/include/",
+"/opt/root_v6.36.00/include/",
 "/home/dave/opt/AR.CATS/build/Tools/a2display/",
 nullptr
     };

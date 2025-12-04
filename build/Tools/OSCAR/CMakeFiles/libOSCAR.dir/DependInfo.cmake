@@ -1,41 +1,30 @@
+
+# Consider dependencies only in project.
+set(CMAKE_DEPENDS_IN_PROJECT_ONLY OFF)
+
 # The set of languages for which implicit dependencies are needed:
 set(CMAKE_DEPENDS_LANGUAGES
-  "CXX"
-  )
-# The set of files for implicit dependencies of each language:
-set(CMAKE_DEPENDS_CHECK_CXX
-  "/home/dave/opt/AR.CATS/Tools/OSCAR/A2/src/TOA2BaseDetParticle.cxx" "/home/dave/opt/AR.CATS/build/Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2BaseDetParticle.cxx.o"
-  "/home/dave/opt/AR.CATS/Tools/OSCAR/A2/src/TOA2DetParticle.cxx" "/home/dave/opt/AR.CATS/build/Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2DetParticle.cxx.o"
-  "/home/dave/opt/AR.CATS/Tools/OSCAR/A2/src/TOA2Detector.cxx" "/home/dave/opt/AR.CATS/build/Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2Detector.cxx.o"
-  "/home/dave/opt/AR.CATS/Tools/OSCAR/A2/src/TOA2PSA.cxx" "/home/dave/opt/AR.CATS/build/Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2PSA.cxx.o"
-  "/home/dave/opt/AR.CATS/Tools/OSCAR/A2/src/TOA2RecMeson2g.cxx" "/home/dave/opt/AR.CATS/build/Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2RecMeson2g.cxx.o"
-  "/home/dave/opt/AR.CATS/Tools/OSCAR/A2/src/TOA2RecParticle.cxx" "/home/dave/opt/AR.CATS/build/Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2RecParticle.cxx.o"
-  "/home/dave/opt/AR.CATS/Tools/OSCAR/A2/src/TOA2Trigger.cxx" "/home/dave/opt/AR.CATS/build/Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2Trigger.cxx.o"
-  "/home/dave/opt/AR.CATS/Tools/OSCAR/MC/src/TOMCParticle.cxx" "/home/dave/opt/AR.CATS/build/Tools/OSCAR/CMakeFiles/libOSCAR.dir/MC/src/TOMCParticle.cxx.o"
-  "/home/dave/opt/AR.CATS/build/Tools/OSCAR/main/src/G__OSCAR.cxx" "/home/dave/opt/AR.CATS/build/Tools/OSCAR/CMakeFiles/libOSCAR.dir/main/src/G__OSCAR.cxx.o"
-  "/home/dave/opt/AR.CATS/Tools/OSCAR/main/src/TOGlobals.cxx" "/home/dave/opt/AR.CATS/build/Tools/OSCAR/CMakeFiles/libOSCAR.dir/main/src/TOGlobals.cxx.o"
-  "/home/dave/opt/AR.CATS/Tools/OSCAR/utils/src/TOASCIIReader.cxx" "/home/dave/opt/AR.CATS/build/Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TOASCIIReader.cxx.o"
-  "/home/dave/opt/AR.CATS/Tools/OSCAR/utils/src/TOArray2D.cxx" "/home/dave/opt/AR.CATS/build/Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TOArray2D.cxx.o"
-  "/home/dave/opt/AR.CATS/Tools/OSCAR/utils/src/TOKinCut.cxx" "/home/dave/opt/AR.CATS/build/Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TOKinCut.cxx.o"
-  "/home/dave/opt/AR.CATS/Tools/OSCAR/utils/src/TOLoader.cxx" "/home/dave/opt/AR.CATS/build/Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TOLoader.cxx.o"
-  "/home/dave/opt/AR.CATS/Tools/OSCAR/utils/src/TONumberReader.cxx" "/home/dave/opt/AR.CATS/build/Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TONumberReader.cxx.o"
-  "/home/dave/opt/AR.CATS/Tools/OSCAR/utils/src/TOSUtils.cxx" "/home/dave/opt/AR.CATS/build/Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TOSUtils.cxx.o"
-  )
-set(CMAKE_CXX_COMPILER_ID "GNU")
-
-# Preprocessor definitions for this target.
-set(CMAKE_TARGET_DEFINITIONS_CXX
-  "_FORTIFY_SOURCE=2"
-  "libOSCAR_EXPORTS"
   )
 
-# The include file search paths:
-set(CMAKE_CXX_TARGET_INCLUDE_PATH
-  "/opt/root_v6.28.06_cxx14/include"
-  "../Tools/OSCAR/A2/include"
-  "../Tools/OSCAR/MC/include"
-  "../Tools/OSCAR/main/include"
-  "../Tools/OSCAR/utils/include"
+# The set of dependency files which are needed:
+set(CMAKE_DEPENDS_DEPENDENCY_FILES
+  "/home/dave/opt/AR.CATS/Tools/OSCAR/A2/src/TOA2BaseDetParticle.cxx" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2BaseDetParticle.cxx.o" "gcc" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2BaseDetParticle.cxx.o.d"
+  "/home/dave/opt/AR.CATS/Tools/OSCAR/A2/src/TOA2DetParticle.cxx" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2DetParticle.cxx.o" "gcc" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2DetParticle.cxx.o.d"
+  "/home/dave/opt/AR.CATS/Tools/OSCAR/A2/src/TOA2Detector.cxx" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2Detector.cxx.o" "gcc" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2Detector.cxx.o.d"
+  "/home/dave/opt/AR.CATS/Tools/OSCAR/A2/src/TOA2PSA.cxx" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2PSA.cxx.o" "gcc" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2PSA.cxx.o.d"
+  "/home/dave/opt/AR.CATS/Tools/OSCAR/A2/src/TOA2RecMeson2g.cxx" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2RecMeson2g.cxx.o" "gcc" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2RecMeson2g.cxx.o.d"
+  "/home/dave/opt/AR.CATS/Tools/OSCAR/A2/src/TOA2RecParticle.cxx" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2RecParticle.cxx.o" "gcc" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2RecParticle.cxx.o.d"
+  "/home/dave/opt/AR.CATS/Tools/OSCAR/A2/src/TOA2Trigger.cxx" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2Trigger.cxx.o" "gcc" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/A2/src/TOA2Trigger.cxx.o.d"
+  "/home/dave/opt/AR.CATS/Tools/OSCAR/MC/src/TOMCParticle.cxx" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/MC/src/TOMCParticle.cxx.o" "gcc" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/MC/src/TOMCParticle.cxx.o.d"
+  "/home/dave/opt/AR.CATS/build/Tools/OSCAR/main/src/G__OSCAR.cxx" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/main/src/G__OSCAR.cxx.o" "gcc" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/main/src/G__OSCAR.cxx.o.d"
+  "/home/dave/opt/AR.CATS/Tools/OSCAR/main/src/TOGlobals.cxx" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/main/src/TOGlobals.cxx.o" "gcc" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/main/src/TOGlobals.cxx.o.d"
+  "/home/dave/opt/AR.CATS/Tools/OSCAR/utils/src/TOASCIIReader.cxx" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TOASCIIReader.cxx.o" "gcc" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TOASCIIReader.cxx.o.d"
+  "/home/dave/opt/AR.CATS/Tools/OSCAR/utils/src/TOArray2D.cxx" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TOArray2D.cxx.o" "gcc" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TOArray2D.cxx.o.d"
+  "/home/dave/opt/AR.CATS/Tools/OSCAR/utils/src/TOKinCut.cxx" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TOKinCut.cxx.o" "gcc" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TOKinCut.cxx.o.d"
+  "/home/dave/opt/AR.CATS/Tools/OSCAR/utils/src/TOLoader.cxx" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TOLoader.cxx.o" "gcc" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TOLoader.cxx.o.d"
+  "/home/dave/opt/AR.CATS/Tools/OSCAR/utils/src/TONumberReader.cxx" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TONumberReader.cxx.o" "gcc" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TONumberReader.cxx.o.d"
+  "/home/dave/opt/AR.CATS/Tools/OSCAR/utils/src/TOSUtils.cxx" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TOSUtils.cxx.o" "gcc" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/utils/src/TOSUtils.cxx.o.d"
+  "" "lib/libOSCAR.so" "gcc" "Tools/OSCAR/CMakeFiles/libOSCAR.dir/link.d"
   )
 
 # Pairs of files generated by the same build rule.
@@ -44,8 +33,12 @@ set(CMAKE_MULTIPLE_OUTPUT_PAIRS
   )
 
 
-# Targets to which this target links.
-set(CMAKE_TARGET_LINKED_INFO_FILES
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_LINKED_INFO_FILES
+  )
+
+# Targets to which this target links which contain Fortran sources.
+set(CMAKE_Fortran_TARGET_FORWARD_LINKED_INFO_FILES
   )
 
 # Fortran module output directory.

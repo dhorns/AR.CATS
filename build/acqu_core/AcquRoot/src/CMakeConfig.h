@@ -7,7 +7,7 @@
 
 // the path to the ROOT installation which has been
 // used to build it
-#define CMAKE_ROOTSYS "/opt/root_v6.28.06_cxx14"
+#define CMAKE_ROOTSYS "/opt/root_v6.36.00"
 
 // the path to the core/sys AcquRoot and to the user part
 // the former $acqu_sys env variable
