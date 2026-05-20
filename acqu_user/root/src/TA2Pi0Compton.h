@@ -113,8 +113,16 @@ class TA2Pi0Compton : public TA2Physics {
 	Double_t*	fTaggerPi0Time;
 	Double_t*	fTaggerPi0TimeCut;
 
-	Int_t	 	fN2PhotonInvariantMass;
-	Double_t* 	f2PhotonInvariantMass;
+	Int_t	 	fN2PhotonIM;
+	Double_t* 	f2PhotonIM;
+	Double_t* 	f2PhotonIMtime;
+
+	Int_t			fNPrompt2gIM;
+	Int_t			fNRandom2gIM;
+	Double_t*	f2PhotonIMPrompt;
+	Double_t*	f2PhotonIMRandom;
+	Int_t*		fTaggerChannelPromptIM;
+	Int_t*		fTaggerChannelRandomIM;
 
 	Int_t		fPhotTimePL;
 	Int_t		fPhotTimePR;

@@ -7,11 +7,11 @@ enum { EComptonPromptWindows = 1000, EComptonRandomWindows, EPi0PromptWindows, E
 static const Map_t kInputs[] = {
 	{"Compton-Prompt-Windows:",	EComptonPromptWindows},
 	{"Compton-Random-Windows:",	EComptonRandomWindows},
-	{"Pi0-Prompt-Windows:",		EPi0PromptWindows},
-	{"Pi0-Random-Windows:",		EPi0RandomWindows},
+	{"Pi0-Prompt-Windows:",			EPi0PromptWindows},
+	{"Pi0-Random-Windows:",			EPi0RandomWindows},
 	{"Pi0-Invariant-Mass-Cuts:",	EPi0InvariantMassCuts},
-	{"Produce-Tree-File:",		EProduceTreeFile},
-	{"Tree-File-Name:",		ETreeFileName},
+	{"Produce-Tree-File:",			EProduceTreeFile},
+	{"Tree-File-Name:",				ETreeFileName},
 	{NULL,          -1}
 };
 
@@ -84,7 +84,14 @@ TA2Pi0Compton::TA2Pi0Compton( const char* name, TA2Analysis* analysis )
 	fPromptRandomRatio	= 0.0;
 	fPromptRandomRatioPi0	= 0.0;
 
-	f2PhotonInvariantMass	= NULL;
+	f2PhotonIM	= NULL;
+	f2PhotonIMtime	= NULL;
+
+	f2PhotonIMPrompt	= NULL;
+	f2PhotonIMRandom	= NULL;
+	fTaggerChannelPromptIM	= NULL;
+	fTaggerChannelRandomIM	= NULL;
+
 	fTaggerPhotonTime	= NULL;
 	fTaggerPi0Time		= NULL;
 	fTaggerPi0TimeCut	= NULL;
@@ -132,8 +139,8 @@ TA2Pi0Compton::~TA2Pi0Compton()
 
 // Delete Tree Files
 //
-//	delete fTree;
-//	delete fFile;
+	delete fTree;
+	delete fFile;
 
 }
 	
@@ -167,30 +174,34 @@ void TA2Pi0Compton::SetConfig(Char_t* line, Int_t key)
 		break;
 		case EPi0RandomWindows:
 			//  Pi0 Random Windows
-			if( sscanf( line, "%d %d %d %d\n", &fPi0TimeRL1, &fPi0TimeRR1, &fPi0TimeRL2, &fPi0TimeRR2 ) != 4 ){
+			if( sscanf( line, "%d %d %d %d\n", &fPi0TimeRL1, &fPi0TimeRR1, &fPi0TimeRL2, &fPi0TimeRR2 ) != 4 )
+			{
 				PrintError( line, "<Error: Pi0 Random Windows not set correctly>");
 				return;
 			}
 		break;
-                case EPi0InvariantMassCuts:
-                        //  Pi0 Invariant Mass Cuts
-                        if( sscanf( line, "%d %d\n", &fPi0InvMassCut1, &fPi0InvMassCut2 ) != 2 ){
-                      		PrintError( line, "<Error: Pi0 Invariant Mass Cuts not set correctly>");
-                       		return;
-                        }
-                break;
+		case EPi0InvariantMassCuts:
+			//  Pi0 Invariant Mass Cuts
+			if( sscanf( line, "%d %d\n", &fPi0InvMassCut1, &fPi0InvMassCut2 ) != 2 )
+			{
+				PrintError( line, "<Error: Pi0 Invariant Mass Cuts not set correctly>");
+				return;
+			}
+			break;
 		case EProduceTreeFile:
 			//  Pi0 Random Windows
-			if( sscanf( line, "%d\n", &fProduceTreeFile) != 1 ){
+			if( sscanf( line, "%d\n", &fProduceTreeFile) != 1 )
+			{
 				PrintError( line, "<Error: Tree files not turned on/off correctly>");
 				return;
 			}
-			if(fProduceTreeFile == 1) printf("\n\nPhysics tree file enabled\n");
-                        else printf("\n\nPhysics tree file disabled\n");
+			if( fProduceTreeFile == 1) printf("\n\nPhysics tree file enabled\n");
+			else printf("\n\nPhysics tree file disabled\n");
 		break;
 		case ETreeFileName:
 			//  Tree File Name
-			if( sscanf( line, "%s\n", fTreeFileName) != 1){
+			if( sscanf( line, "%s\n", fTreeFileName) != 1)
+			{
 				PrintError( line, "<Error: Tree file name not set correctly>");
 				return;
 			}
@@ -225,9 +236,9 @@ void TA2Pi0Compton::PostInit()
 	else {  printf("CB system included in analysis\n");
 		fCBParticles  = fCB->GetParticles(); }
 
-        // NaI
-        fNaI = (TA2CalArray*)((TA2Analysis*)fParent)->GetGrandChild("NaI");
-        if ( !fNaI) PrintError( "", "<No NaI class found>", EErrFatal);
+	// NaI
+	fNaI = (TA2CalArray*)((TA2Analysis*)fParent)->GetGrandChild("NaI");
+	if ( !fNaI) PrintError( "", "<No NaI class found>", EErrFatal);
 
 	// TAPS
 	fTAPS = (TA2Taps*)((TA2Analysis*)fParent)->GetChild("TAPS");
@@ -235,8 +246,8 @@ void TA2Pi0Compton::PostInit()
 	else {  printf("TAPS included in analysis\n");
 		fTAPSParticles = fTAPS->GetParticles();
 
-	        fBaF2 = (TA2TAPS_BaF2*)((TA2Analysis*)fParent)->GetGrandChild("BaF2PWO");
-	        if (!fBaF2) PrintError( "", "<No BaF2 class found>", EErrFatal);
+		fBaF2 = (TA2TAPS_BaF2*)((TA2Analysis*)fParent)->GetGrandChild("BaF2PWO");
+		if (!fBaF2) PrintError( "", "<No BaF2 class found>", EErrFatal);
 	}
 
 	printf("\n");
@@ -273,7 +284,7 @@ void TA2Pi0Compton::PostInit()
 	for ( i = 0; i < squareMax; i++) fPi0[i] = part + i;
 
 	fUnknown		= new TA2Particle*[fMaxNParticle];
-	fTaggedPhoton		= new TA2Particle*[352];
+	fTaggedPhoton		= new TA2Particle*[328];
 
 	fPhotonEnergy		= new Double_t[fMaxNParticle];
 	fPhotonTheta		= new Double_t[fMaxNParticle];
@@ -291,37 +302,43 @@ void TA2Pi0Compton::PostInit()
 	fPi0Time		= new Double_t[fMaxNParticle];
 
 	fIsPionPhoton		= new Bool_t[fMaxNParticle];
-	f2PhotonInvariantMass	= new Double_t[squareMax];
+	f2PhotonIM	= new Double_t[squareMax];
+	f2PhotonIMtime	= new Double_t[squareMax];
 
-	fTaggerTime		= new Double_t[352];
-	fTaggerPhotonTime	= new Double_t[352*fMaxNParticle];
-	fTaggerPi0Time		= new Double_t[352*fMaxNParticle];
-	fTaggerPi0TimeCut	= new Double_t[352*fMaxNParticle];
-	fTaggerChannel		= new Int_t[352*5];
+	f2PhotonIMPrompt	= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	f2PhotonIMRandom	= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	fTaggerChannelPromptIM 	= new Int_t[328*fMaxNParticle*fMaxNParticle];
+	fTaggerChannelRandomIM 	= new Int_t[328*fMaxNParticle*fMaxNParticle];
 
-	fTaggerChannelPrompt 	= new Int_t[352*fMaxNParticle*fMaxNParticle];
-	fTaggerChannelRandom 	= new Int_t[352*fMaxNParticle*fMaxNParticle];
-	fMissingMassPrompt	= new Double_t[352*fMaxNParticle*fMaxNParticle];
-	fMissingMassRandom	= new Double_t[352*fMaxNParticle*fMaxNParticle];
-	fMissingEnergyPrompt	= new Double_t[352*fMaxNParticle*fMaxNParticle];
-	fMissingEnergyRandom	= new Double_t[352*fMaxNParticle*fMaxNParticle];
-	fPhotonThetaPrompt	= new Double_t[352*fMaxNParticle*fMaxNParticle];
-	fPhotonThetaRandom	= new Double_t[352*fMaxNParticle*fMaxNParticle];
-	fPhotonPhiPrompt	= new Double_t[352*fMaxNParticle*fMaxNParticle];
-	fPhotonPhiRandom	= new Double_t[352*fMaxNParticle*fMaxNParticle];
+	fTaggerTime		= new Double_t[328];
+	fTaggerPhotonTime	= new Double_t[328*fMaxNParticle];
+	fTaggerPi0Time		= new Double_t[328*fMaxNParticle];
+	fTaggerPi0TimeCut	= new Double_t[328*fMaxNParticle];
+	fTaggerChannel		= new Int_t[328*fMaxNParticle];
 
-	fTaggerChannelPromptPi0 = new Int_t[352*fMaxNParticle*fMaxNParticle];
-	fTaggerChannelRandomPi0 = new Int_t[352*fMaxNParticle*fMaxNParticle];
-	fMissingMassPromptPi0	= new Double_t[352*fMaxNParticle*fMaxNParticle];
-	fMissingMassRandomPi0	= new Double_t[352*fMaxNParticle*fMaxNParticle];
-	fMissingEnergyPromptPi0	= new Double_t[352*fMaxNParticle*fMaxNParticle];
-	fMissingEnergyRandomPi0	= new Double_t[352*fMaxNParticle*fMaxNParticle];
-	fPi0ThetaPrompt		= new Double_t[352*fMaxNParticle*fMaxNParticle];
-	fPi0ThetaRandom		= new Double_t[352*fMaxNParticle*fMaxNParticle];
-	fPi0PhiPrompt		= new Double_t[352*fMaxNParticle*fMaxNParticle];
-	fPi0PhiRandom		= new Double_t[352*fMaxNParticle*fMaxNParticle];
-	fPi0InvMPrompt		= new Double_t[352*fMaxNParticle*fMaxNParticle];
-	fPi0InvMRandom		= new Double_t[352*fMaxNParticle*fMaxNParticle];
+	fTaggerChannelPrompt 	= new Int_t[328*fMaxNParticle*fMaxNParticle];
+	fTaggerChannelRandom 	= new Int_t[328*fMaxNParticle*fMaxNParticle];
+	fMissingMassPrompt	= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	fMissingMassRandom	= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	fMissingEnergyPrompt	= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	fMissingEnergyRandom	= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	fPhotonThetaPrompt	= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	fPhotonThetaRandom	= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	fPhotonPhiPrompt	= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	fPhotonPhiRandom	= new Double_t[328*fMaxNParticle*fMaxNParticle];
+
+	fTaggerChannelPromptPi0 = new Int_t[328*fMaxNParticle*fMaxNParticle];
+	fTaggerChannelRandomPi0 = new Int_t[328*fMaxNParticle*fMaxNParticle];
+	fMissingMassPromptPi0	= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	fMissingMassRandomPi0	= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	fMissingEnergyPromptPi0	= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	fMissingEnergyRandomPi0	= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	fPi0ThetaPrompt		= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	fPi0ThetaRandom		= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	fPi0PhiPrompt		= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	fPi0PhiRandom		= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	fPi0InvMPrompt		= new Double_t[328*fMaxNParticle*fMaxNParticle];
+	fPi0InvMRandom		= new Double_t[328*fMaxNParticle*fMaxNParticle];
 
 // Create Tree Files, Define Branches (if option is turned on "fProduceTreeFile ==1")
 
@@ -364,19 +381,25 @@ void TA2Pi0Compton::PostInit()
 		fTree->Branch( "NRandomPi0",	&fNRandomPi0, 	"NRandomPi0/I");
 		fTree->Branch( "NTaggNPi0",	&fNTaggNPi0,	"NTaggNPi0/I");
 
-		fTree->Branch( "TaggerTime",  		fTaggerTime,   		"TaggerTime[NTagg]/D");
-		fTree->Branch( "TaggerPhotonTime",  	fTaggerPhotonTime,   	"TaggerPhotonTime[NTaggNPhot]/D");
-		fTree->Branch( "TaggerPi0Time",	   	fTaggerPi0Time,      	"TaggerPi0Time[NTaggNPi0]/D");
-		fTree->Branch( "TaggerPi0TimeCut",	   	fTaggerPi0TimeCut,      	"TaggerPi0TimeCut[NTaggNPi0]/D");
+		fTree->Branch( "TaggerTime",  		fTaggerTime,	"TaggerTime[NTagg]/D");
+		fTree->Branch( "TaggerPhotonTime",  	fTaggerPhotonTime,	"TaggerPhotonTime[NTaggNPhot]/D");
+		fTree->Branch( "TaggerPi0Time",		fTaggerPi0Time,	"TaggerPi0Time[NTaggNPi0]/D");
+		fTree->Branch( "TaggerPi0TimeCut",		fTaggerPi0TimeCut,	"TaggerPi0TimeCut[NTaggNPi0]/D");
 
-		fTree->Branch( "N2PhotonInvariantMass", 	&fN2PhotonInvariantMass,"N2PhotonInvariantMass/I");
-		fTree->Branch( "2PhotonInvariantMass",  	f2PhotonInvariantMass,  "2PhotonInvariantMass[N2PhotonInvariantMass]/D");
+		fTree->Branch( "N2PhotonIM", 		&fN2PhotonIM, "N2PhotonIM/I");
+		fTree->Branch( "2PhotonIM",  		f2PhotonIM,  "2PhotonIM[N2PhotonIM]/D");
+		fTree->Branch( "2PhotonIMtime", 	f2PhotonIMtime,  "2PhotonIMtime[N2PhotonIM]/D");
+
+		fTree->Branch( "2PhotonIMPrompt",	f2PhotonIMPrompt,"2PhotonIMPrompt[NPrompt2gIM]/D");
+		fTree->Branch( "2PhotonIMRandom",	f2PhotonIMRandom,"2PhotonIMRandom[NRandom2gIM]/D");
+		fTree->Branch( "TaggerChannelPromptIM",	fTaggerChannelPromptIM,	"TaggerChannelPromptIM[NPrompt2gIM]/I");
+		fTree->Branch( "TaggerChannelRandomIM",	fTaggerChannelRandomIM,	"TaggerChannelRandomIM[NRandom2gIM]/I");
 
 		fTree->Branch( "PromptRandomRatio",	&fPromptRandomRatio,	"PromptRandomRatio/D");
 		fTree->Branch( "TaggerChannelPrompt",	fTaggerChannelPrompt,	"TaggerChannelPrompt[NPrompt]/I");
 		fTree->Branch( "TaggerChannelRandom",	fTaggerChannelRandom,	"TaggerChannelRandom[NRandom]/I");
-		fTree->Branch( "MissingMassPrompt",	fMissingMassPrompt,	"MissingMassPrompt[NPrompt]/D");
-		fTree->Branch( "MissingMassRandom",	fMissingMassRandom,	"MissingMassRandom[NRandom]/D");
+//		fTree->Branch( "MissingMassPrompt",	fMissingMassPrompt,	"MissingMassPrompt[NPrompt]/D");
+//		fTree->Branch( "MissingMassRandom",	fMissingMassRandom,	"MissingMassRandom[NRandom]/D");
 		fTree->Branch( "MissingEnergyPrompt",	fMissingEnergyPrompt,	"MissingEnergyPrompt[NPrompt]/D");
 		fTree->Branch( "MissingEnergyRandom",	fMissingEnergyRandom,	"MissingEnergyRandom[NRandom]/D");
 		fTree->Branch( "PhotonThetaPrompt",	fPhotonThetaPrompt, 	"PhotonThetaPrompt[NPrompt]/D");
@@ -387,8 +410,8 @@ void TA2Pi0Compton::PostInit()
 		fTree->Branch( "PromptRandomRatioPi0",	&fPromptRandomRatioPi0,	"PromptRandomRatioPi0/D");
 		fTree->Branch( "TaggerChannelPromptPi0",	fTaggerChannelPromptPi0,"TaggerChannelPromptPi0[NPromptPi0]/I");
 		fTree->Branch( "TaggerChannelRandomPi0",	fTaggerChannelRandomPi0,"TaggerChannelRandomPi0[NRandomPi0]/I");
-		fTree->Branch( "MissingMassPromptPi0",	fMissingMassPromptPi0,	"MissingMassPromptPi0[NPromptPi0]/D");
-		fTree->Branch( "MissingMassRandomPi0",	fMissingMassRandomPi0,	"MissingMassRandomPi0[NRandomPi0]/D");
+//		fTree->Branch( "MissingMassPromptPi0",	fMissingMassPromptPi0,	"MissingMassPromptPi0[NPromptPi0]/D");
+//		fTree->Branch( "MissingMassRandomPi0",	fMissingMassRandomPi0,	"MissingMassRandomPi0[NRandomPi0]/D");
 		fTree->Branch( "MissingEnergyPromptPi0",	fMissingEnergyPromptPi0,	"MissingEnergyPromptPi0[NPromptPi0]/D");
 		fTree->Branch( "MissingEnergyRandomPi0",	fMissingEnergyRandomPi0,	"MissingEnergyRandomPi0[NRandomPi0]/D");
 		fTree->Branch( "Pi0ThetaPrompt",		fPi0ThetaPrompt, 	"Pi0ThetaPrompt[NPromptPi0]/D");
@@ -398,9 +421,9 @@ void TA2Pi0Compton::PostInit()
 		fTree->Branch( "Pi0InvMPrompt",		fPi0InvMPrompt, 	"Pi0InvMPrompt[NPromptPi0]/D");
 		fTree->Branch( "Pi0InvMRandom",		fPi0InvMRandom, 	"Pi0InvMRandom[NRandomPi0]/D");
 
-	   fTree->Branch( "CBESum",  		&fCBESum,		"CBESum/D");
-	   fTree->Branch( "NaINCluster",            &fNaINCluster,          "NaINCluster/I");
-	   fTree->Branch( "BaF2NCluster",           &fBaF2NCluster,         "BaF2NCluster/I");
+		fTree->Branch( "CBESum",  			&fCBESum,			"CBESum/D");
+		fTree->Branch( "NaINCluster",		&fNaINCluster,		"NaINCluster/I");
+		fTree->Branch( "BaF2NCluster",	&fBaF2NCluster,	"BaF2NCluster/I");
 
 		gROOT->cd();
 	}
@@ -435,7 +458,14 @@ void TA2Pi0Compton::LoadVariable( )
 	TA2DataManager::LoadVariable("Pi0Energy", 		fPi0Energy,			EDMultiX);
 	TA2DataManager::LoadVariable("Pi0Time", 		fPi0Time,			EDMultiX);
 
-	TA2DataManager::LoadVariable("2PhotonInvariantMass", 	f2PhotonInvariantMass,		EDMultiX);
+	TA2DataManager::LoadVariable("N2PhotonIM", 		&fN2PhotonIM,		EISingleX);
+	TA2DataManager::LoadVariable("2PhotonIM", 		f2PhotonIM,			EDMultiX);
+	TA2DataManager::LoadVariable("2PhotonIMtime", 	f2PhotonIMtime,	EDMultiX);
+
+	TA2DataManager::LoadVariable("2PhotonIMPrompt",	f2PhotonIMPrompt,		EDMultiX);
+	TA2DataManager::LoadVariable("2PhotonIMRandom",	f2PhotonIMRandom,		EDMultiX);
+	TA2DataManager::LoadVariable("TaggerChannelPromptIM",	fTaggerChannelPromptIM,		EIMultiX);
+	TA2DataManager::LoadVariable("TaggerChannelRandomIM",	fTaggerChannelRandomIM,		EIMultiX);
 
 //Here
 	TA2DataManager::LoadVariable("2PhotonPhiDiff", 		&f2PhotonPhiDiff,		EDSingleX);
@@ -553,22 +583,25 @@ void TA2Pi0Compton::Reconstruct()
 
 	TLorentzVector p4;
 	Double_t time;
-	fN2PhotonInvariantMass = 0;
+	fN2PhotonIM = 0;
 
-	for ( i = 0; i< fNPhotTemp; i++) {
+	for ( i = 0; i< fNPhotTemp; i++)
+	{
 		TA2Particle photon1 	= *fPhotTemp[i];
 
-		for ( j = (i+1); j< fNPhotTemp; j++) {
+		for ( j = (i+1); j< fNPhotTemp; j++)
+		{
 			TA2Particle photon2 	= *fPhotTemp[j];
 
 			p4 = photon1.GetP4() + photon2.GetP4();	
 
-			f2PhotonInvariantMass[fN2PhotonInvariantMass] = p4.M();
-			fN2PhotonInvariantMass++;
+			time = (photon1.GetTime() + photon2.GetTime())/2;
+			f2PhotonIM[fN2PhotonIM] = p4.M();
+			f2PhotonIMtime[fN2PhotonIM] = time;
+			fN2PhotonIM++;
 
-			if (p4.M() > fPi0InvMassCut1 && p4.M() < fPi0InvMassCut2) {
-
-				time = (photon1.GetTime() + photon2.GetTime())/2;
+			if (p4.M() > fPi0InvMassCut1 && p4.M() < fPi0InvMassCut2)
+			{
 
 				(*fPi0[fNPi0]).SetP4(p4);
 				(*fPi0[fNPi0]).SetTime(time);
@@ -586,7 +619,6 @@ void TA2Pi0Compton::Reconstruct()
 			}
 		}
 	}
-
 
 // Fill Proton and Photon properties (remove pion photons from list) 
 
@@ -623,6 +655,8 @@ void TA2Pi0Compton::Reconstruct()
 		TA2Particle taggerphoton = *fTaggedPhoton[i];
 		fTaggerTime[i]	 	 = taggerphoton.GetTime();
 	} 
+
+// Calculate Missing Energy for all photons
 
 	fNTaggNPhot	= 0;
 	fNPrompt	= 0;
@@ -666,9 +700,6 @@ void TA2Pi0Compton::Reconstruct()
 		}
 	}
 
-
-// Here
-
 	if ( fNPhoton == 2)
 	{
 		Double_t phi_diff;
@@ -676,7 +707,6 @@ void TA2Pi0Compton::Reconstruct()
 		phi_diff = fabs( fPhotonPhi[0] - fPhotonPhi[1]);
 
 		f2PhotonPhiDiff = phi_diff;
-//		std::cout << phi_diff << std::endl;
 		
 		if (( phi_diff >= 160) && ( phi_diff <= 200))
 		{
@@ -685,14 +715,11 @@ void TA2Pi0Compton::Reconstruct()
 
 	}
 
-// Calculate Missing Mass for all pi0
+// Calculate Missing Energy for all pi0
 
 	fNTaggNPi0	= 0;
 	fNPromptPi0	= 0;
 	fNRandomPi0	= 0;
-
-//	fNPromptPi0Cut	= 0;
-//	fNRandomPi0Cut	= 0;
 
 	for (i = 0; i < fNPi0; i++)  {
 
@@ -734,6 +761,42 @@ void TA2Pi0Compton::Reconstruct()
 			}
 
 			fNTaggNPi0++;
+		}
+	}
+
+//	Calculate 2g invariant mass for different tagger channels
+	fNPrompt2gIM = 0;
+	fNRandom2gIM = 0;
+
+	for (i = 0; i < fN2PhotonIM; i++)
+//	if ( fN2PhotonIM == 1)
+	{
+
+		for (j = 0; j < fNTagg; j++)
+		{
+
+//			Double_t time2gIM = fTaggerTime[j] - f2PhotonIMtime[0];
+			Double_t time2gIM = fTaggerTime[j] - f2PhotonIMtime[i];
+
+			if ( (time2gIM >= fPi0TimePL && time2gIM <= fPi0TimePR) || (gAR->GetProcessType() == EMCProcess) )
+			{
+
+//				f2PhotonIMPrompt[fNPrompt2gIM] = f2PhotonIM[0];
+				f2PhotonIMPrompt[fNPrompt2gIM] = f2PhotonIM[i];
+				fTaggerChannelPromptIM[fNPrompt2gIM]  = fTaggerChannel[j];
+
+				fNPrompt2gIM++;
+			}
+
+			if ( (time2gIM >= fPi0TimeRL1 && time2gIM <= fPi0TimeRR1) || (time2gIM >= fPi0TimeRL2 && time2gIM <= fPi0TimeRR2) )
+			{
+
+//				f2PhotonIMRandom[fNRandom2gIM] = f2PhotonIM[0];
+				f2PhotonIMRandom[fNRandom2gIM] = f2PhotonIM[i];
+				fTaggerChannelRandomIM[fNRandom2gIM]  = fTaggerChannel[j];
+
+				fNRandom2gIM++;
+			}
 		}
 	}
 
@@ -802,7 +865,13 @@ void TA2Pi0Compton::Reconstruct()
 	fPi0Phi[fNPi0]				= EBufferEnd;
 	fPi0Time[fNPi0]				= EBufferEnd;
 
-	f2PhotonInvariantMass[fN2PhotonInvariantMass] = EBufferEnd;
+	f2PhotonIM[fN2PhotonIM] = EBufferEnd;
+	f2PhotonIMtime[fN2PhotonIM] = EBufferEnd;
+
+	f2PhotonIMPrompt[fNPrompt2gIM]			= EBufferEnd;
+	f2PhotonIMRandom[fNRandom2gIM]			= EBufferEnd;
+	fTaggerChannelPromptIM[fNPrompt2gIM]	= EBufferEnd;
+	fTaggerChannelRandomIM[fNRandom2gIM]	= EBufferEnd;
 
 	fTaggerTime[fNTagg]			= EBufferEnd;
 	fTaggerPhotonTime[fNTaggNPhot]		= EBufferEnd;

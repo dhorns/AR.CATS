@@ -20,14 +20,17 @@ RawHits:
 ## Global energy scale parameter, uncomment if desired
 ########################################################################
 ##
-#Energy-Scale: 1.05
+Energy-Scale: 1.067
 ##
 ########################################################################
 ## Resolutions for MC smearing, not used in real data analysis
 ########################################################################
 ##
 ## Energy given by c1 * (E/GeV)^c2 (enable/disable by last parameter).
-Energy-Resolution: 0.027  0.750  1
+# Original parameters 2026.05.14
+Energy-Resolution: 0.053  0.750  1
+# Changed to (attempt to) match 2025 He4 data
+#Energy-Resolution: 0.05  0.750  1
 ##
 ## Time given by Gaussian with sigma in ns (enable/disable by last parameter).
 Time-Resolution:   2.870  1
@@ -2284,4 +2287,3 @@ Display: 2D   ClTheta     180    0 180 -1   ClPhi     180 -180 180 -1
 Display: 2D   ClTheta     180    0 180 -1   ClPhi     180 -180 180 -1 CutCluster
 Display: 2D   EnergyOR    100    0 400 -1   Hits      720    0 720 -1
 Display: 2D   TimeOR      200 -100 100 -1   Hits      720    0 720 -1
-
