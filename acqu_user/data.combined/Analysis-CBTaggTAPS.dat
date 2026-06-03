@@ -46,7 +46,7 @@ MultiADC:       1       10000    10100
 ##
 ## Apparatus setup....
 ##              Name            Class           	Setup file
-Apparatus:      TAGG            TA2Tagger   		Apparatus-Tagger883.dat
+Apparatus:      TAGG            TA2Tagger   		Apparatus-Tagger855.dat
 Apparatus:	CB	      	TA2CentralApparatus     Apparatus-CentApp.dat
 #Apparatus:	TAPS      	TA2Taps		        Apparatus-Taps.dat
 ##

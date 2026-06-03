@@ -72,7 +72,7 @@ void EMissComptonHe4()
 
 	TString name;
 
-	gROOT->ProcessLine( "ReadTagEng(883)");
+	gROOT->ProcessLine( "ReadTagEng(855)");
 
 	TCanvas *c1 = new TCanvas ( "c1", "EMissHe4", 200, 350, 1000, 500);
 	c1->Divide( 3, 1);
@@ -193,7 +193,7 @@ void TaggerScalers()
 	UInt_t i, s_chan;
 	Double_t scal;
 
-	gROOT->ProcessLine( "ReadTagEng(883)");
+	gROOT->ProcessLine( "ReadTagEng(855)");
 
 	for ( i = 0; i < 328; i++)
 	{
@@ -251,7 +251,7 @@ void ProjTaggerTime( UInt_t chan)
 	UInt_t eg;
 	TString name;
 
-	gROOT->ProcessLine( "ReadTagEng(883)");
+	gROOT->ProcessLine( "ReadTagEng(855)");
 
 	eg = tdata[chan].egamma;
 
