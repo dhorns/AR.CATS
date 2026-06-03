@@ -68,7 +68,8 @@ Branch:   mc_rnd_id     8
 # New In-Beam Simulated Data
 #TreeFile: A2G4/g_300_40_180_out.root
 #TreeFile: A2G4/pi0_c_300_out.root
-TreeFile: A2G4/compton_c_300_out.root
+#TreeFile: A2G4/compton_c_300_out.root
+TreeFile: A2Geant4/g_300_40_180_out.root
 #
 ##
 ## Batch mode operation...redirect output directory for log files etc.

@@ -1,6 +1,7 @@
 // Tagger Energy
 typedef struct {
 
+	Double_t elec;
 	Int_t egamma;
 	Double_t energy;
 	Double_t denergy;
@@ -13,6 +14,7 @@ TData tdata[328];
 // Histogram File
 //TFile he4_data( "ARout/CB/ARH_He4.root");
 TFile he4_data( "ARout/CB/ARH_31837_He4.root");
+//TFile he4_data( "ARout/CB/ARH_30files_He4.root");
 
 // Tagger-Pi0 Time for Random Subtraction
 TH1D *tt = (TH1D*)he4_data.Get( "PHYS_TaggerPi0Time");
@@ -47,21 +49,24 @@ const Double_t etag = 0.185;
 TH2D *hS2;
 
 TH2D *im2d_sub2;
+TH2D *im2d_sub3;
 
 TH1D *scalers;
 
 void ReadTagEng( Int_t eg)
 {
 	UInt_t i, sc;
-	Double_t eff, deff;
+	Double_t eff, egg, deff;
 	TString file;
 
-	file = Form( "includes/tageng%d.dat", eg);
+	file = Form( "includes/tageng%d_new.dat", eg);
 
 	ifstream inFile( file);
 	while( !inFile.eof()) {
-		inFile >> i >> eff >> deff >> sc;
-		tdata[i].energy = deff;
+		inFile >> i >> eff >> egg >> deff >> sc;
+		tdata[i].elec = eff;
+		tdata[i].energy = egg;
+		tdata[i].denergy = deff;
 		tdata[i].egamma = (int)(deff + 0.5);
 		tdata[i].scaler = sc;
 	}
@@ -292,5 +297,113 @@ void ProjInvMass( UInt_t lo, UInt_t hi)
 
 	name = Form( "plots/CB/InvMass_chan%d-%d.pdf", lo, hi);
 	c1->Print( name);
+
+}
+
+// Simulation Histogram File
+//TFile he4_sim( "ARout/CB/MC_He4_210MeV.root");
+TFile he4_sim( "ARout/CB/MC_He4_300MeV.root");
+TH1D *sim_IM = (TH1D*)he4_sim.Get( "PHYS_2PhotonIM");
+
+void InvMassComp()
+{
+	UInt_t left, right;
+	Int_t Nd, Ns;
+	Double_t max, scale;
+	Double_t par[3], mean[2], sigma[2];
+	UInt_t eg_lo, eg_hi;
+
+	TString name;
+
+//	UInt_t lo = 50;
+//	UInt_t hi = 50;
+	UInt_t lo = 87;
+	UInt_t hi = 87;
+
+	gROOT->ProcessLine( "ReadTagEng(883)");
+
+	eg_lo = tdata[lo].egamma;
+	eg_hi = tdata[hi].egamma;
+
+	TCanvas *c1 = new TCanvas ( "c1", "EMissHe4", 200, 350, 1000, 500);
+
+	im2d_sub3 = (TH2D*)im2d_sub2->Clone( "binned");
+	TH1D *proj = im2d_sub3->ProjectionX( "projX");
+	proj->Draw();
+	proj->SetTitle( "Invariant Mass");
+
+	max = proj->GetMaximum();
+	max *= 1.2;
+	proj->SetMaximum( max);
+
+	TF1 *f1 = new TF1( "f1", "gaus", 110, 150);
+	proj->Fit( f1, "R0", "same");
+
+	f1->GetParameters( &par[0]);
+	mean[0] = par[1];
+	sigma[0] = par[2];
+
+	left = proj->GetXaxis()->FindBin( 100);
+	right = proj->GetXaxis()->FindBin( 170);
+	Nd = proj->Integral( left, right);
+	cout << left;
+	cout << " " << right;
+	cout << " " << Nd;
+	cout << endl;
+
+	left = sim_IM->GetXaxis()->FindBin( 100);
+	right = sim_IM->GetXaxis()->FindBin( 170);
+	Ns = sim_IM->Integral( left, right);
+	scale = (Double_t) Nd/Ns;
+	cout << left;
+	cout << " " << right;
+	cout << " " << Ns;
+	cout << " " << scale;
+	cout << endl;
+
+	sim_IM->Scale( scale);
+
+	sim_IM->SetLineColor( 4);
+	sim_IM->Draw( "HISTsame");
+
+	TF1 *f2 = new TF1( "f2", "gaus", 110, 135);
+	sim_IM->Fit( f2, "R0", "same");
+
+	f2->GetParameters( &par[0]);
+	mean[1] = par[1];
+	sigma[1] = par[2];
+
+	TLine *l1 = new TLine( 135, 0, 135, max);
+	l1->SetLineWidth( 2);
+	l1->SetLineStyle( 2);
+	l1->Draw( "same");
+
+	TLegend *pt = new TLegend( 0.5, 0.7, 0.7, 0.85);
+	pt->SetFillColor( 0);
+	pt->SetBorderSize( 0);
+	pt->SetTextSize( 0.04);
+
+	pt->AddEntry( sim_IM, "Simulation", "l");
+	pt->AddEntry( im2d_sub3, "Data", "l");
+	pt->Draw();
+
+	f1->Draw( "same");
+	f2->SetLineColor( 4);
+	f2->Draw( "same");
+
+	TPaveText *pl = new TPaveText( 0.6, 0.2, 0.9, 0.3, "NDC");
+   pl->SetBorderSize( 0);
+   pl->SetFillColor( 0);
+   pl->SetTextAlign( 12);
+   pl->SetTextSize( 0.035);
+
+	name = Form( "Data: mean = %5.1f MeV  #sigma = %4.1f MeV", mean[0], sigma[0]);
+	pl->AddText( name);
+	name = Form( "Sim: mean = %5.1f MeV  #sigma = %4.1f MeV", mean[1], sigma[1]);
+	pl->AddText( name);
+
+	pl->Draw( "same");
+
+	c1->Print( "plots/CB/invmass.pdf");
 
 }
