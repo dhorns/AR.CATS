@@ -1,6 +1,7 @@
 // Tagger Energy
 typedef struct {
 
+	Double_t elec;
 	Int_t egamma;
 	Double_t energy;
 	Double_t denergy;
@@ -36,15 +37,17 @@ TH2D *hS2;
 void ReadTagEng( Int_t eg)
 {
 	UInt_t i, sc;
-	Double_t eff, deff;
+	Double_t eff, egg, deff;
 	TString file;
 
-	file = Form( "includes/tageng%d.dat", eg);
+	file = Form( "includes/tageng%d_new.dat", eg);
 
 	ifstream inFile( file);
 	while( !inFile.eof()) {
-		inFile >> i >> eff >> deff >> sc;
-		tdata[i].energy = deff;
+		inFile >> i >> eff >> egg >> deff >> sc;
+		tdata[i].elec = eff;
+		tdata[i].energy = egg;
+		tdata[i].denergy = deff;
 		tdata[i].egamma = (int)(deff + 0.5);
 		tdata[i].scaler = sc;
 	}

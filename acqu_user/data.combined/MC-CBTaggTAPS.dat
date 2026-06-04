@@ -55,8 +55,8 @@ Branch:   emwpc         1024
 #
 #TreeFile: scratch/geant.root
 #TreeFile: A2G4/compton_c_300_out.root
-#TreeFile: A2G4/pi0_he4_300_out.root
-TreeFile: A2G4/pi0_he4_210_out.root
+TreeFile: A2G4/pi0_he4_300_out.root
+#TreeFile: A2G4/pi0_he4_210_out.root
 #TreeFile: A2G4/pi0_p_300_out.root
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
@@ -83,6 +83,6 @@ SetADC:  40000   640	 12
 Analysis:      TA2UserAnalysis
 #Configuration file for selected analysis class
 #AnalysisSetup: MC-Analysis.dat
-AnalysisSetup: Analysis-CBTaggTAPS.dat
+AnalysisSetup: Analysis-CBTaggTAPS-MC.dat
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #

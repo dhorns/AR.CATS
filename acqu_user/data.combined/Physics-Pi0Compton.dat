@@ -13,8 +13,8 @@ Target:	0. 0. 0.	3727.838
 # Set Physics class input parameters
 #
 # Set Compton (photon v. tagger) prompt and random windows
-Compton-Prompt-Windows: -50 20
-Compton-Random-Windows: -300 -100 100 600
+Compton-Prompt-Windows: -55 -5
+Compton-Random-Windows: -300 -100 0 0
 #
 # Set Pi0 (pi0 v. tagger) prompt and random windows
 Pi0-Prompt-Windows: -25 -10
@@ -30,6 +30,7 @@ Produce-Tree-File: 0
 #
 # Tree file name if Produce-Tree-File is on
 #Tree-File-Name: TA2Pi0ComptonMC.root
+Tree-File-Name: ARout/CB/TA2Pi0Compton.root
 #
 ############################################################
 Initialise:
@@ -56,18 +57,28 @@ Display: 1D Pi0Theta		180 	0 	180
 Display: 1D Pi0Phi		190 	-190 	190
 Display: 1D Pi0Time		100 	-50 	50
 #
-Display: 1D 2PhotonInvariantMass 200	0	200
+Display: 1D N2PhotonIM 10 0 10
+Display: 1D 2PhotonIM 400	0	400
+Display: 1D 2PhotonIMtime 1200	-600	600
+#
+Display: 1D 2PhotonIMPrompt 400	0 400
+Display: 1D 2PhotonIMRandom 400	0 400
+Display: 1D TaggerChannelPromptIM 328	0 	328
+Display: 1D TaggerChannelRandomIM 328	0 	328
+Display: 2D 2PhotonIMPrompt 400 0 400 -1 TaggerChannelPromptIM 328 0 328 -1
+Display: 2D 2PhotonIMRandom 400 0 400 -1 TaggerChannelRandomIM 328 0 328 -1
 #
 Display: 1D TaggerTime		1200	-600	600
 Display: 1D TaggerPhotonTime	1200	-600	600
 Display: 1D TaggerPi0Time	1200	-600	600
 #Display: 1D TaggerPi0TimeCut	1200	-600	600
 #
+Display: 1D TaggerChannel	328	0 	328
 Display: 1D PromptRandomRatio	100	0	1
-Display: 1D TaggerChannelPrompt 352	0 	352
-Display: 1D TaggerChannelRandom 352	0 	352
-Display: 1D MissingMassPrompt 	300	900 	1200
-Display: 1D MissingMassRandom 	300	900 	1200
+Display: 1D TaggerChannelPrompt 328	0 	328
+Display: 1D TaggerChannelRandom 328	0 	328
+#Display: 1D MissingMassPrompt 	300	900 	1200
+#Display: 1D MissingMassRandom 	300	900 	1200
 #Display: 1D MissingMassPrompt 	500	11000	11500
 #Display: 1D MissingMassRandom 	500	11000	11500
 Display: 1D MissingEnergyPrompt 200	-100	100
@@ -77,13 +88,19 @@ Display: 1D PhotonThetaRandom	180	0	180
 Display: 1D PhotonPhiPrompt	360	-180	180
 Display: 1D PhotonPhiRandom	360	-180	180
 #
+Display: 2D TaggerTime 1200 -600 600 -1 TaggerChannel 328 0 328 -1
+#Display: 2D 2PhotonIM 400 0 400 -1 TaggerChannel 328 0 328 -1
+#
+Display: 2D MissingEnergyPrompt 200 -100 100 -1 TaggerChannelPrompt 328 0 328 -1
+Display: 2D MissingEnergyRandom 200 -100 100 -1 TaggerChannelRandom 328 0 328 -1
+#
 Display: 1D PromptRandomRatioPi0	100	0	1
-Display: 1D TaggerChannelPromptPi0 	352	0 	352
-Display: 1D TaggerChannelRandomPi0 	352	0 	352
+Display: 1D TaggerChannelPromptPi0 	328	0 	328
+Display: 1D TaggerChannelRandomPi0 	328	0 	328
 #Display: 1D MissingMassPromptPi0 	300	900 	1200
 #Display: 1D MissingMassRandomPi0 	300	900 	1200
-Display: 1D MissingMassPromptPi0 	1000	3200 	4200
-Display: 1D MissingMassRandomPi0 	1000	3200 	4200
+#Display: 1D MissingMassPromptPi0 	1000	3200 	4200
+#Display: 1D MissingMassRandomPi0 	1000	3200 	4200
 Display: 1D MissingEnergyPromptPi0	200	-100	100
 Display: 1D MissingEnergyRandomPi0	200	-100	100
 #Display: 1D MissingEnergyPromptPi0Cut	200	-100	100
@@ -95,9 +112,9 @@ Display: 1D Pi0PhiRandom		360	-180	180
 Display: 1D Pi0InvMPrompt		200	0	200
 Display: 1D Pi0InvMRandom		200	0	200
 #
-Display: 2D MissingEnergyPromptPi0 200 -100 100 -1 TaggerChannelPromptPi0 352 0 352 -1
-Display: 2D MissingEnergyRandomPi0 200 -100 100 -1 TaggerChannelRandomPi0 352 0 352 -1
+Display: 2D MissingEnergyPromptPi0 200 -100 100 -1 TaggerChannelPromptPi0 328 0 328 -1
+Display: 2D MissingEnergyRandomPi0 200 -100 100 -1 TaggerChannelRandomPi0 328 0 328 -1
 #
-Display: 1D CBESum		800 	0 	800
-Display: 1D NaINCluster		10	0	10
-Display: 1D BaF2NCluster	10 	0 	10
+#Display: 1D CBESum		800 	0 	800
+#Display: 1D NaINCluster		10	0	10
+#Display: 1D BaF2NCluster	10 	0 	10

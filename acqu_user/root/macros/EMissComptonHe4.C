@@ -1,6 +1,7 @@
 // Tagger Energy
 typedef struct {
 
+	Double_t elec;
 	Int_t egamma;
 	Double_t energy;
 	Double_t denergy;
@@ -11,21 +12,24 @@ typedef struct {
 TData tdata[328];
 
 // Histogram File
+//TFile he4_data( "ARout/CB/ARH_31837_He4.root");
 TFile he4_data( "ARout/CB/ARH_He4.root");
 
 // Tagger-Pi0 Time for Random Subtraction
-TH1D *tt = (TH1D*)he4_data.Get( "PHYS_TaggerPi0Time");
+TH1D *tt = (TH1D*)he4_data.Get( "PHYS_TaggerPhotonTime");
+
+TH2D *tt2d = (TH2D*)he4_data.Get( "PHYS_TaggerChannel_v_TaggerTime");
 
 // Tagger Sum Scalers
 TH1D *ts = (TH1D*)he4_data.Get( "SumScalers2000to3000");
 TH1D *ss = new TH1D( "TaggerScalers", "TaggerScalers", 328, 0, 327);
 
 // 2D Tagger Channel vs. Missing Energy
-TH2D *hP = (TH2D*)he4_data.Get( "PHYS_TaggerChannelPromptPi0_v_MissingEnergyPromptPi0");
-TH2D *hR = (TH2D*)he4_data.Get( "PHYS_TaggerChannelRandomPi0_v_MissingEnergyRandomPi0");
+TH2D *hP = (TH2D*)he4_data.Get( "PHYS_TaggerChannelPrompt_v_MissingEnergyPrompt");
+TH2D *hR = (TH2D*)he4_data.Get( "PHYS_TaggerChannelRandom_v_MissingEnergyRandom");
 
 // Prompt-Accidental Subtraction Ratio
-const Double_t rPR = 0.0636;
+const Double_t rPR = 0.216;
 
 // Target thickness in nuclei/cm^2 for the 5-cm cell.
 const Double_t t_cm2 = 0.940e23;
@@ -46,27 +50,29 @@ TH1D *scalers;
 void ReadTagEng( Int_t eg)
 {
 	UInt_t i, sc;
-	Double_t eff, deff;
+	Double_t eff, egg, deff;
 	TString file;
 
-	file = Form( "includes/tageng%d.dat", eg);
+	file = Form( "includes/tageng%d_new.dat", eg);
 
 	ifstream inFile( file);
 	while( !inFile.eof()) {
-		inFile >> i >> eff >> deff >> sc;
-		tdata[i].energy = deff;
+		inFile >> i >> eff >> egg >> deff >> sc;
+		tdata[i].elec = eff;
+		tdata[i].energy = egg;
+		tdata[i].denergy = deff;
 		tdata[i].egamma = (int)(deff + 0.5);
 		tdata[i].scaler = sc;
 	}
 	inFile.close();
 }
 
-void EMissHe4()
+void EMissComptonHe4()
 {
 
 	TString name;
 
-	gROOT->ProcessLine( "ReadTagEng(883)");
+	gROOT->ProcessLine( "ReadTagEng(855)");
 
 	TCanvas *c1 = new TCanvas ( "c1", "EMissHe4", 200, 350, 1000, 500);
 	c1->Divide( 3, 1);
@@ -89,12 +95,12 @@ void EMissHe4()
 	hS2 = (TH2D*)hS->Clone( "binned");
 	hS2->SetTitle( "Binned");
 
-//	c1->Print( "plots/CB/EMissHe4.pdf");
-	c1->Print( "plots/CB/emiss_data.eps");
+	c1->Print( "plots/CB/EMissComptonHe4.pdf");
+//	c1->Print( "plots/CB/emiss_data.eps");
 
 }
 
-void ProjEMiss( UInt_t chan)
+void ProjEMissCompton( UInt_t chan)
 {
 	UInt_t eg;
 	TString name;
@@ -117,8 +123,8 @@ void ProjEMiss( UInt_t chan)
 	pt->AddText( name);
 	pt->Draw();
 
-//	name = Form( "plots/CB/EMissHe4_%dMeV.pdf", eg);
-	name = Form( "plots/CB/EMissHe4_%dMeV.eps", eg);
+	name = Form( "plots/CB/EMissComptonHe4_%dMeV.pdf", eg);
+//	name = Form( "plots/CB/EMissHe4_%dMeV.eps", eg);
 	c1->Print( name);
 
 }
@@ -130,23 +136,38 @@ void TaggerTime( UInt_t rebin = 1)
 	Double_t x[2], y[2], z[2];
 	Double_t AR, AP, ratio;
 	Double_t w, l;
+	Double_t max;
 	TString name;
 
 	TCanvas *c1 = new TCanvas ( "c1", "Tagger Time", 20, 350, 500, 500);
 	tt->GetXaxis()->SetRangeUser( -500, 500);
 	tt->SetMinimum( 0);
 	tt->Draw();
+	max = tt->GetMaximum();
+	max *= 1.2;
+	tt->SetMaximum( max);
+
+	tt->GetXaxis()->SetRangeUser( -300, 50);
 
 	TF1 *f1 = new TF1( "f1", "pol2", -300, -100);
 	tt->Fit( "f1", "R");
 	f1->GetParameters( &par[0]);
 	f1->SetLineWidth( 4);
+	f1->SetLineColor( 2);
+	f1->Draw( "same");
 
 	TF1 *f2 = new TF1("f", "[0]*x + 0.5*[1]*x*x + 0.3333*[2]*x*x*x", -1000, 1000);
 	f2->SetParameters( par[0], par[1], par[2]);
 
-	x[0] = -25;
-	x[1] = -10;
+	x[0] = -55;
+	x[1] = -5;
+
+	TLine *l1 = new TLine( x[0], 0, x[0], max);
+	l1->SetLineWidth( 2);
+	l1->Draw( "same");
+	TLine *l2 = new TLine( x[1], 0, x[1], max);
+	l2->SetLineWidth( 2);
+	l2->Draw( "same");
 
 	AP = f2->Eval( x[1]) - f2->Eval( x[0]);
 	cout << " AP = " << AP;
@@ -163,7 +184,7 @@ void TaggerTime( UInt_t rebin = 1)
 	cout << "  ratio = " << ratio;
 	cout << endl;
 
-//	c1->Print( "plots/CB/TaggerTimeCut.pdf");
+	c1->Print( "plots/CB/TaggerTimePhoton.pdf");
 
 }
 
@@ -172,7 +193,7 @@ void TaggerScalers()
 	UInt_t i, s_chan;
 	Double_t scal;
 
-	gROOT->ProcessLine( "ReadTagEng(883)");
+	gROOT->ProcessLine( "ReadTagEng(855)");
 
 	for ( i = 0; i < 328; i++)
 	{
@@ -222,5 +243,35 @@ void XS( UInt_t chan)
 	cout << " " << etag;
 	cout << " " << xs;
 	cout << endl;
+
+}
+
+void ProjTaggerTime( UInt_t chan)
+{
+	UInt_t eg;
+	TString name;
+
+	gROOT->ProcessLine( "ReadTagEng(855)");
+
+	eg = tdata[chan].egamma;
+
+	TCanvas *c1 = new TCanvas ( "c1", "TaggerTime", 20, 350, 700, 500);
+
+	tt2d->GetYaxis()->SetRange( chan, chan);
+	TH1D *proj = tt2d->ProjectionX( "projX");
+	proj->Draw();
+	proj->SetTitle( "Tagger Time");
+
+	TPaveText *pt = new TPaveText( 0.6, 0.2, 0.8, 0.3, "NDC");
+	pt->SetBorderSize( 0);
+	pt->SetFillStyle( 0);
+	pt->SetTextAlign( 12);
+	pt->SetTextSize( 0.05);
+	name = Form( "E_{#gamma} = %d MeV\n", eg);
+	pt->AddText( name);
+	pt->Draw();
+
+//	name = Form( "plots/CB/TaggerTime_Chan%d.pdf", chan);
+//	c1->Print( name);
 
 }

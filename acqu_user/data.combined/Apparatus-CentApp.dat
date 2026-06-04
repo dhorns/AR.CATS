@@ -85,13 +85,13 @@ Display: 2D PID_Hits 24 0 24 -1              NaI_ClPhi 		180 -180 180 -1
 #Display: 2D PID_Hits 24 0 24 -1              CylMWPC_Wire1Hits 	232  0   232 -1
 #Display: 2D PID_Hits 24 0 24 -1              CylMWPC_Wire2Hits 	296  0   296 -1
 #
-Display: 1D	Ntracks		20	0	20
-Display: 1D	NchTracks	20	0	20
-Display: 1D	NneTracks	20	0	20
+#Display: 1D	Ntracks		20	0	20
+#Display: 1D	NchTracks	20	0	20
+#Display: 1D	NneTracks	20	0	20
 #
-Display: 1D	PhiMwpcTrackNaI		180	0	180
+#Display: 1D	PhiMwpcTrackNaI		180	0	180
 #Display: 1D	PhiTrackPid		180	-180	180
-Display: 1D	PhiMwpcTrackPid		180	-180	180
+#Display: 1D	PhiMwpcTrackPid		180	-180	180
 #Display: 1D	PhiInterSingleMwpcNaI	180	0	180
 #Display: 1D	PhiTrackSingleMwpcPid	180	-180	180
 #Display: 1D	PhiMwpcInterNaI		180	0	180
@@ -99,28 +99,28 @@ Display: 1D	PhiMwpcTrackPid		180	-180	180
 #Display: 1D	PhiPidNaI		180	-180	180
 #
 #Display: 1D	TrackTypes	16	0	16
-Display: 1D	TrackTheta	180	0	180
-Display: 1D	TrackPhi	180	0	360
+#Display: 1D	TrackTheta	180	0	180
+#Display: 1D	TrackPhi	180	0	360
 #Display: 1D	EclNaI		100	0	500
 #Display: 1D	EhitPid		100	0	6
 Display: 2D	EclNaI		100	0	400	-1	EhitPid		100	0	10	-1
 #Display: 1D	EtrackMwpc	100	0	2000
 #Display: 2D	EhitPid		100	0	6	-1	EtrackMwpc	100	0	2000	-1
 #Display: 2D	EclNaI		100	0	400	-1	EtrackMwpc	100	0	2000	-1
-Display: 1D	PsVertexX	40	-40	40
-Display: 1D	PsVertexY	40	-40	40
-Display: 1D	PsVertexZ	500	-250	250
+#Display: 1D	PsVertexX	40	-40	40
+#Display: 1D	PsVertexY	40	-40	40
+#Display: 1D	PsVertexZ	500	-250	250
 #Display: 1D	PsVertexR	100	0	74
-Display: 2D	PsVertexX	40	-40	40	-1	PsVertexY	40	-40	40	-1
-Display: 2D	PsVertexZ	500	-250	250	-1	PsVertexX	40	-40	40	-1
-Display: 2D	PsVertexZ	500	-250	250	-1	PsVertexY	40	-40	40	-1
+#Display: 2D	PsVertexX	40	-40	40	-1	PsVertexY	40	-40	40	-1
+#Display: 2D	PsVertexZ	500	-250	250	-1	PsVertexX	40	-40	40	-1
+#Display: 2D	PsVertexZ	500	-250	250	-1	PsVertexY	40	-40	40	-1
 # Vertexes
-Display: 2D	VertexX	40	-40	40	-1	VertexY	40	-40	40	-1
-Display: 2D	VertexZ	500	-250	250	-1	VertexX	40	-40	40	-1
-Display: 2D	VertexZ	500	-250	250	-1	VertexY	40	-40	40	-1
-Display: 1D	VertexN		5	0	5
-Display: 1D	VertexX		40	-40	40
-Display: 1D	VertexY		40	-40	40
-Display: 1D	VertexZ		500	-250	250
+#Display: 2D	VertexX	40	-40	40	-1	VertexY	40	-40	40	-1
+#Display: 2D	VertexZ	500	-250	250	-1	VertexX	40	-40	40	-1
+#Display: 2D	VertexZ	500	-250	250	-1	VertexY	40	-40	40	-1
+#Display: 1D	VertexN		5	0	5
+#Display: 1D	VertexX		40	-40	40
+#Display: 1D	VertexY		40	-40	40
+#Display: 1D	VertexZ		500	-250	250
 #Display: 1D	VertexR		70	0	70
 #

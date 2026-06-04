@@ -16,14 +16,16 @@
 // adds pointer to x variable to be histogramed and a pointer to a
 // weight variable. Able to handle single or multi value
 // variables through child classes of an abstract  base class
+//
+// Changed to TH1D
 
 #ifndef __TA2H1_h__
 #define __TA2H1_h__
 
-#include "TH1F.h"
+#include "TH1D.h"
 #include "TA2H.h"
 
-template< typename T > class TA2H1 : public TA2H, public TH1F {
+template< typename T > class TA2H1 : public TA2H, public TH1D {
  protected:
   T* fHistBuff;
  public:
@@ -31,11 +33,11 @@ template< typename T > class TA2H1 : public TA2H, public TH1F {
   TA2H1( char* n, const char* t, Int_t ch, Axis_t low, Axis_t high, T* data,
 	 TA2Cut* cut = NULL, Stat_t* wgt = NULL ):
     TA2H(cut,wgt),
-    TH1F(n,t,ch,low,high) { fHistBuff = data; }
+    TH1D(n,t,ch,low,high) { fHistBuff = data; }
   TA2H1( char* n, const char* t, Int_t ch, Double_t* xch, T* data,
 	 TA2Cut* cut = NULL, Stat_t* wgt = NULL ):
     TA2H(cut,wgt),
-    TH1F(n,t,ch,xch) { fHistBuff = data; }
+    TH1D(n,t,ch,xch) { fHistBuff = data; }
 
   virtual ~TA2H1(){}
   T* GetHistBuff(){ return fHistBuff; }     // return data buffer ptr
@@ -64,7 +66,7 @@ template< typename T > class TA2H1S: public TA2H1<T>{
       if( fCut ){ if( !fCut->Test() ) return; }
       T* hb = fHistBuff;
       if( *hb != ((T)ENullHit) )
-	TH1F::Fill( (Float_t)(*hb), *fWeight );
+	TH1D::Fill( (Double_t)(*hb), *fWeight );
       return;
     }
 };
@@ -91,7 +93,7 @@ template< typename T > class TA2H1M: public TA2H1<T>
       if( fCut ){ if( !fCut->Test() ) return; }
       T* hb = fHistBuff;
       while( *hb != (T)EBufferEnd ){
-	TH1F::Fill( (Float_t)(*hb), *fWeight );
+	TH1D::Fill( (Double_t)(*hb), *fWeight );
 	hb++;
       }
     }
@@ -115,7 +117,7 @@ template< typename T > class TA2H1MF: public TA2H1<T>
       // note SetBinContent(0,...) doesn't work
       T* hb = fHistBuff;
       for( int i=0; i<fChan; i++ ){
-	TH1F::SetBinContent( i+1, (Float_t)(hb[i]) );
+	TH1D::SetBinContent( i+1, (Double_t)(hb[i]) );
       }
     }
 };
@@ -142,7 +144,7 @@ template< typename T > class TA2H1MS: public TA2H1<T>
       if( ! *fIsScalerRead ) return;
       T* hb = fHistBuff;
       for( int i=0; i<fChan; i++ ){
-	TH1F::SetBinContent( i+1, (Float_t)(hb[i]) );
+	TH1D::SetBinContent( i+1, (Double_t)(hb[i]) );
       }
     }
 };
@@ -179,12 +181,12 @@ template< typename T > class TA2H1SR: public TA2H1<T>{
       fMean += *fHistBuff;
       if( fFreqCounter < fFrequency ) return;
       fFreqCounter = 0;
-      TH1F::SetBinContent( fChan, fMean/fFrequency );
+      TH1D::SetBinContent( fChan, fMean/fFrequency );
       fMean = 0;
       fChan++;
       if( fChan >= fNChan ){
 	fChan = 0;
-	TH1F::Reset();
+	TH1D::Reset();
       }
       return;
     }

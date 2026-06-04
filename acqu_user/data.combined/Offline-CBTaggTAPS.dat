@@ -33,4 +33,5 @@ AnalysisSetup: Analysis-CBTaggTAPS.dat
 #SplitScaler: 2 256 364
 ##
 ## Set Server file
-ServerSetup: ServerOffline-CBTaggTAPS.dat
+#ServerSetup: Server/ServerOffline-CB-He4-2025.dat
+ServerSetup: data/Server/ServerOffline-CB-He4-1file.dat
