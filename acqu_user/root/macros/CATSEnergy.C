@@ -13,7 +13,6 @@ TData tdata[328];
 
 // Histogram File
 TFile CATSdata( "ARout/CATS/ARH_InBeam.root");
-//TFile CATSdata( "ARout/CATS/ARH_all.root");
 
 // Tagger-CATS Time for Random Subtraction
 TH1D *tt = (TH1D*)CATSdata.Get( "PHYS_CATSTaggerTime");
@@ -26,15 +25,15 @@ TH2D *hR = (TH2D*)CATSdata.Get( "PHYS_TaggerChannelCATSR_v_CATSEnergyNoShieldRan
 const Double_t rPR = 0.0636;
 
 TH2D *hS2;
-TH1D* proj_global = nullptr;//Added by Gen
+TH1D* proj_global = nullptr;
 
 void ReadTagEng( Int_t eg)
 {
 	UInt_t i, sc;
 	Double_t eff, deff;
-	TString file;
-
-	file = Form( "includes/tageng%d.dat", eg);
+	//TString file;
+	TString file = "includes/tageng855.dat";
+	//file = Form( "includes/tageng%d.dat", eg);
 
 	ifstream inFile( file);
 	while( !inFile.eof()) {
@@ -48,8 +47,6 @@ void ReadTagEng( Int_t eg)
 
 void CATSEnergy()
 {
-
-
 	Double_t par[3];
 	TString name;
 
@@ -177,11 +174,11 @@ void TaggerTime( UInt_t rebin = 1)
 }
 
 void MCvsData0(UInt_t chan){ //Added by gen
-	//attempting to collect the histogram from void CATSEnergy above
+	//Collecting the histogram from CATSEnergy 
 	ProjCATSE(chan);
 	TH1D* h_ARH = proj_global;
 
-	//Debugging attempt
+	//Warning message
  	if (!h_ARH) {
         	std::cerr << "Error: Failed to retrive ProjCATSE!" << std::endl;
         return;	
@@ -193,7 +190,7 @@ void MCvsData0(UInt_t chan){ //Added by gen
 
 	eg = tdata[chan].egamma;
 
-	//calling in the Monte Carlo simulation 
+	//Calling in the Monte Carlo simulation 
 	TFile *f_mc = TFile::Open("ARout/CATS/MC_InBeam.root");
 	//Testing error message if Monte Carlo simulation has no plot
 	TH1F* h_mc = dynamic_cast<TH1F*>(f_mc ->Get("PHYS_CATSEnergy"));
@@ -294,7 +291,7 @@ void MCvsData0(UInt_t chan){ //Added by gen
 	c->Print("plots/MCvsDATA.pdf");	
 }
 
-void MCvsData40(UInt_t chan){ //Added by gen
+/*void MCvsData40(UInt_t chan){ //Added by gen
 	//attempting to collect the histogram from void CATSEnergy above
 	ProjCATSE(chan);
 	TH1D* h_ARH = proj_global;
@@ -356,34 +353,7 @@ void MCvsData40(UInt_t chan){ //Added by gen
         	std::cerr << "Error MC integral is zero" << std::endl;
         	return;
     	}
-	
-//	TH1F* h_mc_combined_scaled = (TH1F*)h_mc_combined->Clone("h_mc_combined_scaled");
-//	h_mc_combined_scaled->Scale(data_int / mc_int);
-	// Now comparing with the real data (ARH)
-    //	int data_bin_min = h_ARH->FindBin(eg - 0.1 * eg);
-    //	int data_bin_max = h_ARH->FindBin(eg + 0.1 * eg);
-
-    //	double data_int = h_ARH->Integral(data_bin_min, data_bin_max);
-
-    	//int mc_bin_min = h_mc_combined->FindBin(eg - 0.1 * eg);
-    	//int mc_bin_max = h_mc_combined->FindBin(eg + 0.1 * eg);
-    //	double mc_int = h_mc_combined->Integral(h_mc_combined->FindBin(xmin), h_mc_combined->FindBin(xmax));
 		
-
-//    	TH1F* h_mc_pi0_scaled_final = nullptr;
-//    	if (mc_int > 0) {
-//        	double scale = data_int / mc_int;
-//        	h_mc_pi0_scaled_final = (TH1F*)h_mc_pi0_scaled->Clone("h_mc_pi0_scaled_final");
-//        	h_mc_pi0_scaled_final->Scale(scale);
-//    	}
-	
-	//double max_mc = std::max({
-    	//h_mc_compton->GetMaximum(),
-    	//h_mc_pi0_scaled->GetMaximum(),
-    	//h_mc_combined->GetMaximum()
-	//});
-	//h_mc_compton->SetMaximum(1.2 * max_mc);
-	
 	TCanvas *c_mc = new TCanvas("c_mc", "MC Components", 800, 600);
 	c_mc->Divide(1,3); // should be 3 rows, 1 column 
 	
@@ -419,19 +389,6 @@ void MCvsData40(UInt_t chan){ //Added by gen
 	// Save it
 	c_mc->Print("plots/MC_components.pdf");
 	
-	//Scaling the histogram: 
-/*	TH1F* h_mc_combined_scaled = nullptr; 
-	if (mc_int > 0){
-    		double scale = data_int / mc_int;
-    		h_mc_combined_scaled = (TH1F*)h_mc_combined->Clone("h_mc_combined_scaled");
-    		h_mc_combined_scaled->Scale(scale);
-    		std::cout << "Scaling combined MC by factor: " << scale << std::endl;
-		} 
-	else {
-   	 	std::cerr << "Error: MC integral is zero in selected region!" << std::endl;
-		return;
-		} */
-
 	TCanvas *c = new TCanvas("c_comapre", "Data vs Simulation", 800, 600);
 	
 	//Style for ARH
@@ -486,5 +443,5 @@ void MCvsData40(UInt_t chan){ //Added by gen
 
 
 	c->Print("plots/MCvsDATA_Combined.pdf");	
-}
+}*/
 
