@@ -24,6 +24,7 @@ Analysis: TA2UserAnalysis
 AnalysisSetup: Analysis-CATSTagg.dat
 ##
 ## Set Server file
-ServerSetup: Server/ServerOffline-CATS-C12-2025.dat
+#ServerSetup: Server/ServerOffline-CATS-C12-2025.dat
+ServerSetUp: ServerOffline-JS.dat
 #
 Log-Hard-Error:

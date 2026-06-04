@@ -187,3 +187,186 @@ void TaggerScalers()
 	ss->Draw();
 
 }
+
+void MCvsData(UInt_t lo, UInt_t hi){// by Gen
+	if (!hS2) {
+        	std::cerr << "Error: Run EMiss2D() first!" << std::endl;
+        	return;
+    	}
+    	//Reproducing projection from ProjEMiss
+    	hS2->GetYaxis()->SetRange(lo, hi);
+    	TH1D *h_ARH = hS2->ProjectionX("projX_temp");
+
+    	if (!h_ARH) {
+        	std::cerr << "Error: Projection failed!" << std::endl;
+        	return;
+    	}
+	
+	h_ARH->SetTitle("Missing Energy");
+    	h_ARH->GetXaxis()->SetTitle("Energy (MeV)");
+    	h_ARH->GetYaxis()->SetTitle("Counts");
+
+    	// Photon energy range
+    	UInt_t eg_l = tdata[lo].egamma;
+    	UInt_t eg_h = tdata[hi].egamma;
+
+    	//Retriving simulated data directories
+    	TFile *f_mc_pi0 = TFile::Open("ARout/CATS/MC_Pi0.root");
+    	TFile *f_mc_compton = TFile::Open("ARout/CATS/MC_Compton.root");
+
+    	if (!f_mc_pi0 || !f_mc_compton) {
+        	std::cerr << "Error opening MC files!" << std::endl;
+        	return;
+    	}
+	//Retriving EMiss Prompt files 
+    	TH1F* h_mc_pi0 = (TH1F*)f_mc_pi0->Get("PHYS_EmissP");
+    	TH1F* h_mc_compton = (TH1F*)f_mc_compton->Get("PHYS_EmissP");
+
+    	if (!h_mc_pi0 || !h_mc_compton) {
+        	std::cerr << "Error: MC histograms not found!" << std::endl;
+        	return;
+    	}
+// The above should not need changing it is calling and setting up the input files we want 
+
+    	//Pi0 scaling
+    	double eg_mid = 0.5 * (eg_l + eg_h);
+
+    	double scale_factor;
+    	if (eg_mid <= 200) scale_factor = 60;
+    	else if (eg_mid >= 300) scale_factor = 30;
+    	else scale_factor = 60 - (eg_mid - 200) * (30.0 / 100.0);
+	
+//    	TH1F* h_mc_pi0_scaled = (TH1F*)h_mc_pi0->Clone("h_mc_pi0_scaled");
+//   	h_mc_pi0_scaled->Scale(scale_factor);
+
+//	Combining MC Compton and Scaled Pi0 
+//    	TH1F* h_mc_combined = (TH1F*)h_mc_compton->Clone("h_mc_combined");
+//    	h_mc_combined->Add(h_mc_pi0_scaled);
+
+	
+	TH1F* h_mc_compton_norm = (TH1F*)h_mc_compton->Clone("h_mc_compton_norm");
+	double int_compton = h_mc_compton_norm->Integral();
+	if (int_compton > 0) {
+    		h_mc_compton_norm->Scale(1.0 / int_compton);
+	} else {
+    		std::cerr << "Compton integral is zero!" << std::endl;
+	}
+
+	TH1F* h_mc_pi0_norm = (TH1F*)h_mc_pi0->Clone("h_mc_pi0_norm");
+	double int_pi0 = h_mc_pi0_norm->Integral();
+	if (int_pi0 > 0) {
+   		h_mc_pi0_norm->Scale(1.0 / int_pi0);
+	} else {
+    	std::cerr << "Pi0 integral is zero!" << std::endl;
+	}
+
+	//Applying Pi0 scaling (relative weight) 
+	TH1F* h_mc_pi0_scaled = (TH1F*)h_mc_pi0_norm->Clone("h_mc_pi0_scaled");
+	h_mc_pi0_scaled->Scale(scale_factor);
+
+	// Combining MC Pi0 scaled and MC Comtpon
+	TH1F* h_mc_combined = (TH1F*)h_mc_compton_norm->Clone("h_mc_combined");
+	h_mc_combined->Add(h_mc_pi0_scaled);
+
+
+	TCanvas *c_mc = new TCanvas(Form("c_mc_%d_%d", eg_l, eg_h), "MC Components", 800, 900);
+	c_mc->Divide(1,3);
+
+	//MC Compton Histogram Components 
+	c_mc->cd(1);
+	h_mc_compton->SetTitle("Compton");
+	h_mc_compton->GetXaxis()->SetTitle("Energy (MeV)");
+	h_mc_compton->GetYaxis()->SetTitle("Counts");
+	h_mc_compton->SetLineColor(kBlue);
+	h_mc_compton->SetLineWidth(2);
+	h_mc_compton->Draw("HIST");
+	//h_mc_compton_norm->Draw("HIST");
+
+	//MC Pi0 scaled Histogram Components
+	c_mc->cd(2);
+	h_mc_pi0_scaled->SetTitle("Pi0 (Scaled)");
+	h_mc_pi0_scaled->GetXaxis()->SetTitle("Energy (MeV)");
+	h_mc_pi0_scaled->GetYaxis()->SetTitle("Counts");
+	h_mc_pi0_scaled->SetLineColor(kRed);
+	h_mc_pi0_scaled->SetLineWidth(2);
+	h_mc_pi0_scaled->Draw("HIST");
+
+	//MC Combined Histogram (Compton + Scaled Pi0) Components
+	c_mc->cd(3);
+	h_mc_combined->SetTitle("Combined");
+	h_mc_combined->GetXaxis()->SetTitle("Energy (MeV)");
+	h_mc_combined->GetYaxis()->SetTitle("Counts");
+	h_mc_combined->SetLineColor(kBlack);
+	h_mc_combined->SetLineWidth(2);
+	h_mc_combined->Draw("HIST");
+
+	// Save it
+	c_mc->Print(Form("plots/CATS/MC_components_%d_%d.pdf", eg_l, eg_h));
+
+ /*   	// Peak-based scaling 
+   	int peakBin = h_ARH->GetMaximumBin();
+    	double peakCentre = h_ARH->GetBinCenter(peakBin);
+
+	std::cout << "Data peak centre = " << peakCentre << std::endl;
+
+    	double xmin = peakCentre -25;
+    	double xmax = peakCentre +35;
+	
+   	double data_int = h_ARH->Integral(h_ARH->FindBin(xmin), h_ARH->FindBin(xmax));
+    	double mc_int   = h_mc_combined->Integral(h_mc_combined->FindBin(xmin), h_mc_combined->FindBin(xmax));
+	*/
+	double xmin = -40;
+	double xmax =  40;
+
+	double data_int = h_ARH->Integral( h_ARH->FindBin(xmin),h_ARH->FindBin(xmax));
+	double mc_int = h_mc_combined->Integral(h_mc_combined->FindBin(xmin), h_mc_combined->FindBin(xmax));
+
+    	if (mc_int <= 0) {
+        	std::cerr << "Error: MC integral is zero!" << std::endl;
+        	return;
+    	}
+
+	std::cout << "xmin = " << xmin << " xmax = " << xmax << std::endl;
+	std::cout << "Data integral = " << data_int << std::endl;
+	std::cout << "MC integral   = " << mc_int << std::endl;
+
+    	TH1F* h_mc_scaled = (TH1F*)h_mc_combined->Clone("h_mc_scaled");
+    	if(mc_int > 0) {
+    		double scale = data_int / mc_int;
+    		h_mc_scaled->Scale(scale);
+    		std::cout << "MC scaled by factor: " << scale << std::endl;
+	} else {
+    		std::cerr << "MC integral is zero in selected window!" << std::endl;
+	}
+	
+	//h_mc_scaled->Scale(data_int / mc_int);
+
+    	//Ploting
+    	TCanvas *c = new TCanvas("c_compare", "EMiss Data vs MC", 800, 600);
+
+    	h_ARH->SetMarkerStyle(20);
+    	h_ARH->SetMarkerColor(kRed);
+	h_ARH->SetMarkerSize(1.5);
+    	h_mc_scaled->SetLineColor(kBlue);
+
+    	double maxY = std::max(h_ARH->GetMaximum(), h_mc_scaled->GetMaximum());
+    	h_ARH->SetMaximum(1.1 * maxY);
+	
+    	h_ARH->Draw("E1");
+    	h_mc_scaled->Draw("HIST SAME");
+	
+    	// Label
+    	TPaveText *pt = new TPaveText(0.2, 0.7, 0.5, 0.85, "NDC");
+    	pt->SetFillStyle(0);
+    	pt->SetBorderSize(0);
+    	pt->AddText(Form("E_{#gamma} = %d - %d MeV", eg_l, eg_h));
+    	pt->Draw();
+	
+    	// Legend
+    	TLegend *leg = new TLegend(0.7, 0.7, 0.88, 0.88);
+    	leg->AddEntry(h_ARH, "Data", "lep");
+    	leg->AddEntry(h_mc_scaled, "Simulation", "l");
+    	leg->Draw();
+
+    	c->Print(Form("plots/CATS/MCvsData_%d_%d.pdf", eg_l, eg_h));
+}
