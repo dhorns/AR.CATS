@@ -202,8 +202,8 @@ void MCvsData0(UInt_t chan){ //Added by gen
 	int peakBin = h_ARH->GetMaximumBin();
     	double peakCentre = h_ARH->GetBinCenter(peakBin);
 
-	//attempting to plot with axes from peak +/- 20% intergration regions 
-	double frac = 0.10; // 20%
+	//attempting to plot with axes from peak +/- 10% intergration regions 
+	double frac = 0.10; // 10%
 
 	double xmin = peakCentre * (1.0 - frac);
 	double xmax = peakCentre * (1.0 + frac);

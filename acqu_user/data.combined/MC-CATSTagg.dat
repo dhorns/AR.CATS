@@ -66,22 +66,23 @@ Branch:   mc_rnd_id     8
 #ROOT file(s) (GEANT4 output) to be analysed. Add more lines for more files
 #
 # New In-Beam Simulated Data:
-TreeFile: A2G4/g_300_40_180_out.root
+#TreeFile: A2G4/g_300_40_180_out.root
 #
 ####40 degree Simulated Data: 
 ###PI0
-#TreeFile: A2G4/pi0_c_147_out.root
-#TreeFile: A2G4/pi0_c_212_out.root
-TreeFile: A2G4/pi0_c_300_out.root
+#TreeFile: A2G4/pi0_c_145_out.root
+#TreeFile: A2G4/pi0_c_210_out.root
+#TreeFile: A2G4/pi0_c_300_out.root
 #TreeFile: A2G4/pi0_c_355_out.root
-#TreeFile: A2G4/pi0_c_404_out.root
+#TreeFile: A2G4/pi0_c_405_out.root
 ###Compton 
-#TreeFile: A2G4/compton_c_212_out.root
+#TreeFile: A2G4/compton_c_145_out.root
+#TreeFile: A2G4/compton_c_210_out.root
 #TreeFile: A2G4/compton_c_300_out.root
 #TreeFile: A2G4/compton_c_355_out.root
-#TreeFile: A2G4/compton_c_404_out.root
+TreeFile: A2G4/compton_c_405_out.root
 #TreeFile: A2G4/compton_c_300_out.root
-#TreeFile: A2Geant4/g_300_40_180_out.root
+
 
 #
 ##
