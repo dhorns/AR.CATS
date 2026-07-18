@@ -58,7 +58,8 @@ Branch:   emwpc         1024
 #TreeFile: A2G4/pi0_he4_300_out.root
 #TreeFile: A2G4/pi0_he4_210_out.root
 #TreeFile: A2G4/pi0_p_300_out.root
-TreeFile: A2Geant4/compton_li7_300_out.root
+TreeFile: A2Geant4/compton_li6_300_out.root
+#TreeFile: A2Geant4/compton_li7_300_out.root
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 #
 #- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
