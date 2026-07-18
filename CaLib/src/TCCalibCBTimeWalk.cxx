@@ -263,8 +263,7 @@ void TCCalibCBTimeWalk::Fit(Int_t elem)
         sprintf(tmp, "fTWalk_%d", elem);
         if (fFitFunc) delete fFitFunc;
         fFitFunc = new TF1(tmp, this, &TCCalibCBTimeWalk::TWFunc, 
-                           lowLimit, highLimit, 4, 
-                           "TCCalibCBTimeWalk", "TWFunc");
+                           lowLimit, highLimit, 4);
 
         // prepare fitting function
         fFitFunc->SetLineColor(2);
