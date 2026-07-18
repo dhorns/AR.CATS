@@ -5,9 +5,16 @@
 ############################################################
 #
 # Set Target parameters (used by TA2Physics.cc)
+## Proton
 #Target:	0. 0. 0.	938.271  
+## Carbon-12
 #Target:	0. 0. 0.	11174.7
-Target:	0. 0. 0.	3727.838
+## Helium-4
+#Target:	0. 0. 0.	3727.838
+## Lithium-6
+Target:	0. 0. 0.	5601.518
+## Lithium-7
+#Target:	0. 0. 0.	6533.833
 #
 ############################################################
 # Set Physics class input parameters
